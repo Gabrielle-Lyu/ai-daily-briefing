@@ -1,0 +1,172 @@
+"""
+config.py — Audience profiles, RSS sources, and scoring weights
+for the OCI AI Daily Executive Briefing System.
+"""
+
+# ---------------------------------------------------------------------------
+# Audience Profiles
+# ---------------------------------------------------------------------------
+# Each profile defines section weights (must sum to 1.0), tone guidance,
+# and a display name used in rendering.
+
+AUDIENCE_PROFILES = {
+    "karan": {
+        "id": "karan",
+        "name": "Karan Batta",
+        "title": "SVP, Product",
+        "email": "karan.batta@oracle.com",
+        "tone": "concise, high signal, strategic",
+        "tone_guidance": (
+            "Be concise and strategic. Lead with the bottom line. "
+            "Highlight financial impact, competitive positioning, and deal signals. "
+            "Avoid jargon. One crisp insight per item."
+        ),
+        "section_weights": {
+            "financial": 0.35,
+            "compete":   0.25,
+            "datacenter": 0.15,
+            "ai":        0.15,
+            "deals":     0.10,
+        },
+        "accent_color": "#C74634",
+    },
+    "nathan": {
+        "id": "nathan",
+        "name": "Nathan Thomas",
+        "title": "SVP, Product",
+        "email": "nathan.thomas@oracle.com",
+        "tone": "ecosystem, partner-aware",
+        "tone_guidance": (
+            "Focus on multi-cloud dynamics, partner ecosystem shifts, and deal flow. "
+            "Highlight how OCI can expand into adjacent platform opportunities. "
+            "Note ISV, GSI, and hyperscaler partnership angles."
+        ),
+        "section_weights": {
+            "multicloud":    0.30,
+            "ai":            0.25,
+            "deals":         0.25,
+            "compete":       0.10,
+            "financial":     0.10,
+        },
+        "accent_color": "#1B6EC2",
+    },
+    "greg": {
+        "id": "greg",
+        "name": "Greg Pavlik",
+        "title": "EVP, Data & AI",
+        "email": "greg.pavlik@oracle.com",
+        "tone": "technical executive",
+        "tone_guidance": (
+            "Prioritize technical depth. Cover model benchmarks, infrastructure advances, "
+            "open-source ecosystem moves, and competitive AI/data platform developments. "
+            "Be direct about implications for OCI's AI and data strategy."
+        ),
+        "section_weights": {
+            "compete":      0.35,
+            "ai":           0.35,
+            "oss":          0.15,
+            "partnerships": 0.10,
+            "community":    0.05,
+        },
+        "accent_color": "#2E7D32",
+    },
+    "mahesh": {
+        "id": "mahesh",
+        "name": "Mahesh Thiagarajan",
+        "title": "EVP, Security & Developer Platform",
+        "email": "mahesh.thiagarajan@oracle.com",
+        "tone": "platform, resilience, scale",
+        "tone_guidance": (
+            "Focus on infrastructure scale, power/energy constraints, security posture, "
+            "and developer platform signals. Highlight OCI's resilience and sovereign-cloud angles. "
+            "Note regulatory, compliance, and supply-chain risks."
+        ),
+        "section_weights": {
+            "datacenter": 0.25,
+            "power":      0.20,
+            "ai":         0.20,
+            "deals":      0.20,
+            "security":   0.15,
+        },
+        "accent_color": "#6A1B9A",
+    },
+}
+
+AUDIENCE_ORDER = ["karan", "nathan", "greg", "mahesh"]
+
+# ---------------------------------------------------------------------------
+# RSS Sources
+# ---------------------------------------------------------------------------
+RSS_SOURCES = [
+    # Tier 1 — primary news wires
+    {"url": "https://feeds.reuters.com/reuters/technologyNews",  "name": "Reuters Tech",     "tier": 1, "sections": ["financial", "compete", "deals"]},
+    {"url": "https://feeds.reuters.com/reuters/businessNews",    "name": "Reuters Business", "tier": 1, "sections": ["financial", "deals"]},
+    # Tier 2 — quality tech journalism
+    {"url": "https://feeds.arstechnica.com/arstechnica/technology-lab", "name": "Ars Technica",   "tier": 2, "sections": ["ai", "compete", "infrastructure"]},
+    {"url": "https://techcrunch.com/feed/",                     "name": "TechCrunch",       "tier": 2, "sections": ["ai", "deals", "compete"]},
+    {"url": "https://venturebeat.com/category/ai/feed/",        "name": "VentureBeat AI",   "tier": 2, "sections": ["ai", "compete"]},
+    {"url": "https://www.theverge.com/rss/index.xml",           "name": "The Verge",        "tier": 2, "sections": ["ai", "compete"]},
+    # Tier 2 — cloud/infra trade press
+    {"url": "https://cloudwars.com/feed/",                      "name": "CloudWars",        "tier": 2, "sections": ["compete", "deals", "financial"]},
+    {"url": "https://www.datacenterdynamics.com/en/rss/",       "name": "DC Dynamics",      "tier": 2, "sections": ["datacenter", "power"]},
+    # Tier 3 — vendor blogs
+    {"url": "https://aws.amazon.com/blogs/aws/feed/",           "name": "AWS Blog",         "tier": 3, "sections": ["compete", "ai"]},
+    {"url": "https://azure.microsoft.com/en-us/blog/feed/",     "name": "Azure Blog",       "tier": 3, "sections": ["compete", "ai"]},
+    {"url": "https://cloud.google.com/blog/rss",                "name": "Google Cloud",     "tier": 3, "sections": ["compete", "ai"]},
+    {"url": "https://blogs.oracle.com/cloud-infrastructure/rss","name": "OCI Blog",         "tier": 3, "sections": ["compete", "ai"]},
+    {"url": "https://openai.com/news/rss.xml",                  "name": "OpenAI Blog",      "tier": 3, "sections": ["ai"]},
+    {"url": "https://www.anthropic.com/rss.xml",                "name": "Anthropic Blog",   "tier": 3, "sections": ["ai"]},
+    # Tier 4 — community signal
+    {"url": "https://news.ycombinator.com/rss",                 "name": "Hacker News",      "tier": 4, "sections": ["community", "ai", "compete"]},
+]
+
+# ---------------------------------------------------------------------------
+# Scoring Weights
+# ---------------------------------------------------------------------------
+TIER_CREDIBILITY_SCORES = {
+    1: 30,
+    2: 20,
+    3: 10,
+    4: 5,
+}
+
+TIMELINESS_SCORES = [
+    (6,  15),   # < 6 hours
+    (12, 12),   # < 12 hours
+    (24, 8),    # < 24 hours
+    (48, 4),    # < 48 hours
+    (None, 0),  # older
+]
+
+# OCI-relevant keywords for keyword scoring bonus (max +10 pts)
+OCI_KEYWORDS = {
+    # Oracle / OCI direct
+    "oracle": 3, "oci": 3, "oracle cloud": 3,
+    # Hyperscaler competitors (important to track)
+    "aws": 2, "amazon web services": 2, "azure": 2, "microsoft cloud": 2,
+    "google cloud": 2, "gcp": 2,
+    # AI / ML
+    "nvidia": 2, "gpu": 2, "h100": 2, "b200": 2, "a100": 2,
+    "large language model": 2, "llm": 2, "generative ai": 2,
+    "openai": 2, "anthropic": 2, "gemini": 2, "claude": 2, "gpt": 2,
+    "foundation model": 2, "inference": 1, "training": 1,
+    # Infrastructure
+    "datacenter": 2, "data center": 2, "colocation": 1,
+    "power grid": 2, "megawatt": 2, "gigawatt": 2, "nuclear": 2,
+    "hyperscaler": 2, "sovereign cloud": 2,
+    # Business
+    "cloud deal": 2, "enterprise contract": 2, "partnership": 1, "acquisition": 2,
+    "ipo": 1, "earnings": 2, "valuation": 1,
+    # Security / Dev
+    "zero trust": 1, "security breach": 2, "ransomware": 2, "kubernetes": 1,
+    "open source": 1, "developer platform": 1,
+}
+
+# Maximum keyword bonus
+MAX_KEYWORD_BONUS = 10
+
+# Pipeline settings
+INGEST_WINDOW_HOURS = 48
+MAX_ARTICLES_TO_CLASSIFY = 60
+TOP_ARTICLES_PER_AUDIENCE = 12
+MAX_CONCURRENT_LLM = 5

@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCI AI Intelligence — Nathan Thomas — 2026-03-11</title>
+  <style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Primary palette */
+    --teal:        #5B9DB5;
+    --teal-dark:   #3D7A96;
+    --teal-light:  #D6EAF2;
+    --teal-pale:   #EBF5FA;
+    --charcoal:    #2C3E50;
+    --charcoal2:   #34495E;
+
+    /* Grays */
+    --gray-dark:   #7F8C8D;
+    --gray-mid:    #BDC3C7;
+    --gray-light:  #ECF0F1;
+    --gray-bg:     #F4F6F8;
+    --white:       #FFFFFF;
+
+    /* Text */
+    --text:        #2C3E50;
+    --text-mid:    #555E68;
+    --text-muted:  #95A5A6;
+
+    /* Borders and Shadows */
+    --border:      #D5DDE3;
+    --shadow:      0 2px 8px rgba(44,62,80,0.10);
+    --shadow-sm:   0 1px 3px rgba(44,62,80,0.06);
+
+    /* OCI callout — amber/gold accent */
+    --oci-accent:      #D4880F;
+    --oci-bg:          #FFF8EE;
+    --oci-text:        #7A5200;
+    --oci-label:       #B8730C;
+
+    /* Freshness indicator */
+    --new-badge-bg:    #E8F5E9;
+    --new-badge-text:  #2E7D32;
+    --new-border:      var(--teal);
+
+    /* Misc */
+    --radius:      4px;
+    --serif:       Georgia, 'Times New Roman', serif;
+  }
+
+  html { font-size: 13px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--gray-bg);
+    color: var(--text);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  a { color: var(--teal-dark); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+
+  /* -- Unified Header Bar (40px) ---------------------- */
+  .unified-header {
+    background: var(--charcoal);
+    border-bottom: 3px solid var(--teal);
+  }
+
+  .unified-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .header-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .header-title span {
+    color: var(--teal);
+    font-style: italic;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-right: 3px;
+  }
+
+  .header-date {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.55);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .header-nav-link {
+    padding: 11px 9px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.60);
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.1s;
+    display: block;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .header-nav-link:hover {
+    color: white;
+    border-bottom-color: var(--teal);
+    text-decoration: none;
+  }
+
+  /* -- NEW badge ------------------------------------- */
+  .new-badge {
+    font-size: 7.5px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--new-badge-text);
+    background: var(--new-badge-bg);
+    padding: 1px 4px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: inline-block;
+    line-height: 1.4;
+  }
+
+  /* -- Audience panel -------------------------------- */
+  .audience-panel { display: none; }
+  .audience-panel.active { display: block; }
+
+  /* -- Page wrapper ---------------------------------- */
+  .page-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 24px 32px;
+  }
+
+  /* -- Executive summary ----------------------------- */
+  .cover-block {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 0;
+    background: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 14px;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .cover-left {
+    background: var(--charcoal);
+    color: white;
+    padding: 14px 16px;
+  }
+
+  .cover-overline {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  .cover-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .cover-bullets li {
+    display: flex;
+    gap: 7px;
+    align-items: flex-start;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.4;
+  }
+
+  .cover-bullets li:last-child { border-bottom: none; }
+
+  .bullet-num {
+    width: 16px;
+    height: 16px;
+    background: var(--teal);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .cover-right {
+    background: var(--oci-bg);
+    border-left: 4px solid var(--oci-accent);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .oci-badge-strip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .oci-badge-icon {
+    color: var(--oci-accent);
+    font-size: 10px;
+  }
+
+  .oci-callout-label {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--oci-label);
+  }
+
+  .oci-callout-text {
+    font-size: 11.5px;
+    color: var(--oci-text);
+    line-height: 1.5;
+  }
+
+  /* -- Section header -------------------------------- */
+  .section-block { margin-bottom: 14px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .section-label-bar {
+    background: var(--teal);
+    color: white;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--teal-light);
+  }
+
+  .section-count {
+    font-size: 9px;
+    color: var(--text-muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* -- Hero card ------------------------------------- */
+  .hero-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 6px;
+    transition: box-shadow 0.12s;
+  }
+
+  .hero-card:hover { box-shadow: var(--shadow); }
+
+  .hero-img {
+    height: 100%;
+    min-height: 120px;
+    overflow: hidden;
+    position: relative;
+    background: var(--gray-light);
+  }
+
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .hero-img-badge {
+    position: absolute;
+    top: 5px; left: 5px;
+    font-size: 7.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: white;
+  }
+
+  .hero-body {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.28;
+  }
+
+  .hero-headline a { color: var(--charcoal); }
+  .hero-headline a:hover { color: var(--teal-dark); text-decoration: underline; }
+
+  .hero-summary {
+    font-size: 11px;
+    color: var(--text-mid);
+    line-height: 1.5;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .hero-oci {
+    font-size: 10px;
+    color: var(--oci-text);
+    background: var(--oci-bg);
+    border-left: 3px solid var(--oci-accent);
+    padding: 4px 8px;
+    border-radius: 2px;
+    line-height: 1.4;
+  }
+
+  .hero-footer {
+    font-size: 9px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--gray-light);
+    padding-top: 4px;
+    margin-top: 2px;
+  }
+
+  /* -- Compact story rows ---------------------------- */
+  .story-list { display: flex; flex-direction: column; gap: 1px; }
+
+  .story-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 7px 10px;
+    transition: background 0.1s;
+  }
+
+  .story-row:hover { background: var(--teal-pale); }
+
+  .story-row.is-fresh {
+    border-left: 3px solid var(--new-border);
+    padding-left: 7px;
+  }
+
+  .row-left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+  .row-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .src-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .src-name {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .topic-pill {
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--teal-dark);
+    background: var(--teal-light);
+    padding: 1px 5px;
+    border-radius: 8px;
+  }
+
+  .conf-pill {
+    font-size: 8px;
+    font-weight: 600;
+    padding: 1px 5px;
+    border-radius: 8px;
+  }
+
+  .conf-high   { background: #D5EFE0; color: #1A7A3C; }
+  .conf-medium { background: #FEF3CD; color: #856404; }
+  .conf-low    { background: #E9ECEF; color: #6C757D; }
+
+  .row-headline {
+    font-family: var(--serif);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.28;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .row-headline a { color: var(--charcoal); }
+  .row-headline a:hover { color: var(--teal-dark); text-decoration: underline; }
+
+  .row-summary {
+    font-size: 10.5px;
+    color: var(--text-mid);
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* row-oci: REMOVED in v2.2. Safety net to hide if accidentally emitted. */
+  .row-oci {
+    display: none;
+  }
+
+  .row-right {
+    text-align: right;
+    flex-shrink: 0;
+    font-size: 8.5px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    white-space: nowrap;
+  }
+
+  /* -- Divider & footer ------------------------------ */
+  .divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+  .page-footer {
+    text-align: center;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    line-height: 2;
+  }
+
+  .page-footer a { color: var(--teal-dark); }
+
+  .footer-briefings {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-briefings-label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .footer-briefing-link {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--teal-dark);
+    text-decoration: none;
+    padding: 2px 8px;
+    border-radius: 3px;
+    transition: background 0.1s;
+  }
+
+  .footer-briefing-link:hover {
+    background: var(--teal-pale);
+    text-decoration: none;
+  }
+
+  .footer-briefing-link.current {
+    color: var(--text-muted);
+    pointer-events: none;
+    font-weight: 400;
+  }
+
+  /* -- Responsive ------------------------------------ */
+  @media (max-width: 680px) {
+    .unified-header-inner {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 8px 16px;
+      gap: 4px;
+    }
+
+    .header-nav {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .header-date {
+      display: none;
+    }
+
+    .cover-block { grid-template-columns: 1fr; }
+
+    .cover-right {
+      border-left: none;
+      border-top: 4px solid var(--oci-accent);
+    }
+
+    .hero-card { grid-template-columns: 1fr; }
+    .hero-img { min-height: 120px; max-height: 160px; }
+
+    .row-headline {
+      -webkit-line-clamp: 3;
+    }
+  }
+
+  /* -- Scrollbar ------------------------------------- */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--gray-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gray-mid); border-radius: 3px; }
+
+  .mt { margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+    <header class="unified-header">
+      <div class="unified-header-inner">
+        <div class="header-title"><span>AI</span> Daily Briefing</div>
+        <div class="header-date">Wed Mar 11, 2026</div>
+        <nav class="header-nav" aria-label="Section navigation" id="header-nav">
+        </nav>
+      </div>
+    </header>
+    <div class="audience-panel active" data-audience="nathan" data-sec-nav="&lt;a class=&quot;header-nav-link&quot; href=&quot;#nathan-ai&quot;&gt;Artificial Intelligence&lt;/a&gt;">
+      <main>
+        <div class="page-wrap">
+          <div class="cover-block" id="nathan-exec" aria-label="Executive Summary">
+      <div class="cover-left">
+        <div class="cover-overline">Executive Summary</div>
+        <ul class="cover-bullets"><li><span class="bullet-num">1</span> Google brings Gemini in Chrome to India...</li><li><span class="bullet-num">2</span> In a vote of confidence for Meta’s Threads, Kalshi adds sharing featur...</li><li><span class="bullet-num">3</span> DOGE employee stole Social Security data and put it on a thumb drive, ...</li><li><span class="bullet-num">4</span> ChatGPT can now create interactive visuals to help you understand math...</li><li><span class="bullet-num">5</span> Google and Tesla think we’re managing the electrical grid all wrong...</li></ul>
+      </div>
+      <div class="cover-right" aria-label="OCI Implication of the Day">
+        <div class="oci-badge-strip">
+          <span class="oci-badge-icon">&#9670;</span>
+          <span class="oci-callout-label">OCI Implication of the Day</span>
+        </div>
+        <div class="oci-callout-text">[DRY RUN] Executive summary for Nathan Thomas (SVP, Product). Claude Sonnet would synthesise today's top signals into a concrete strategic implication for OCI leadership — covering competitive moves, AI advancements, and infrastructure developments most relevant to this executive's priorities.</div>
+      </div>
+    </div>
+          <section class="section-block" id="nathan-ai" aria-label="Artificial Intelligence">
+      <div class="section-header">
+        <span class="section-label-bar">Artificial Intelligence</span>
+        <div class="section-rule"></div>
+        <span class="section-count">12 stories</span>
+      </div>
+      <article class="hero-card">
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/114/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">TechCrunch</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-meta">
+          <span class="topic-pill">cloud computing</span><span class="topic-pill">AI infrastructure</span>
+          <span class="conf-pill conf-high">high</span>
+           <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+        </div>
+        <div class="hero-headline"><a href="https://techcrunch.com/2026/03/10/google-gemini-chrome-expands-to-india-canada-new-zealand/" target="_blank" rel="noopener">[DRY RUN] Google brings Gemini in Chrome to India</a></div>
+        <div class="hero-summary">This is a placeholder summary for 'Google brings Gemini in Chrome to India'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+        <div class="hero-oci">OCI implication placeholder: Claude Sonnet would generate a concrete, strategic implication for OCI leadership here.</div>
+        <div class="hero-footer">TechCrunch &nbsp;·&nbsp; Mar 11, 02:30 &nbsp;·&nbsp; 1h ago</div>
+      </div>
+    </article>
+      <div class="story-list"><article class="story-row is-fresh">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/in-a-vote-of-confidence-for-metas-threads-kalshi-adds-sharing-feature/" target="_blank" rel="noopener">[DRY RUN] In a vote of confidence for Meta’s Threads, Kalshi adds sharing feature</a></div>
+        <div class="row-summary">This is a placeholder summary for 'In a vote of confidence for Meta’s Threads, Kalshi adds shar'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>5h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/doge-employee-stole-social-security-data-and-put-it-on-a-thumb-drive-report-says/" target="_blank" rel="noopener">[DRY RUN] DOGE employee stole Social Security data and put it on a thumb drive, report say</a></div>
+        <div class="row-summary">This is a placeholder summary for 'DOGE employee stole Social Security data and put it on a thu'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/chatgpt-can-now-create-interactive-visuals-to-help-you-understand-math-and-science-concepts/" target="_blank" rel="noopener">[DRY RUN] ChatGPT can now create interactive visuals to help you understand math and scien</a></div>
+        <div class="row-summary">This is a placeholder summary for 'ChatGPT can now create interactive visuals to help you under'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>10h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/google-and-tesla-think-were-managing-the-electrical-grid-all-wrong/" target="_blank" rel="noopener">[DRY RUN] Google and Tesla think we’re managing the electrical grid all wrong</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Google and Tesla think we’re managing the electrical grid al'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>7h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/amazon-launches-its-healthcare-ai-assistant-on-its-website-and-app/" target="_blank" rel="noopener">[DRY RUN] Amazon launches its healthcare AI assistant on its website and app</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Amazon launches its healthcare AI assistant on its website a'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/pokemon-pokopia-review-animal-crossing-ditto-nintendo-switch/" target="_blank" rel="noopener">[DRY RUN] ‘Pokémon Pokopia’ is a game about rehabilitating a broken world — and I love it</a></div>
+        <div class="row-summary">This is a placeholder summary for '‘Pokémon Pokopia’ is a game about rehabilitating a broken wo'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/youtube-surpasses-disney-paramount-wbd-in-2025-ad-revenue/" target="_blank" rel="noopener">[DRY RUN] YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue</a></div>
+        <div class="row-summary">This is a placeholder summary for 'YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/ai-powered-apps-struggle-with-long-term-retention-new-report-shows/" target="_blank" rel="noopener">[DRY RUN] AI-powered apps struggle with long-term retention, new report shows</a></div>
+        <div class="row-summary">This is a placeholder summary for 'AI-powered apps struggle with long-term retention, new repor'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/mandiants-founder-just-raised-190m-for-his-autonomous-ai-agent-security-startup/" target="_blank" rel="noopener">[DRY RUN] Mandiant’s founder just raised $190M for his autonomous AI agent security startu</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Mandiant’s founder just raised $190M for his autonomous AI a'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/us-military-contractor-likely-built-iphone-hacking-tools-used-by-russian-spies-in-ukraine/" target="_blank" rel="noopener">[DRY RUN] US military contractor likely built iPhone hacking tools used by Russian spies i</a></div>
+        <div class="row-summary">This is a placeholder summary for 'US military contractor likely built iPhone hacking tools use'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>10h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/thinking-machines-lab-inks-massive-compute-deal-with-nvidia/" target="_blank" rel="noopener">[DRY RUN] Thinking Machines Lab inks massive compute deal with Nvidia</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Thinking Machines Lab inks massive compute deal with Nvidia'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>13h ago</div>
+    </article></div>
+    </section>
+          <div class="divider"></div>
+          <footer class="page-footer">
+            <div>Nathan Thomas &middot; 2026-03-11 04:16 UTC &middot; 12 stories &middot;
+            Powered by <a href="https://claude.ai">Claude</a></div>
+            <div class="footer-briefings">
+              <div class="footer-briefings-label">View other briefings</div>
+              <a class="footer-briefing-link" href="?audience=karan">Karan Batta</a>
+<a class="footer-briefing-link current" href="?audience=nathan" aria-current="page">Nathan Thomas</a>
+<a class="footer-briefing-link" href="?audience=greg">Greg Pavlik</a>
+<a class="footer-briefing-link" href="?audience=mahesh">Mahesh Thiagarajan</a>
+
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div>
+    <script>
+    (function(){
+      var panel = document.querySelector('.audience-panel.active');
+      var nav = document.getElementById('header-nav');
+      if (panel && nav && panel.dataset.secNav) {
+        nav.innerHTML = panel.dataset.secNav;
+      }
+    })();
+    </script>
+</body>
+</html>

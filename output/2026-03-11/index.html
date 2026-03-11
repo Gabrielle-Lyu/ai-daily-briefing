@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCI AI Intelligence — 2026-03-11</title>
+  <style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Primary palette */
+    --teal:        #5B9DB5;
+    --teal-dark:   #3D7A96;
+    --teal-light:  #D6EAF2;
+    --teal-pale:   #EBF5FA;
+    --charcoal:    #2C3E50;
+    --charcoal2:   #34495E;
+
+    /* Grays */
+    --gray-dark:   #7F8C8D;
+    --gray-mid:    #BDC3C7;
+    --gray-light:  #ECF0F1;
+    --gray-bg:     #F4F6F8;
+    --white:       #FFFFFF;
+
+    /* Text */
+    --text:        #2C3E50;
+    --text-mid:    #555E68;
+    --text-muted:  #95A5A6;
+
+    /* Borders and Shadows */
+    --border:      #D5DDE3;
+    --shadow:      0 2px 8px rgba(44,62,80,0.10);
+    --shadow-sm:   0 1px 3px rgba(44,62,80,0.06);
+
+    /* OCI callout — amber/gold accent */
+    --oci-accent:      #D4880F;
+    --oci-bg:          #FFF8EE;
+    --oci-text:        #7A5200;
+    --oci-label:       #B8730C;
+
+    /* Freshness indicator */
+    --new-badge-bg:    #E8F5E9;
+    --new-badge-text:  #2E7D32;
+    --new-border:      var(--teal);
+
+    /* Misc */
+    --radius:      4px;
+    --serif:       Georgia, 'Times New Roman', serif;
+  }
+
+  html { font-size: 13px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--gray-bg);
+    color: var(--text);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  a { color: var(--teal-dark); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+
+  /* -- Unified Header Bar (40px) ---------------------- */
+  .unified-header {
+    background: var(--charcoal);
+    border-bottom: 3px solid var(--teal);
+  }
+
+  .unified-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .header-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .header-title span {
+    color: var(--teal);
+    font-style: italic;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-right: 3px;
+  }
+
+  .header-date {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.55);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .header-nav-link {
+    padding: 11px 9px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.60);
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.1s;
+    display: block;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .header-nav-link:hover {
+    color: white;
+    border-bottom-color: var(--teal);
+    text-decoration: none;
+  }
+
+  /* -- NEW badge ------------------------------------- */
+  .new-badge {
+    font-size: 7.5px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--new-badge-text);
+    background: var(--new-badge-bg);
+    padding: 1px 4px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: inline-block;
+    line-height: 1.4;
+  }
+
+  /* -- Audience panel -------------------------------- */
+  .audience-panel { display: none; }
+  .audience-panel.active { display: block; }
+
+  /* -- Page wrapper ---------------------------------- */
+  .page-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 24px 32px;
+  }
+
+  /* -- Executive summary ----------------------------- */
+  .cover-block {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 0;
+    background: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 14px;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .cover-left {
+    background: var(--charcoal);
+    color: white;
+    padding: 14px 16px;
+  }
+
+  .cover-overline {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  .cover-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .cover-bullets li {
+    display: flex;
+    gap: 7px;
+    align-items: flex-start;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.4;
+  }
+
+  .cover-bullets li:last-child { border-bottom: none; }
+
+  .bullet-num {
+    width: 16px;
+    height: 16px;
+    background: var(--teal);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .cover-right {
+    background: var(--oci-bg);
+    border-left: 4px solid var(--oci-accent);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .oci-badge-strip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .oci-badge-icon {
+    color: var(--oci-accent);
+    font-size: 10px;
+  }
+
+  .oci-callout-label {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--oci-label);
+  }
+
+  .oci-callout-text {
+    font-size: 11.5px;
+    color: var(--oci-text);
+    line-height: 1.5;
+  }
+
+  /* -- Section header -------------------------------- */
+  .section-block { margin-bottom: 14px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .section-label-bar {
+    background: var(--teal);
+    color: white;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--teal-light);
+  }
+
+  .section-count {
+    font-size: 9px;
+    color: var(--text-muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* -- Hero card ------------------------------------- */
+  .hero-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 6px;
+    transition: box-shadow 0.12s;
+  }
+
+  .hero-card:hover { box-shadow: var(--shadow); }
+
+  .hero-img {
+    height: 100%;
+    min-height: 120px;
+    overflow: hidden;
+    position: relative;
+    background: var(--gray-light);
+  }
+
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .hero-img-badge {
+    position: absolute;
+    top: 5px; left: 5px;
+    font-size: 7.5px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: white;
+  }
+
+  .hero-body {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.28;
+  }
+
+  .hero-headline a { color: var(--charcoal); }
+  .hero-headline a:hover { color: var(--teal-dark); text-decoration: underline; }
+
+  .hero-summary {
+    font-size: 11px;
+    color: var(--text-mid);
+    line-height: 1.5;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .hero-oci {
+    font-size: 10px;
+    color: var(--oci-text);
+    background: var(--oci-bg);
+    border-left: 3px solid var(--oci-accent);
+    padding: 4px 8px;
+    border-radius: 2px;
+    line-height: 1.4;
+  }
+
+  .hero-footer {
+    font-size: 9px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--gray-light);
+    padding-top: 4px;
+    margin-top: 2px;
+  }
+
+  /* -- Compact story rows ---------------------------- */
+  .story-list { display: flex; flex-direction: column; gap: 1px; }
+
+  .story-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 7px 10px;
+    transition: background 0.1s;
+  }
+
+  .story-row:hover { background: var(--teal-pale); }
+
+  .story-row.is-fresh {
+    border-left: 3px solid var(--new-border);
+    padding-left: 7px;
+  }
+
+  .row-left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+  .row-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .src-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .src-name {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .topic-pill {
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--teal-dark);
+    background: var(--teal-light);
+    padding: 1px 5px;
+    border-radius: 8px;
+  }
+
+  .conf-pill {
+    font-size: 8px;
+    font-weight: 600;
+    padding: 1px 5px;
+    border-radius: 8px;
+  }
+
+  .conf-high   { background: #D5EFE0; color: #1A7A3C; }
+  .conf-medium { background: #FEF3CD; color: #856404; }
+  .conf-low    { background: #E9ECEF; color: #6C757D; }
+
+  .row-headline {
+    font-family: var(--serif);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.28;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .row-headline a { color: var(--charcoal); }
+  .row-headline a:hover { color: var(--teal-dark); text-decoration: underline; }
+
+  .row-summary {
+    font-size: 10.5px;
+    color: var(--text-mid);
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* row-oci: REMOVED in v2.2. Safety net to hide if accidentally emitted. */
+  .row-oci {
+    display: none;
+  }
+
+  .row-right {
+    text-align: right;
+    flex-shrink: 0;
+    font-size: 8.5px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    white-space: nowrap;
+  }
+
+  /* -- Divider & footer ------------------------------ */
+  .divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+  .page-footer {
+    text-align: center;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    line-height: 2;
+  }
+
+  .page-footer a { color: var(--teal-dark); }
+
+  .footer-briefings {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-briefings-label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .footer-briefing-link {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--teal-dark);
+    text-decoration: none;
+    padding: 2px 8px;
+    border-radius: 3px;
+    transition: background 0.1s;
+  }
+
+  .footer-briefing-link:hover {
+    background: var(--teal-pale);
+    text-decoration: none;
+  }
+
+  .footer-briefing-link.current {
+    color: var(--text-muted);
+    pointer-events: none;
+    font-weight: 400;
+  }
+
+  /* -- Responsive ------------------------------------ */
+  @media (max-width: 680px) {
+    .unified-header-inner {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 8px 16px;
+      gap: 4px;
+    }
+
+    .header-nav {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .header-date {
+      display: none;
+    }
+
+    .cover-block { grid-template-columns: 1fr; }
+
+    .cover-right {
+      border-left: none;
+      border-top: 4px solid var(--oci-accent);
+    }
+
+    .hero-card { grid-template-columns: 1fr; }
+    .hero-img { min-height: 120px; max-height: 160px; }
+
+    .row-headline {
+      -webkit-line-clamp: 3;
+    }
+  }
+
+  /* -- Scrollbar ------------------------------------- */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--gray-bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gray-mid); border-radius: 3px; }
+
+  .mt { margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+    <header class="unified-header">
+      <div class="unified-header-inner">
+        <div class="header-title"><span>AI</span> Daily Briefing</div>
+        <div class="header-date">Wed Mar 11, 2026</div>
+        <nav class="header-nav" aria-label="Section navigation" id="header-nav">
+        </nav>
+      </div>
+    </header>
+    <div style="display:none">
+      <button class="audience-tab" data-switch="karan" data-accent="#C74634" onclick="switchAudience('karan')" style="display:none">
+          Karan Batta
+        </button><button class="audience-tab" data-switch="nathan" data-accent="#1B6EC2" onclick="switchAudience('nathan')" style="display:none">
+          Nathan Thomas
+        </button><button class="audience-tab" data-switch="greg" data-accent="#2E7D32" onclick="switchAudience('greg')" style="display:none">
+          Greg Pavlik
+        </button><button class="audience-tab" data-switch="mahesh" data-accent="#6A1B9A" onclick="switchAudience('mahesh')" style="display:none">
+          Mahesh Thiagarajan
+        </button>
+    </div>
+    <div class="audience-panel" data-audience="karan" data-sec-nav="&lt;a class=&quot;header-nav-link&quot; href=&quot;#karan-compete&quot;&gt;Competitive Intel&lt;/a&gt;&lt;a class=&quot;header-nav-link&quot; href=&quot;#karan-ai&quot;&gt;Artificial Intelligence&lt;/a&gt;">
+      <main>
+        <div class="page-wrap">
+          <div class="cover-block" id="karan-exec" aria-label="Executive Summary">
+      <div class="cover-left">
+        <div class="cover-overline">Executive Summary</div>
+        <ul class="cover-bullets"><li><span class="bullet-num">1</span> OpenAI Secures $110B at $730B Valuation — Amazon, NVIDIA and SoftBank ...</li><li><span class="bullet-num">2</span> SAP, Oracle, Workday in Violent Agreement on Key Customer Issue...</li><li><span class="bullet-num">3</span> Hell Freezes Over: SAP, Oracle, Workday Agree on Key Issue!...</li><li><span class="bullet-num">4</span> Oracle Q3 Preview: Overtake Google Cloud as World’s Hottest Hyperscale...</li><li><span class="bullet-num">5</span> Oracle Q3 Outlook: How High Can Soaring RPO Go?...</li></ul>
+      </div>
+      <div class="cover-right" aria-label="OCI Implication of the Day">
+        <div class="oci-badge-strip">
+          <span class="oci-badge-icon">&#9670;</span>
+          <span class="oci-callout-label">OCI Implication of the Day</span>
+        </div>
+        <div class="oci-callout-text">[DRY RUN] Executive summary for Karan Batta (SVP, Product). Claude Sonnet would synthesise today's top signals into a concrete strategic implication for OCI leadership — covering competitive moves, AI advancements, and infrastructure developments most relevant to this executive's priorities.</div>
+      </div>
+    </div>
+          <section class="section-block" id="karan-compete" aria-label="Competitive Intel">
+      <div class="section-header">
+        <span class="section-label-bar">Competitive Intel</span>
+        <div class="section-rule"></div>
+        <span class="section-count">4 stories</span>
+      </div>
+      <article class="hero-card">
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/641/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">CloudWars</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-meta">
+          <span class="topic-pill">cloud computing</span><span class="topic-pill">AI infrastructure</span>
+          <span class="conf-pill conf-high">high</span>
+          
+        </div>
+        <div class="hero-headline"><a href="https://cloudwars.com/cloud/sap-oracle-workday-in-violent-agreement-on-key-customer-issue/" target="_blank" rel="noopener">[DRY RUN] SAP, Oracle, Workday in Violent Agreement on Key Customer Issue</a></div>
+        <div class="hero-summary">This is a placeholder summary for 'SAP, Oracle, Workday in Violent Agreement on Key Customer Is'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+        <div class="hero-oci">OCI implication placeholder: Claude Sonnet would generate a concrete, strategic implication for OCI leadership here.</div>
+        <div class="hero-footer">CloudWars &nbsp;·&nbsp; Mar 10, 15:00 &nbsp;·&nbsp; 13h ago</div>
+      </div>
+    </article>
+      <div class="story-list"><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">CloudWars</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://cloudwars.com/cloud-wars-minute/hell-freezes-over-sap-oracle-workday-agree-on-key-issue/" target="_blank" rel="noopener">[DRY RUN] Hell Freezes Over: SAP, Oracle, Workday Agree on Key Issue!</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Hell Freezes Over: SAP, Oracle, Workday Agree on Key Issue!'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>16h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">CloudWars</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://cloudwars.com/ai/oracle-q3-preview-can-it-leapfrog-google-cloud-as-worlds-hottest-hyperscaler/" target="_blank" rel="noopener">[DRY RUN] Oracle Q3 Preview: Overtake Google Cloud as World’s Hottest Hyperscaler?</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Oracle Q3 Preview: Overtake Google Cloud as World’s Hottest '. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 09<br>1d ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">CloudWars</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://cloudwars.com/ai/can-you-trust-your-ai-data/" target="_blank" rel="noopener">[DRY RUN] Can You Trust Your AI Data?</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Can You Trust Your AI Data?'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>15h ago</div>
+    </article></div>
+    </section>
+<section class="section-block" id="karan-ai" aria-label="Artificial Intelligence">
+      <div class="section-header">
+        <span class="section-label-bar">Artificial Intelligence</span>
+        <div class="section-rule"></div>
+        <span class="section-count">8 stories</span>
+      </div>
+      <article class="hero-card">
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/173/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">CloudWars</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-meta">
+          <span class="topic-pill">cloud computing</span><span class="topic-pill">AI infrastructure</span>
+          <span class="conf-pill conf-high">high</span>
+          
+        </div>
+        <div class="hero-headline"><a href="https://cloudwars.com/ai/openai-secures-110b-at-730b-valuation-amazon-nvidia-and-softbank-lead-massive-ai-funding-round/" target="_blank" rel="noopener">[DRY RUN] OpenAI Secures $110B at $730B Valuation — Amazon, NVIDIA and SoftBank Lead Massi</a></div>
+        <div class="hero-summary">This is a placeholder summary for 'OpenAI Secures $110B at $730B Valuation — Amazon, NVIDIA and'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+        <div class="hero-oci">OCI implication placeholder: Claude Sonnet would generate a concrete, strategic implication for OCI leadership here.</div>
+        <div class="hero-footer">CloudWars &nbsp;·&nbsp; Mar 10, 13:00 &nbsp;·&nbsp; 15h ago</div>
+      </div>
+    </article>
+      <div class="story-list"><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">CloudWars</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://cloudwars.com/cloud-wars-minute/oracle-q3-outlook-how-high-can-soaring-rpo-go/" target="_blank" rel="noopener">[DRY RUN] Oracle Q3 Outlook: How High Can Soaring RPO Go?</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Oracle Q3 Outlook: How High Can Soaring RPO Go?'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 09<br>1d ago</div>
+    </article><article class="story-row is-fresh">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/google-gemini-chrome-expands-to-india-canada-new-zealand/" target="_blank" rel="noopener">[DRY RUN] Google brings Gemini in Chrome to India</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Google brings Gemini in Chrome to India'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 11<br>1h ago</div>
+    </article><article class="story-row is-fresh">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/in-a-vote-of-confidence-for-metas-threads-kalshi-adds-sharing-feature/" target="_blank" rel="noopener">[DRY RUN] In a vote of confidence for Meta’s Threads, Kalshi adds sharing feature</a></div>
+        <div class="row-summary">This is a placeholder summary for 'In a vote of confidence for Meta’s Threads, Kalshi adds shar'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>5h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/doge-employee-stole-social-security-data-and-put-it-on-a-thumb-drive-report-says/" target="_blank" rel="noopener">[DRY RUN] DOGE employee stole Social Security data and put it on a thumb drive, report say</a></div>
+        <div class="row-summary">This is a placeholder summary for 'DOGE employee stole Social Security data and put it on a thu'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/chatgpt-can-now-create-interactive-visuals-to-help-you-understand-math-and-science-concepts/" target="_blank" rel="noopener">[DRY RUN] ChatGPT can now create interactive visuals to help you understand math and scien</a></div>
+        <div class="row-summary">This is a placeholder summary for 'ChatGPT can now create interactive visuals to help you under'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>10h ago</div>
+    </article><article class="story-row is-fresh">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">The Verge</span>
+          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://www.theverge.com/report/892661/iran-war-oil-gas-prices-data-center-electricity" target="_blank" rel="noopener">[DRY RUN] How the spiraling Iran conflict could affect data centers and electricity costs</a></div>
+        <div class="row-summary">This is a placeholder summary for 'How the spiraling Iran conflict could affect data centers an'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>5h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/google-and-tesla-think-were-managing-the-electrical-grid-all-wrong/" target="_blank" rel="noopener">[DRY RUN] Google and Tesla think we’re managing the electrical grid all wrong</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Google and Tesla think we’re managing the electrical grid al'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>7h ago</div>
+    </article></div>
+    </section>
+          <div class="divider"></div>
+          <footer class="page-footer">
+            <div>Karan Batta &middot; 2026-03-11 04:16 UTC &middot; 12 stories &middot;
+            Powered by <a href="https://claude.ai">Claude</a></div>
+            <div class="footer-briefings">
+              <div class="footer-briefings-label">View other briefings</div>
+              <a class="footer-briefing-link current" href="?audience=karan" aria-current="page">Karan Batta</a>
+<a class="footer-briefing-link" href="?audience=nathan">Nathan Thomas</a>
+<a class="footer-briefing-link" href="?audience=greg">Greg Pavlik</a>
+<a class="footer-briefing-link" href="?audience=mahesh">Mahesh Thiagarajan</a>
+
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div><div class="audience-panel" data-audience="nathan" data-sec-nav="&lt;a class=&quot;header-nav-link&quot; href=&quot;#nathan-ai&quot;&gt;Artificial Intelligence&lt;/a&gt;">
+      <main>
+        <div class="page-wrap">
+          <div class="cover-block" id="nathan-exec" aria-label="Executive Summary">
+      <div class="cover-left">
+        <div class="cover-overline">Executive Summary</div>
+        <ul class="cover-bullets"><li><span class="bullet-num">1</span> Google brings Gemini in Chrome to India...</li><li><span class="bullet-num">2</span> In a vote of confidence for Meta’s Threads, Kalshi adds sharing featur...</li><li><span class="bullet-num">3</span> DOGE employee stole Social Security data and put it on a thumb drive, ...</li><li><span class="bullet-num">4</span> ChatGPT can now create interactive visuals to help you understand math...</li><li><span class="bullet-num">5</span> Google and Tesla think we’re managing the electrical grid all wrong...</li></ul>
+      </div>
+      <div class="cover-right" aria-label="OCI Implication of the Day">
+        <div class="oci-badge-strip">
+          <span class="oci-badge-icon">&#9670;</span>
+          <span class="oci-callout-label">OCI Implication of the Day</span>
+        </div>
+        <div class="oci-callout-text">[DRY RUN] Executive summary for Nathan Thomas (SVP, Product). Claude Sonnet would synthesise today's top signals into a concrete strategic implication for OCI leadership — covering competitive moves, AI advancements, and infrastructure developments most relevant to this executive's priorities.</div>
+      </div>
+    </div>
+          <section class="section-block" id="nathan-ai" aria-label="Artificial Intelligence">
+      <div class="section-header">
+        <span class="section-label-bar">Artificial Intelligence</span>
+        <div class="section-rule"></div>
+        <span class="section-count">12 stories</span>
+      </div>
+      <article class="hero-card">
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/114/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">TechCrunch</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-meta">
+          <span class="topic-pill">cloud computing</span><span class="topic-pill">AI infrastructure</span>
+          <span class="conf-pill conf-high">high</span>
+           <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+        </div>
+        <div class="hero-headline"><a href="https://techcrunch.com/2026/03/10/google-gemini-chrome-expands-to-india-canada-new-zealand/" target="_blank" rel="noopener">[DRY RUN] Google brings Gemini in Chrome to India</a></div>
+        <div class="hero-summary">This is a placeholder summary for 'Google brings Gemini in Chrome to India'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+        <div class="hero-oci">OCI implication placeholder: Claude Sonnet would generate a concrete, strategic implication for OCI leadership here.</div>
+        <div class="hero-footer">TechCrunch &nbsp;·&nbsp; Mar 11, 02:30 &nbsp;·&nbsp; 1h ago</div>
+      </div>
+    </article>
+      <div class="story-list"><article class="story-row is-fresh">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/in-a-vote-of-confidence-for-metas-threads-kalshi-adds-sharing-feature/" target="_blank" rel="noopener">[DRY RUN] In a vote of confidence for Meta’s Threads, Kalshi adds sharing feature</a></div>
+        <div class="row-summary">This is a placeholder summary for 'In a vote of confidence for Meta’s Threads, Kalshi adds shar'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>5h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/doge-employee-stole-social-security-data-and-put-it-on-a-thumb-drive-report-says/" target="_blank" rel="noopener">[DRY RUN] DOGE employee stole Social Security data and put it on a thumb drive, report say</a></div>
+        <div class="row-summary">This is a placeholder summary for 'DOGE employee stole Social Security data and put it on a thu'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/chatgpt-can-now-create-interactive-visuals-to-help-you-understand-math-and-science-concepts/" target="_blank" rel="noopener">[DRY RUN] ChatGPT can now create interactive visuals to help you understand math and scien</a></div>
+        <div class="row-summary">This is a placeholder summary for 'ChatGPT can now create interactive visuals to help you under'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>10h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/google-and-tesla-think-were-managing-the-electrical-grid-all-wrong/" target="_blank" rel="noopener">[DRY RUN] Google and Tesla think we’re managing the electrical grid all wrong</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Google and Tesla think we’re managing the electrical grid al'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>7h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/amazon-launches-its-healthcare-ai-assistant-on-its-website-and-app/" target="_blank" rel="noopener">[DRY RUN] Amazon launches its healthcare AI assistant on its website and app</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Amazon launches its healthcare AI assistant on its website a'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/pokemon-pokopia-review-animal-crossing-ditto-nintendo-switch/" target="_blank" rel="noopener">[DRY RUN] ‘Pokémon Pokopia’ is a game about rehabilitating a broken world — and I love it</a></div>
+        <div class="row-summary">This is a placeholder summary for '‘Pokémon Pokopia’ is a game about rehabilitating a broken wo'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/youtube-surpasses-disney-paramount-wbd-in-2025-ad-revenue/" target="_blank" rel="noopener">[DRY RUN] YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue</a></div>
+        <div class="row-summary">This is a placeholder summary for 'YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/ai-powered-apps-struggle-with-long-term-retention-new-report-shows/" target="_blank" rel="noopener">[DRY RUN] AI-powered apps struggle with long-term retention, new report shows</a></div>
+        <div class="row-summary">This is a placeholder summary for 'AI-powered apps struggle with long-term retention, new repor'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/mandiants-founder-just-raised-190m-for-his-autonomous-ai-agent-security-startup/" target="_blank" rel="noopener">[DRY RUN] Mandiant’s founder just raised $190M for his autonomous AI agent security startu</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Mandiant’s founder just raised $190M for his autonomous AI a'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/us-military-contractor-likely-built-iphone-hacking-tools-used-by-russian-spies-in-ukraine/" target="_blank" rel="noopener">[DRY RUN] US military contractor likely built iPhone hacking tools used by Russian spies i</a></div>
+        <div class="row-summary">This is a placeholder summary for 'US military contractor likely built iPhone hacking tools use'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>10h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/thinking-machines-lab-inks-massive-compute-deal-with-nvidia/" target="_blank" rel="noopener">[DRY RUN] Thinking Machines Lab inks massive compute deal with Nvidia</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Thinking Machines Lab inks massive compute deal with Nvidia'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>13h ago</div>
+    </article></div>
+    </section>
+          <div class="divider"></div>
+          <footer class="page-footer">
+            <div>Nathan Thomas &middot; 2026-03-11 04:16 UTC &middot; 12 stories &middot;
+            Powered by <a href="https://claude.ai">Claude</a></div>
+            <div class="footer-briefings">
+              <div class="footer-briefings-label">View other briefings</div>
+              <a class="footer-briefing-link" href="?audience=karan">Karan Batta</a>
+<a class="footer-briefing-link current" href="?audience=nathan" aria-current="page">Nathan Thomas</a>
+<a class="footer-briefing-link" href="?audience=greg">Greg Pavlik</a>
+<a class="footer-briefing-link" href="?audience=mahesh">Mahesh Thiagarajan</a>
+
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div><div class="audience-panel" data-audience="greg" data-sec-nav="&lt;a class=&quot;header-nav-link&quot; href=&quot;#greg-ai&quot;&gt;Artificial Intelligence&lt;/a&gt;">
+      <main>
+        <div class="page-wrap">
+          <div class="cover-block" id="greg-exec" aria-label="Executive Summary">
+      <div class="cover-left">
+        <div class="cover-overline">Executive Summary</div>
+        <ul class="cover-bullets"><li><span class="bullet-num">1</span> Google brings Gemini in Chrome to India...</li><li><span class="bullet-num">2</span> How the spiraling Iran conflict could affect data centers and electric...</li><li><span class="bullet-num">3</span> In a vote of confidence for Meta’s Threads, Kalshi adds sharing featur...</li><li><span class="bullet-num">4</span> DOGE employee stole Social Security data and put it on a thumb drive, ...</li><li><span class="bullet-num">5</span> ChatGPT can now create interactive visuals to help you understand math...</li></ul>
+      </div>
+      <div class="cover-right" aria-label="OCI Implication of the Day">
+        <div class="oci-badge-strip">
+          <span class="oci-badge-icon">&#9670;</span>
+          <span class="oci-callout-label">OCI Implication of the Day</span>
+        </div>
+        <div class="oci-callout-text">[DRY RUN] Executive summary for Greg Pavlik (EVP, Data &amp; AI). Claude Sonnet would synthesise today's top signals into a concrete strategic implication for OCI leadership — covering competitive moves, AI advancements, and infrastructure developments most relevant to this executive's priorities.</div>
+      </div>
+    </div>
+          <section class="section-block" id="greg-ai" aria-label="Artificial Intelligence">
+      <div class="section-header">
+        <span class="section-label-bar">Artificial Intelligence</span>
+        <div class="section-rule"></div>
+        <span class="section-count">12 stories</span>
+      </div>
+      <article class="hero-card">
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/114/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">TechCrunch</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-meta">
+          <span class="topic-pill">cloud computing</span><span class="topic-pill">AI infrastructure</span>
+          <span class="conf-pill conf-high">high</span>
+           <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+        </div>
+        <div class="hero-headline"><a href="https://techcrunch.com/2026/03/10/google-gemini-chrome-expands-to-india-canada-new-zealand/" target="_blank" rel="noopener">[DRY RUN] Google brings Gemini in Chrome to India</a></div>
+        <div class="hero-summary">This is a placeholder summary for 'Google brings Gemini in Chrome to India'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+        <div class="hero-oci">OCI implication placeholder: Claude Sonnet would generate a concrete, strategic implication for OCI leadership here.</div>
+        <div class="hero-footer">TechCrunch &nbsp;·&nbsp; Mar 11, 02:30 &nbsp;·&nbsp; 1h ago</div>
+      </div>
+    </article>
+      <div class="story-list"><article class="story-row is-fresh">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">The Verge</span>
+          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://www.theverge.com/report/892661/iran-war-oil-gas-prices-data-center-electricity" target="_blank" rel="noopener">[DRY RUN] How the spiraling Iran conflict could affect data centers and electricity costs</a></div>
+        <div class="row-summary">This is a placeholder summary for 'How the spiraling Iran conflict could affect data centers an'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>5h ago</div>
+    </article><article class="story-row is-fresh">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/in-a-vote-of-confidence-for-metas-threads-kalshi-adds-sharing-feature/" target="_blank" rel="noopener">[DRY RUN] In a vote of confidence for Meta’s Threads, Kalshi adds sharing feature</a></div>
+        <div class="row-summary">This is a placeholder summary for 'In a vote of confidence for Meta’s Threads, Kalshi adds shar'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>5h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/doge-employee-stole-social-security-data-and-put-it-on-a-thumb-drive-report-says/" target="_blank" rel="noopener">[DRY RUN] DOGE employee stole Social Security data and put it on a thumb drive, report say</a></div>
+        <div class="row-summary">This is a placeholder summary for 'DOGE employee stole Social Security data and put it on a thu'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/chatgpt-can-now-create-interactive-visuals-to-help-you-understand-math-and-science-concepts/" target="_blank" rel="noopener">[DRY RUN] ChatGPT can now create interactive visuals to help you understand math and scien</a></div>
+        <div class="row-summary">This is a placeholder summary for 'ChatGPT can now create interactive visuals to help you under'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>10h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">The Verge</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://www.theverge.com/transportation/892010/ford-pro-ai-telematics-commercial-fleet" target="_blank" rel="noopener">[DRY RUN] Ford is giving its commercial fleet business an AI makeover</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Ford is giving its commercial fleet business an AI makeover'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>6h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/google-and-tesla-think-were-managing-the-electrical-grid-all-wrong/" target="_blank" rel="noopener">[DRY RUN] Google and Tesla think we’re managing the electrical grid all wrong</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Google and Tesla think we’re managing the electrical grid al'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>7h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/amazon-launches-its-healthcare-ai-assistant-on-its-website-and-app/" target="_blank" rel="noopener">[DRY RUN] Amazon launches its healthcare AI assistant on its website and app</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Amazon launches its healthcare AI assistant on its website a'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/pokemon-pokopia-review-animal-crossing-ditto-nintendo-switch/" target="_blank" rel="noopener">[DRY RUN] ‘Pokémon Pokopia’ is a game about rehabilitating a broken world — and I love it</a></div>
+        <div class="row-summary">This is a placeholder summary for '‘Pokémon Pokopia’ is a game about rehabilitating a broken wo'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/youtube-surpasses-disney-paramount-wbd-in-2025-ad-revenue/" target="_blank" rel="noopener">[DRY RUN] YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue</a></div>
+        <div class="row-summary">This is a placeholder summary for 'YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/ai-powered-apps-struggle-with-long-term-retention-new-report-shows/" target="_blank" rel="noopener">[DRY RUN] AI-powered apps struggle with long-term retention, new report shows</a></div>
+        <div class="row-summary">This is a placeholder summary for 'AI-powered apps struggle with long-term retention, new repor'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/mandiants-founder-just-raised-190m-for-his-autonomous-ai-agent-security-startup/" target="_blank" rel="noopener">[DRY RUN] Mandiant’s founder just raised $190M for his autonomous AI agent security startu</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Mandiant’s founder just raised $190M for his autonomous AI a'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article></div>
+    </section>
+          <div class="divider"></div>
+          <footer class="page-footer">
+            <div>Greg Pavlik &middot; 2026-03-11 04:16 UTC &middot; 12 stories &middot;
+            Powered by <a href="https://claude.ai">Claude</a></div>
+            <div class="footer-briefings">
+              <div class="footer-briefings-label">View other briefings</div>
+              <a class="footer-briefing-link" href="?audience=karan">Karan Batta</a>
+<a class="footer-briefing-link" href="?audience=nathan">Nathan Thomas</a>
+<a class="footer-briefing-link current" href="?audience=greg" aria-current="page">Greg Pavlik</a>
+<a class="footer-briefing-link" href="?audience=mahesh">Mahesh Thiagarajan</a>
+
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div><div class="audience-panel" data-audience="mahesh" data-sec-nav="&lt;a class=&quot;header-nav-link&quot; href=&quot;#mahesh-datacenter&quot;&gt;Datacenter &amp;amp; Infrastructure&lt;/a&gt;&lt;a class=&quot;header-nav-link&quot; href=&quot;#mahesh-ai&quot;&gt;Artificial Intelligence&lt;/a&gt;">
+      <main>
+        <div class="page-wrap">
+          <div class="cover-block" id="mahesh-exec" aria-label="Executive Summary">
+      <div class="cover-left">
+        <div class="cover-overline">Executive Summary</div>
+        <ul class="cover-bullets"><li><span class="bullet-num">1</span> Cadillac F1 team selects Core Scientific as data center partner...</li><li><span class="bullet-num">2</span> Franz Seidelhuber named VP of data center operations at SB Energy, fol...</li><li><span class="bullet-num">3</span> The profundity and paradox of time...</li><li><span class="bullet-num">4</span> Google brings Gemini in Chrome to India...</li><li><span class="bullet-num">5</span> 400MW data center could be built in eastern South Africa...</li></ul>
+      </div>
+      <div class="cover-right" aria-label="OCI Implication of the Day">
+        <div class="oci-badge-strip">
+          <span class="oci-badge-icon">&#9670;</span>
+          <span class="oci-callout-label">OCI Implication of the Day</span>
+        </div>
+        <div class="oci-callout-text">[DRY RUN] Executive summary for Mahesh Thiagarajan (EVP, Security &amp; Developer Platform). Claude Sonnet would synthesise today's top signals into a concrete strategic implication for OCI leadership — covering competitive moves, AI advancements, and infrastructure developments most relevant to this executive's priorities.</div>
+      </div>
+    </div>
+          <section class="section-block" id="mahesh-datacenter" aria-label="Datacenter &amp; Infrastructure">
+      <div class="section-header">
+        <span class="section-label-bar">Datacenter &amp; Infrastructure</span>
+        <div class="section-rule"></div>
+        <span class="section-count">3 stories</span>
+      </div>
+      <article class="hero-card">
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/805/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">DC Dynamics</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-meta">
+          <span class="topic-pill">cloud computing</span><span class="topic-pill">AI infrastructure</span>
+          <span class="conf-pill conf-high">high</span>
+          
+        </div>
+        <div class="hero-headline"><a href="https://www.datacenterdynamics.com/en/news/cadillac-f1-team-selects-core-scientific-as-data-center-partner/" target="_blank" rel="noopener">[DRY RUN] Cadillac F1 team selects Core Scientific as data center partner</a></div>
+        <div class="hero-summary">This is a placeholder summary for 'Cadillac F1 team selects Core Scientific as data center part'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+        <div class="hero-oci">OCI implication placeholder: Claude Sonnet would generate a concrete, strategic implication for OCI leadership here.</div>
+        <div class="hero-footer">DC Dynamics &nbsp;·&nbsp; Mar 10, 18:30 &nbsp;·&nbsp; 9h ago</div>
+      </div>
+    </article>
+      <div class="story-list"><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">DC Dynamics</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://www.datacenterdynamics.com/en/analysis/the-profundity-and-paradox-of-time/" target="_blank" rel="noopener">[DRY RUN] The profundity and paradox of time</a></div>
+        <div class="row-summary">This is a placeholder summary for 'The profundity and paradox of time'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>11h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">DC Dynamics</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://www.datacenterdynamics.com/en/news/400mw-data-center-could-be-built-in-eastern-south-africa/" target="_blank" rel="noopener">[DRY RUN] 400MW data center could be built in eastern South Africa</a></div>
+        <div class="row-summary">This is a placeholder summary for '400MW data center could be built in eastern South Africa'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article></div>
+    </section>
+<section class="section-block" id="mahesh-ai" aria-label="Artificial Intelligence">
+      <div class="section-header">
+        <span class="section-label-bar">Artificial Intelligence</span>
+        <div class="section-rule"></div>
+        <span class="section-count">9 stories</span>
+      </div>
+      <article class="hero-card">
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/345/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">DC Dynamics</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-meta">
+          <span class="topic-pill">cloud computing</span><span class="topic-pill">AI infrastructure</span>
+          <span class="conf-pill conf-high">high</span>
+          
+        </div>
+        <div class="hero-headline"><a href="https://www.datacenterdynamics.com/en/news/franz-seidelhuber-named-vp-of-data-center-operations-at-sb-energy-following-studio-151-acquisition/" target="_blank" rel="noopener">[DRY RUN] Franz Seidelhuber named VP of data center operations at SB Energy, following Stu</a></div>
+        <div class="hero-summary">This is a placeholder summary for 'Franz Seidelhuber named VP of data center operations at SB E'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+        <div class="hero-oci">OCI implication placeholder: Claude Sonnet would generate a concrete, strategic implication for OCI leadership here.</div>
+        <div class="hero-footer">DC Dynamics &nbsp;·&nbsp; Mar 10, 16:50 &nbsp;·&nbsp; 11h ago</div>
+      </div>
+    </article>
+      <div class="story-list"><article class="story-row is-fresh">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/google-gemini-chrome-expands-to-india-canada-new-zealand/" target="_blank" rel="noopener">[DRY RUN] Google brings Gemini in Chrome to India</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Google brings Gemini in Chrome to India'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 11<br>1h ago</div>
+    </article><article class="story-row is-fresh">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/in-a-vote-of-confidence-for-metas-threads-kalshi-adds-sharing-feature/" target="_blank" rel="noopener">[DRY RUN] In a vote of confidence for Meta’s Threads, Kalshi adds sharing feature</a></div>
+        <div class="row-summary">This is a placeholder summary for 'In a vote of confidence for Meta’s Threads, Kalshi adds shar'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>5h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/doge-employee-stole-social-security-data-and-put-it-on-a-thumb-drive-report-says/" target="_blank" rel="noopener">[DRY RUN] DOGE employee stole Social Security data and put it on a thumb drive, report say</a></div>
+        <div class="row-summary">This is a placeholder summary for 'DOGE employee stole Social Security data and put it on a thu'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/chatgpt-can-now-create-interactive-visuals-to-help-you-understand-math-and-science-concepts/" target="_blank" rel="noopener">[DRY RUN] ChatGPT can now create interactive visuals to help you understand math and scien</a></div>
+        <div class="row-summary">This is a placeholder summary for 'ChatGPT can now create interactive visuals to help you under'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>10h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/google-and-tesla-think-were-managing-the-electrical-grid-all-wrong/" target="_blank" rel="noopener">[DRY RUN] Google and Tesla think we’re managing the electrical grid all wrong</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Google and Tesla think we’re managing the electrical grid al'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>7h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/amazon-launches-its-healthcare-ai-assistant-on-its-website-and-app/" target="_blank" rel="noopener">[DRY RUN] Amazon launches its healthcare AI assistant on its website and app</a></div>
+        <div class="row-summary">This is a placeholder summary for 'Amazon launches its healthcare AI assistant on its website a'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/pokemon-pokopia-review-animal-crossing-ditto-nintendo-switch/" target="_blank" rel="noopener">[DRY RUN] ‘Pokémon Pokopia’ is a game about rehabilitating a broken world — and I love it</a></div>
+        <div class="row-summary">This is a placeholder summary for '‘Pokémon Pokopia’ is a game about rehabilitating a broken wo'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>8h ago</div>
+    </article><article class="story-row">
+      <div class="row-left">
+        <div class="row-meta">
+          <span class="src-dot" style="background:#2980B9"></span>
+          <span class="src-name">TechCrunch</span>
+          
+          <span class="topic-pill">cloud computing</span>
+          <span class="conf-pill conf-high">high</span>
+        </div>
+        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/youtube-surpasses-disney-paramount-wbd-in-2025-ad-revenue/" target="_blank" rel="noopener">[DRY RUN] YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue</a></div>
+        <div class="row-summary">This is a placeholder summary for 'YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      </div>
+      <div class="row-right">Mar 10<br>9h ago</div>
+    </article></div>
+    </section>
+          <div class="divider"></div>
+          <footer class="page-footer">
+            <div>Mahesh Thiagarajan &middot; 2026-03-11 04:16 UTC &middot; 12 stories &middot;
+            Powered by <a href="https://claude.ai">Claude</a></div>
+            <div class="footer-briefings">
+              <div class="footer-briefings-label">View other briefings</div>
+              <a class="footer-briefing-link" href="?audience=karan">Karan Batta</a>
+<a class="footer-briefing-link" href="?audience=nathan">Nathan Thomas</a>
+<a class="footer-briefing-link" href="?audience=greg">Greg Pavlik</a>
+<a class="footer-briefing-link current" href="?audience=mahesh" aria-current="page">Mahesh Thiagarajan</a>
+
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div>
+    <script>
+  function switchAudience(id) {
+    document.querySelectorAll('.audience-panel').forEach(el => el.classList.remove('active'));
+    const p = document.querySelector('.audience-panel[data-audience="'+id+'"]');
+    if (p) {
+      p.classList.add('active');
+      // Populate header nav from the active panel's section nav data
+      var nav = document.getElementById('header-nav');
+      if (nav && p.dataset.secNav) {
+        nav.innerHTML = p.dataset.secNav;
+      }
+    }
+    document.querySelectorAll('.audience-tab').forEach(b => {
+      b.classList.toggle('active', b.dataset.switch===id);
+    });
+    try { localStorage.setItem('oci-aud', id); } catch(e) {}
+  }
+  (function(){
+    // Check URL parameter first
+    var params = new URLSearchParams(window.location.search);
+    var urlAud = params.get('audience') || '';
+    var last=''; try { last=localStorage.getItem('oci-aud')||''; } catch(e) {}
+    var ids=Array.from(document.querySelectorAll('.audience-panel')).map(function(p){return p.dataset.audience});
+    var pick = ids.includes(urlAud) ? urlAud : (ids.includes(last) ? last : (ids[0]||''));
+    switchAudience(pick);
+  })();
+</script>
+</body>
+</html>
