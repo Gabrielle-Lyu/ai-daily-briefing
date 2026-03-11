@@ -1,0 +1,5 @@
+{
+  "headline": "Meta's Deepfake Crisis Opens Platform Integrity Market for Cloud Providers",
+  "summary": "Meta's Oversight Board is demanding expanded AI-generated content detection and moderation investment after flagging systemic failures against deepfake proliferation. This pressure is accelerating enterprise demand for cloud-native content authenticity and provenance tooling across social, media, and enterprise platforms. ISVs like Truepic, Reality Defender, and Hive Moderation are scaling rapidly to fill this gap, creating a new infrastructure layer that GSIs such as Accenture and Deloitte are beginning to productize for regulated industries.",
+  "oci_implication": "OCI should evaluate co-selling arrangements with Reality Defender or Hive Moderation to position OCI AI Infrastructure as the preferred compute layer for trust and safety workloads \u2014 a wedge into media, fintech, and public sector verticals where deepfake risk is a board-level concern."
+}

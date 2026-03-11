@@ -9,43 +9,30 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    /* Primary palette */
     --teal:        #5B9DB5;
     --teal-dark:   #3D7A96;
     --teal-light:  #D6EAF2;
     --teal-pale:   #EBF5FA;
     --charcoal:    #2C3E50;
     --charcoal2:   #34495E;
-
-    /* Grays */
     --gray-dark:   #7F8C8D;
     --gray-mid:    #BDC3C7;
     --gray-light:  #ECF0F1;
     --gray-bg:     #F4F6F8;
     --white:       #FFFFFF;
-
-    /* Text */
     --text:        #2C3E50;
     --text-mid:    #555E68;
     --text-muted:  #95A5A6;
-
-    /* Borders and Shadows */
     --border:      #D5DDE3;
     --shadow:      0 2px 8px rgba(44,62,80,0.10);
     --shadow-sm:   0 1px 3px rgba(44,62,80,0.06);
-
-    /* OCI callout — amber/gold accent */
     --oci-accent:      #D4880F;
     --oci-bg:          #FFF8EE;
     --oci-text:        #7A5200;
     --oci-label:       #B8730C;
-
-    /* Freshness indicator */
     --new-badge-bg:    #E8F5E9;
     --new-badge-text:  #2E7D32;
     --new-border:      var(--teal);
-
-    /* Misc */
     --radius:      4px;
     --serif:       Georgia, 'Times New Roman', serif;
   }
@@ -62,16 +49,13 @@
   a { color: var(--teal-dark); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  a:focus-visible,
-  button:focus-visible {
+  a:focus-visible, button:focus-visible {
     outline: 2px solid var(--teal);
     outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      transition-duration: 0.01ms !important;
-    }
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
     html { scroll-behavior: auto; }
   }
 
@@ -82,7 +66,7 @@
   }
 
   .unified-header-inner {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
     height: 40px;
@@ -151,6 +135,49 @@
     text-decoration: none;
   }
 
+  /* -- Audience Tabs (prominent) ---------------------- */
+  .audience-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--charcoal2);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .audience-tabs-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+    width: 100%;
+  }
+
+  .audience-tab {
+    padding: 8px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .audience-tab:hover {
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .audience-tab.active {
+    color: white;
+    border-bottom-color: var(--tab-accent, var(--teal));
+    background: rgba(255,255,255,0.08);
+  }
+
   /* -- NEW badge ------------------------------------- */
   .new-badge {
     font-size: 7.5px;
@@ -172,12 +199,12 @@
 
   /* -- Page wrapper ---------------------------------- */
   .page-wrap {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 14px 24px 32px;
   }
 
-  /* -- Executive summary ----------------------------- */
+  /* -- Executive summary (compact 2-panel) ----------- */
   .cover-block {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -185,7 +212,7 @@
     background: var(--white);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     border-radius: var(--radius);
     overflow: hidden;
   }
@@ -193,16 +220,16 @@
   .cover-left {
     background: var(--charcoal);
     color: white;
-    padding: 14px 16px;
+    padding: 12px 16px;
   }
 
   .cover-overline {
-    font-size: 8.5px;
+    font-size: 8px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--teal);
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
 
   .cover-bullets {
@@ -215,9 +242,9 @@
     display: flex;
     gap: 7px;
     align-items: flex-start;
-    padding: 4px 0;
+    padding: 3px 0;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    font-size: 11.5px;
+    font-size: 11px;
     color: rgba(255,255,255,0.88);
     line-height: 1.4;
   }
@@ -225,11 +252,11 @@
   .cover-bullets li:last-child { border-bottom: none; }
 
   .bullet-num {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     background: var(--teal);
     color: white;
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 700;
     border-radius: 50%;
     display: flex;
@@ -242,11 +269,11 @@
   .cover-right {
     background: var(--oci-bg);
     border-left: 4px solid var(--oci-accent);
-    padding: 14px 16px;
+    padding: 12px 16px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
   }
 
   .oci-badge-strip {
@@ -269,37 +296,31 @@
   }
 
   .oci-callout-text {
-    font-size: 11.5px;
+    font-size: 11px;
     color: var(--oci-text);
     line-height: 1.5;
   }
 
-  /* -- Section header -------------------------------- */
-  .section-block { margin-bottom: 14px; }
+  /* -- Section header (full-width bold teal rule) ---- */
+  .section-block { margin-bottom: 16px; }
 
   .section-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 3px solid var(--teal);
+    padding-bottom: 6px;
   }
 
   .section-label-bar {
-    background: var(--teal);
-    color: white;
-    font-size: 8.5px;
+    font-family: var(--serif);
+    font-size: 14px;
     font-weight: 800;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 2px;
+    color: var(--charcoal);
     white-space: nowrap;
-  }
-
-  .section-rule {
-    flex: 1;
-    height: 1px;
-    background: var(--teal-light);
   }
 
   .section-count {
@@ -307,9 +328,10 @@
     color: var(--text-muted);
     font-weight: 600;
     white-space: nowrap;
+    margin-left: auto;
   }
 
-  /* -- Hero card ------------------------------------- */
+  /* -- Hero card (full width, image left 180px) ------ */
   .hero-card {
     display: grid;
     grid-template-columns: 180px 1fr;
@@ -318,7 +340,7 @@
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    margin-bottom: 6px;
+    margin-bottom: 10px;
     transition: box-shadow 0.12s;
   }
 
@@ -347,7 +369,7 @@
   }
 
   .hero-body {
-    padding: 10px 12px;
+    padding: 10px 14px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -362,7 +384,7 @@
 
   .hero-headline {
     font-family: var(--serif);
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--charcoal);
     line-height: 1.28;
@@ -400,50 +422,81 @@
     margin-top: 2px;
   }
 
-  /* -- Compact story rows ---------------------------- */
-  .story-list { display: flex; flex-direction: column; gap: 1px; }
-
-  .story-row {
+  /* -- 3-column story grid --------------------------- */
+  .story-grid {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    align-items: start;
+  }
+
+  .story-card {
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 7px 10px;
-    transition: background 0.1s;
+    padding: 10px 12px;
+    transition: background 0.1s, box-shadow 0.1s;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .story-row:hover { background: var(--teal-pale); }
+  .story-card:hover {
+    background: var(--teal-pale);
+    box-shadow: var(--shadow-sm);
+  }
 
-  .story-row.is-fresh {
+  .story-card.is-fresh {
     border-left: 3px solid var(--new-border);
-    padding-left: 7px;
+    padding-left: 9px;
   }
 
-  .row-left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-
-  .row-meta {
+  .card-meta {
     display: flex;
     align-items: center;
     gap: 4px;
     flex-wrap: wrap;
   }
 
-  .src-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: inline-block;
+  .src-badge {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 2px;
+    color: white;
+    white-space: nowrap;
   }
 
-  .src-name {
-    font-size: 8.5px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+  .card-timestamp {
+    font-size: 8px;
     color: var(--text-muted);
+    margin-left: auto;
+  }
+
+  .card-headline {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-headline a { color: var(--charcoal); }
+  .card-headline a:hover { color: var(--teal-dark); text-decoration: underline; }
+
+  .card-summary {
+    font-size: 11px;
+    color: var(--text-mid);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .topic-pill {
@@ -466,47 +519,8 @@
   .conf-medium { background: #FEF3CD; color: #856404; }
   .conf-low    { background: #E9ECEF; color: #6C757D; }
 
-  .row-headline {
-    font-family: var(--serif);
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--charcoal);
-    line-height: 1.28;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .row-headline a { color: var(--charcoal); }
-  .row-headline a:hover { color: var(--teal-dark); text-decoration: underline; }
-
-  .row-summary {
-    font-size: 10.5px;
-    color: var(--text-mid);
-    line-height: 1.45;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* row-oci: REMOVED in v2.2. Safety net to hide if accidentally emitted. */
-  .row-oci {
-    display: none;
-  }
-
-  .row-right {
-    text-align: right;
-    flex-shrink: 0;
-    font-size: 8.5px;
-    color: var(--text-muted);
-    line-height: 1.8;
-    white-space: nowrap;
-  }
-
   /* -- Divider & footer ------------------------------ */
-  .divider { height: 1px; background: var(--border); margin: 14px 0; }
+  .divider { height: 1px; background: var(--border); margin: 16px 0; }
 
   .page-footer {
     text-align: center;
@@ -555,6 +569,10 @@
   }
 
   /* -- Responsive ------------------------------------ */
+  @media (max-width: 900px) {
+    .story-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
   @media (max-width: 680px) {
     .unified-header-inner {
       flex-wrap: wrap;
@@ -562,32 +580,16 @@
       padding: 8px 16px;
       gap: 4px;
     }
-
-    .header-nav {
-      width: 100%;
-      overflow-x: auto;
-    }
-
-    .header-date {
-      display: none;
-    }
-
+    .header-nav { width: 100%; overflow-x: auto; }
+    .header-date { display: none; }
     .cover-block { grid-template-columns: 1fr; }
-
-    .cover-right {
-      border-left: none;
-      border-top: 4px solid var(--oci-accent);
-    }
-
+    .cover-right { border-left: none; border-top: 4px solid var(--oci-accent); }
     .hero-card { grid-template-columns: 1fr; }
     .hero-img { min-height: 120px; max-height: 160px; }
-
-    .row-headline {
-      -webkit-line-clamp: 3;
-    }
+    .story-grid { grid-template-columns: 1fr; }
+    .audience-tabs-inner { overflow-x: auto; }
   }
 
-  /* -- Scrollbar ------------------------------------- */
   ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: var(--gray-bg); }
   ::-webkit-scrollbar-thumb { background: var(--gray-mid); border-radius: 3px; }
@@ -602,208 +604,173 @@
         <div class="header-title"><span>AI</span> Daily Briefing</div>
         <div class="header-date">Wed Mar 11, 2026</div>
         <nav class="header-nav" aria-label="Section navigation" id="header-nav">
+          <a class="header-nav-link" href="#mahesh-ai">Artificial Intelligence</a><a class="header-nav-link" href="#mahesh-deals">Deals &amp; Partnerships</a><a class="header-nav-link" href="#mahesh-security">Security &amp; Compliance</a>
         </nav>
       </div>
     </header>
-    <div class="audience-panel active" data-audience="mahesh" data-sec-nav="&lt;a class=&quot;header-nav-link&quot; href=&quot;#mahesh-datacenter&quot;&gt;Datacenter &amp;amp; Infrastructure&lt;/a&gt;&lt;a class=&quot;header-nav-link&quot; href=&quot;#mahesh-ai&quot;&gt;Artificial Intelligence&lt;/a&gt;">
+    <div class="audience-panel active" data-audience="mahesh" data-sec-nav="&lt;a class=&quot;header-nav-link&quot; href=&quot;#mahesh-ai&quot;&gt;Artificial Intelligence&lt;/a&gt;&lt;a class=&quot;header-nav-link&quot; href=&quot;#mahesh-deals&quot;&gt;Deals &amp;amp; Partnerships&lt;/a&gt;&lt;a class=&quot;header-nav-link&quot; href=&quot;#mahesh-security&quot;&gt;Security &amp;amp; Compliance&lt;/a&gt;">
       <main>
         <div class="page-wrap">
           <div class="cover-block" id="mahesh-exec" aria-label="Executive Summary">
       <div class="cover-left">
         <div class="cover-overline">Executive Summary</div>
-        <ul class="cover-bullets"><li><span class="bullet-num">1</span> Cadillac F1 team selects Core Scientific as data center partner...</li><li><span class="bullet-num">2</span> Franz Seidelhuber named VP of data center operations at SB Energy, fol...</li><li><span class="bullet-num">3</span> The profundity and paradox of time...</li><li><span class="bullet-num">4</span> Google brings Gemini in Chrome to India...</li><li><span class="bullet-num">5</span> 400MW data center could be built in eastern South Africa...</li></ul>
+        <ul class="cover-bullets"><li><span class="bullet-num">1</span> Oracle cloud revenue surges 44% YoY in Q3, beating EPS estimates ($1.79 vs $1.70 consensus) with full-year guidance raised — validates OCI's infrastructure investment thesis and directly supports the case for accelerated security certification spend (FedRAMP, DISA IL) to capture regulated-sector workloads driving this growth.</li><li><span class="bullet-num">2</span> Thinking Machines Lab (Mira Murati) inks a multi-year Nvidia deal anchored by at least 1 gigawatt of compute capacity — a stark signal that frontier AI training clusters are now grid-scale energy consumers; OCI sovereign and dedicated-region designs must account for power-delivery constraints as a first-class architectural requirement to compete for this class of workload.</li><li><span class="bullet-num">3</span> Microsoft Excel/Copilot zero-click information disclosure vulnerability (March Patch Tuesday, no CVE severity yet public but classified critical by The Register) exploits the Copilot Agent surface to exfiltrate sensitive financial and personal data — a direct warning for OCI's developer platform teams embedding AI agents into productivity and data workflows; agent sandboxing and least-privilege execution policies need immediate review.</li><li><span class="bullet-num">4</span> AWS Security Hub expands to aggregate multicloud security findings, positioning itself as the de-facto cross-cloud SIEM layer — OCI must accelerate native security-findings APIs and SIEM integrations (especially for EU AI Act and FedRAMP compliance contexts) or risk becoming a data source feeding AWS-controlled visibility planes in joint-customer environments.</li><li><span class="bullet-num">5</span> Google's Gemini rollout across eight Indian regional languages in Chrome signals accelerating sovereign-language AI adoption in a major OCI growth market; data-residency and localization requirements tied to India's DPDP Act will pressure OCI's India West/East regions to demonstrate compliant inference infrastructure ahead of enterprise procurement cycles.</li></ul>
       </div>
       <div class="cover-right" aria-label="OCI Implication of the Day">
         <div class="oci-badge-strip">
           <span class="oci-badge-icon">&#9670;</span>
           <span class="oci-callout-label">OCI Implication of the Day</span>
         </div>
-        <div class="oci-callout-text">[DRY RUN] Executive summary for Mahesh Thiagarajan (EVP, Security &amp; Developer Platform). Claude Sonnet would synthesise today's top signals into a concrete strategic implication for OCI leadership — covering competitive moves, AI advancements, and infrastructure developments most relevant to this executive's priorities.</div>
+        <div class="oci-callout-text">Oracle's 44% cloud revenue surge validates demand but raises the stakes: the pipeline now includes hyperscale AI customers (per the Thinking Machines/Nvidia 1GW benchmark) who will stress OCI's power-delivery SLAs and sovereign-isolation guarantees simultaneously. Security teams should treat the Microsoft Copilot zero-click CVE as a forcing function to harden OCI's own AI-agent execution surfaces before a similar class of vulnerability is discovered in OCI's developer platform offerings — especially given FedRAMP and DISA IL auditors will scrutinize agent-to-data access paths. The AWS Security Hub multicloud move is an immediate competitive threat to OCI's security posture narrative; a concrete response roadmap for cross-cloud findings aggregation from OCI Security Zones should be prioritized for the next leadership review.</div>
       </div>
     </div>
-          <section class="section-block" id="mahesh-datacenter" aria-label="Datacenter &amp; Infrastructure">
-      <div class="section-header">
-        <span class="section-label-bar">Datacenter &amp; Infrastructure</span>
-        <div class="section-rule"></div>
-        <span class="section-count">3 stories</span>
-      </div>
-      <article class="hero-card">
-      <div class="hero-img">
-        <img src="https://picsum.photos/seed/805/400/260" alt="" loading="lazy">
-        <span class="hero-img-badge" style="background:#2980B9">DC Dynamics</span>
-      </div>
-      <div class="hero-body">
-        <div class="hero-meta">
-          <span class="topic-pill">cloud computing</span><span class="topic-pill">AI infrastructure</span>
-          <span class="conf-pill conf-high">high</span>
-          
-        </div>
-        <div class="hero-headline"><a href="https://www.datacenterdynamics.com/en/news/cadillac-f1-team-selects-core-scientific-as-data-center-partner/" target="_blank" rel="noopener">[DRY RUN] Cadillac F1 team selects Core Scientific as data center partner</a></div>
-        <div class="hero-summary">This is a placeholder summary for 'Cadillac F1 team selects Core Scientific as data center part'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
-        <div class="hero-oci">OCI implication placeholder: Claude Sonnet would generate a concrete, strategic implication for OCI leadership here.</div>
-        <div class="hero-footer">DC Dynamics &nbsp;·&nbsp; Mar 10, 18:30 &nbsp;·&nbsp; 9h ago</div>
-      </div>
-    </article>
-      <div class="story-list"><article class="story-row">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">DC Dynamics</span>
-          
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
-        </div>
-        <div class="row-headline"><a href="https://www.datacenterdynamics.com/en/analysis/the-profundity-and-paradox-of-time/" target="_blank" rel="noopener">[DRY RUN] The profundity and paradox of time</a></div>
-        <div class="row-summary">This is a placeholder summary for 'The profundity and paradox of time'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
-      </div>
-      <div class="row-right">Mar 10<br>11h ago</div>
-    </article><article class="story-row">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">DC Dynamics</span>
-          
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
-        </div>
-        <div class="row-headline"><a href="https://www.datacenterdynamics.com/en/news/400mw-data-center-could-be-built-in-eastern-south-africa/" target="_blank" rel="noopener">[DRY RUN] 400MW data center could be built in eastern South Africa</a></div>
-        <div class="row-summary">This is a placeholder summary for '400MW data center could be built in eastern South Africa'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
-      </div>
-      <div class="row-right">Mar 10<br>9h ago</div>
-    </article></div>
-    </section>
-<section class="section-block" id="mahesh-ai" aria-label="Artificial Intelligence">
+          <section class="section-block" id="mahesh-ai" aria-label="Artificial Intelligence">
       <div class="section-header">
         <span class="section-label-bar">Artificial Intelligence</span>
-        <div class="section-rule"></div>
-        <span class="section-count">9 stories</span>
+        <span class="section-count">6 stories</span>
       </div>
       <article class="hero-card">
       <div class="hero-img">
-        <img src="https://picsum.photos/seed/345/400/260" alt="" loading="lazy">
-        <span class="hero-img-badge" style="background:#2980B9">DC Dynamics</span>
+        <img src="https://picsum.photos/seed/114/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">TechCrunch</span>
       </div>
       <div class="hero-body">
         <div class="hero-meta">
-          <span class="topic-pill">cloud computing</span><span class="topic-pill">AI infrastructure</span>
+          <span class="topic-pill">Gemini rollout</span><span class="topic-pill">Indian language support</span>
           <span class="conf-pill conf-high">high</span>
-          
+           <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
         </div>
-        <div class="hero-headline"><a href="https://www.datacenterdynamics.com/en/news/franz-seidelhuber-named-vp-of-data-center-operations-at-sb-energy-following-studio-151-acquisition/" target="_blank" rel="noopener">[DRY RUN] Franz Seidelhuber named VP of data center operations at SB Energy, following Stu</a></div>
-        <div class="hero-summary">This is a placeholder summary for 'Franz Seidelhuber named VP of data center operations at SB E'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
-        <div class="hero-oci">OCI implication placeholder: Claude Sonnet would generate a concrete, strategic implication for OCI leadership here.</div>
-        <div class="hero-footer">DC Dynamics &nbsp;·&nbsp; Mar 10, 16:50 &nbsp;·&nbsp; 11h ago</div>
+        <div class="hero-headline"><a href="https://techcrunch.com/2026/03/10/google-gemini-chrome-expands-to-india-canada-new-zealand/" target="_blank" rel="noopener">Google Embeds Gemini Natively in Chrome Across India's Eight Major Languages</a></div>
+        <div class="hero-summary">Google is rolling out Gemini directly within the Chrome browser for Indian users, with support for Hindi, Bengali, Gujarati, Kannada, Malayalam, Marathi, Telugu, and Tamil. This move deepens Google's AI lock-in at the browser layer, effectively making Gemini the default AI assistant for hundreds of millions of Indian internet users. The strategic implication is a significant competitive moat for Google's developer ecosystem in one of the world's largest cloud-growth markets.</div>
+        <div class="hero-oci">OCI's developer platform strategy in India must account for Google's browser-level AI entrenchment, which could influence developer tooling preferences and erode neutral cloud adoption. This also raises data residency questions under India's DPDP Act, as Gemini interactions in-browser may route through Google's infrastructure — an angle OCI's sovereign-cloud pitch can leverage with Indian enterprise and government customers.</div>
+        <div class="hero-footer">TechCrunch &nbsp;·&nbsp; Mar 11, 02:30 &nbsp;·&nbsp; 5h ago</div>
       </div>
     </article>
-      <div class="story-list"><article class="story-row is-fresh">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">TechCrunch</span>
-          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
-        </div>
-        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/google-gemini-chrome-expands-to-india-canada-new-zealand/" target="_blank" rel="noopener">[DRY RUN] Google brings Gemini in Chrome to India</a></div>
-        <div class="row-summary">This is a placeholder summary for 'Google brings Gemini in Chrome to India'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      <div class="story-grid"><article class="story-card is-fresh">
+      <div class="card-meta">
+        <span class="src-badge" style="background:#2980B9">SiliconAngle</span>
+        <span class="new-badge">NEW</span>
+        <span class="card-timestamp">5h ago</span>
       </div>
-      <div class="row-right">Mar 11<br>1h ago</div>
-    </article><article class="story-row is-fresh">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">TechCrunch</span>
-          <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
-        </div>
-        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/in-a-vote-of-confidence-for-metas-threads-kalshi-adds-sharing-feature/" target="_blank" rel="noopener">[DRY RUN] In a vote of confidence for Meta’s Threads, Kalshi adds sharing feature</a></div>
-        <div class="row-summary">This is a placeholder summary for 'In a vote of confidence for Meta’s Threads, Kalshi adds shar'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+      <div class="card-headline"><a href="https://siliconangle.com/2026/03/10/legora-raises-550m-fuel-u-s-expansion-ai-agents-automate-legal-work/" target="_blank" rel="noopener">AI Legal Agent Startup Legora Hits $5.5B Valuation on $550M Series D</a></div>
+      <div class="card-summary">Legora AB secured $550M led by Accel, valuing the Stockholm-based AI legal automation platform at $5.55B as it accelerates U.S. market entry. The raise signals institutional conviction that agentic AI workflows are ready for high-stakes, compliance-sensitive enterprise verticals. For security and platform leaders, this underscores growing enterprise demand for AI agents operating within strict data residency, privilege, and audit-trail requirements.</div>
+    </article><article class="story-card">
+      <div class="card-meta">
+        <span class="src-badge" style="background:#2980B9">SiliconAngle</span>
+        
+        <span class="card-timestamp">7h ago</span>
       </div>
-      <div class="row-right">Mar 10<br>5h ago</div>
-    </article><article class="story-row">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">TechCrunch</span>
+      <div class="card-headline"><a href="https://siliconangle.com/2026/03/10/oracles-cloud-revenue-surges-44-easing-pressure-stock/" target="_blank" rel="noopener">OCI Cloud Revenue Surges 44%, Validating AI Infrastructure Bet Over Software Fears</a></div>
+      <div class="card-summary">Oracle posted Q3 adjusted EPS of $1.79, beating consensus by $0.09, with cloud infrastructure revenue up 44% as AI workload demand offsets legacy software headwinds. The beat prompted an upward revision to full-year guidance, signaling sustained hyperscaler-level growth trajectory. Strategically, this validates OCI's differentiated position in GPU-dense, sovereign, and regulated-cloud segments as enterprise AI adoption accelerates.</div>
+    </article><article class="story-card">
+      <div class="card-meta">
+        <span class="src-badge" style="background:#2980B9">SiliconAngle</span>
+        
+        <span class="card-timestamp">18h ago</span>
+      </div>
+      <div class="card-headline"><a href="https://siliconangle.com/2026/03/10/google-enhances-docs-sheets-slides-drive-deeper-gemini-integration/" target="_blank" rel="noopener">Google Embeds Gemini Deeper Into Workspace, Intensifying Productivity AI Arms Race</a></div>
+      <div class="card-summary">Google has expanded Gemini's native integration across Docs, Sheets, Slides, and Drive, positioning AI-assisted collaboration as a core Workspace differentiator. The move follows Gemini's February model update and signals Google's intent to make LLM capabilities invisible infrastructure rather than opt-in features. This raises the competitive bar for enterprise productivity suites and accelerates customer expectations for ambient AI across all cloud-native tooling.</div>
+    </article><article class="story-card">
+      <div class="card-meta">
+        <span class="src-badge" style="background:#2980B9">TechCrunch</span>
+        
+        <span class="card-timestamp">17h ago</span>
+      </div>
+      <div class="card-headline"><a href="https://techcrunch.com/2026/03/10/meta-acquired-moltbook-the-ai-agent-social-network-that-went-viral-because-of-fake-posts/" target="_blank" rel="noopener">Meta Acquires AI Agent Directory Moltbook, Signaling Platform Race Intensifies</a></div>
+      <div class="card-summary">Meta has acquired Moltbook, an AI agent social network notable for its 'always-on-directory' connecting autonomous agents — despite the platform's viral growth being partly attributed to fabricated content. The acquisition signals Big Tech's move to control the discovery and identity layer for AI agents, a critical infrastructure chokepoint. For platform providers, whoever owns agent directories owns the trust graph — raising immediate questions about identity verification, provenance, and governance standards.</div>
+    </article><article class="story-card is-fresh">
+      <div class="card-meta">
+        <span class="src-badge" style="background:#2980B9">SiliconAngle</span>
+        <span class="new-badge">NEW</span>
+        <span class="card-timestamp">5h ago</span>
+      </div>
+      <div class="card-headline"><a href="https://siliconangle.com/2026/03/10/meta-told-oversight-board-better-moderation-needed-ai-generated-deepfakes/" target="_blank" rel="noopener">Meta's Deepfake Crisis Signals Escalating AI Content Integrity Mandate for Cloud Platforms</a></div>
+      <div class="card-summary">Meta's Oversight Board has formally demanded stronger deepfake detection and moderation policies, citing inadequate controls against AI-generated misinformation proliferating across its platforms. The ruling reflects a hardening regulatory posture globally, with the EU AI Act's provisions on synthetic media and manipulated content directly relevant to platform operators. Strategic implication: cloud providers hosting AI-generated content workloads face increasing pressure to offer native content provenance and integrity tooling as a compliance differentiator.</div>
+    </article></div>
+    </section>
+<section class="section-block" id="mahesh-deals" aria-label="Deals &amp; Partnerships">
+      <div class="section-header">
+        <span class="section-label-bar">Deals &amp; Partnerships</span>
+        <span class="section-count">4 stories</span>
+      </div>
+      <article class="hero-card">
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/542/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">SiliconAngle</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-meta">
+          <span class="topic-pill">AI agent platforms</span><span class="topic-pill">Meta acquisition</span>
+          <span class="conf-pill conf-high">high</span>
           
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
         </div>
-        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/doge-employee-stole-social-security-data-and-put-it-on-a-thumb-drive-report-says/" target="_blank" rel="noopener">[DRY RUN] DOGE employee stole Social Security data and put it on a thumb drive, report say</a></div>
-        <div class="row-summary">This is a placeholder summary for 'DOGE employee stole Social Security data and put it on a thu'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+        <div class="hero-headline"><a href="https://siliconangle.com/2026/03/10/meta-platforms-buys-moltbook-bizarre-fascinating-social-network-ai-agents/" target="_blank" rel="noopener">Meta Acquires AI-Agent Social Network, Signaling Agentic Infrastructure Arms Race</a></div>
+        <div class="hero-summary">Meta has agreed to acquire Moltbook, an experimental social platform built exclusively for autonomous AI agents to interact, transact, and communicate. The acquisition signals that hyperscalers are racing to own the identity, trust, and communication layers for agentic AI—a space with significant authentication, authorization, and data-residency implications. Strategically, this positions Meta to define norms around agent-to-agent protocols, potentially influencing emerging standards that cloud security and compliance frameworks will eventually need to address.</div>
+        <div class="hero-oci">OCI's developer platform and security teams should monitor whether agent-identity and inter-agent communication standards emerging from Meta's ecosystem create new compliance surface areas—particularly around FedRAMP and EU AI Act obligations for workloads running autonomous agents on sovereign OCI regions. This also reinforces the need to accelerate OCI's own agentic-infrastructure primitives to avoid ceding the trust and identity layer to Meta-defined protocols.</div>
+        <div class="hero-footer">SiliconAngle &nbsp;·&nbsp; Mar 11, 00:49 &nbsp;·&nbsp; 6h ago</div>
       </div>
-      <div class="row-right">Mar 10<br>8h ago</div>
-    </article><article class="story-row">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">TechCrunch</span>
+    </article>
+      <div class="story-grid"><article class="story-card">
+      <div class="card-meta">
+        <span class="src-badge" style="background:#2980B9">SiliconAngle</span>
+        
+        <span class="card-timestamp">8h ago</span>
+      </div>
+      <div class="card-headline"><a href="https://siliconangle.com/2026/03/10/domo-shares-rally-30-earnings-beat-expectations-despite-modest-revenue-growth/" target="_blank" rel="noopener">Domo's Profitability Turn Signals BI Platform Consolidation Pressure for OCI</a></div>
+      <div class="card-summary">Domo posted its first profitable quarter with $0.03 adjusted EPS, reversing a $0.05 loss, sending shares up 30% despite only modest revenue growth. The market's reaction underscores that enterprise software investors are rewarding efficiency and margin improvement over top-line growth. This signals continued consolidation pressure in the BI/analytics layer, where customers are rationalizing vendors and gravitating toward platforms with deep cloud-native integrations.</div>
+    </article><article class="story-card">
+      <div class="card-meta">
+        <span class="src-badge" style="background:#2980B9">TechCrunch</span>
+        
+        <span class="card-timestamp">16h ago</span>
+      </div>
+      <div class="card-headline"><a href="https://techcrunch.com/2026/03/10/thinking-machines-lab-inks-massive-compute-deal-with-nvidia/" target="_blank" rel="noopener">Thinking Machines Lab Secures 1GW Nvidia Compute Deal, Signals Hyperscale AI Arms Race</a></div>
+      <div class="card-summary">Thinking Machines Lab has signed a multi-year agreement with Nvidia encompassing at least one gigawatt of compute capacity, accompanied by a strategic Nvidia investment. This deal signals that frontier AI labs are locking in dedicated GPU supply chains at sovereign-infrastructure scale, compressing availability for cloud providers without similar off-take agreements. The strategic implication is clear: hyperscale AI compute is increasingly pre-allocated years out, making OCI's own Nvidia supply relationships and RDMA fabric capacity a direct competitive differentiator.</div>
+    </article><article class="story-card">
+      <div class="card-meta">
+        <span class="src-badge" style="background:#2980B9">SiliconAngle</span>
+        
+        <span class="card-timestamp">8h ago</span>
+      </div>
+      <div class="card-headline"><a href="https://siliconangle.com/2026/03/10/nvidia-makes-significant-investment-mira-muratis-thinking-machines/" target="_blank" rel="noopener">Nvidia Backs Murati's Thinking Machines in Multi-Billion Hardware Deal</a></div>
+      <div class="card-summary">Nvidia has made an undisclosed 'significant' investment in Thinking Machines Lab, founded by former OpenAI CTO Mira Murati, with the startup committing to billions in Nvidia hardware purchases. The deal deepens Nvidia's vertical integration strategy—tying frontier AI labs to its GPU supply chain through equity stakes rather than pure sales. This signals accelerating consolidation in the AI compute supply chain, with implications for hardware procurement leverage and competitive dynamics among hyperscalers.</div>
+    </article></div>
+    </section>
+<section class="section-block" id="mahesh-security" aria-label="Security &amp; Compliance">
+      <div class="section-header">
+        <span class="section-label-bar">Security &amp; Compliance</span>
+        <span class="section-count">2 stories</span>
+      </div>
+      <article class="hero-card">
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/817/400/260" alt="" loading="lazy">
+        <span class="hero-img-badge" style="background:#2980B9">SiliconAngle</span>
+      </div>
+      <div class="hero-body">
+        <div class="hero-meta">
+          <span class="topic-pill">multicloud security</span><span class="topic-pill">security findings aggregation</span>
+          <span class="conf-pill conf-high">high</span>
           
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
         </div>
-        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/chatgpt-can-now-create-interactive-visuals-to-help-you-understand-math-and-science-concepts/" target="_blank" rel="noopener">[DRY RUN] ChatGPT can now create interactive visuals to help you understand math and scien</a></div>
-        <div class="row-summary">This is a placeholder summary for 'ChatGPT can now create interactive visuals to help you under'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+        <div class="hero-headline"><a href="https://siliconangle.com/2026/03/10/aws-updates-security-hub-aggregate-security-findings-across-multicloud-environments/" target="_blank" rel="noopener">AWS Security Hub Goes Multicloud, Challenging OCI's Native Security Aggregation Story</a></div>
+        <div class="hero-summary">AWS has expanded Security Hub to aggregate security findings across multicloud environments and third-party tools, positioning it as a single-pane-of-glass for threat investigation and response. This move directly targets enterprises running heterogeneous clouds—including OCI—by making AWS the de facto security operations hub even for workloads not on AWS infrastructure. The strategic implication: AWS is leveraging its security brand to create lock-in at the observability and compliance layer, potentially influencing FedRAMP and DISA IL procurement decisions where unified security posture reporting is a key evaluation criterion.</div>
+        <div class="hero-oci">OCI must accelerate its own cross-environment security aggregation capabilities—particularly within Security Zones and Cloud Guard—to prevent AWS from becoming the default compliance and findings broker for joint OCI/AWS enterprise deployments, especially in sovereign-cloud and regulated-sector accounts where data residency constraints limit what telemetry can transit AWS infrastructure.</div>
+        <div class="hero-footer">SiliconAngle &nbsp;·&nbsp; Mar 10, 22:46 &nbsp;·&nbsp; 9h ago</div>
       </div>
-      <div class="row-right">Mar 10<br>10h ago</div>
-    </article><article class="story-row">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">TechCrunch</span>
-          
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
-        </div>
-        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/google-and-tesla-think-were-managing-the-electrical-grid-all-wrong/" target="_blank" rel="noopener">[DRY RUN] Google and Tesla think we’re managing the electrical grid all wrong</a></div>
-        <div class="row-summary">This is a placeholder summary for 'Google and Tesla think we’re managing the electrical grid al'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
+    </article>
+      <div class="story-grid"><article class="story-card">
+      <div class="card-meta">
+        <span class="src-badge" style="background:#2980B9">The Register</span>
+        
+        <span class="card-timestamp">11h ago</span>
       </div>
-      <div class="row-right">Mar 10<br>7h ago</div>
-    </article><article class="story-row">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">TechCrunch</span>
-          
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
-        </div>
-        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/amazon-launches-its-healthcare-ai-assistant-on-its-website-and-app/" target="_blank" rel="noopener">[DRY RUN] Amazon launches its healthcare AI assistant on its website and app</a></div>
-        <div class="row-summary">This is a placeholder summary for 'Amazon launches its healthcare AI assistant on its website a'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
-      </div>
-      <div class="row-right">Mar 10<br>8h ago</div>
-    </article><article class="story-row">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">TechCrunch</span>
-          
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
-        </div>
-        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/pokemon-pokopia-review-animal-crossing-ditto-nintendo-switch/" target="_blank" rel="noopener">[DRY RUN] ‘Pokémon Pokopia’ is a game about rehabilitating a broken world — and I love it</a></div>
-        <div class="row-summary">This is a placeholder summary for '‘Pokémon Pokopia’ is a game about rehabilitating a broken wo'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
-      </div>
-      <div class="row-right">Mar 10<br>8h ago</div>
-    </article><article class="story-row">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:#2980B9"></span>
-          <span class="src-name">TechCrunch</span>
-          
-          <span class="topic-pill">cloud computing</span>
-          <span class="conf-pill conf-high">high</span>
-        </div>
-        <div class="row-headline"><a href="https://techcrunch.com/2026/03/10/youtube-surpasses-disney-paramount-wbd-in-2025-ad-revenue/" target="_blank" rel="noopener">[DRY RUN] YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue</a></div>
-        <div class="row-summary">This is a placeholder summary for 'YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue'. In production, Claude Sonnet generates a personalised 2-3 sentence summary tailored to this executive's role and priorities.</div>
-      </div>
-      <div class="row-right">Mar 10<br>9h ago</div>
+      <div class="card-headline"><a href="https://go.theregister.com/feed/www.theregister.com/2026/03/10/zeroclick_microsoft_info_disclosure_bug/" target="_blank" rel="noopener">Excel Copilot Agent Zero-Click Flaw Enables Silent Data Exfiltration via AI</a></div>
+      <div class="card-summary">A critical zero-click information disclosure vulnerability in Microsoft Excel weaponizes the Copilot Agent to exfiltrate sensitive personal and financial data without user interaction. The March Patch Tuesday batch addressed 83 CVEs with two publicly known flaws, though none are under active exploitation—a relative reprieve following February's six zero-days. The strategic implication is clear: AI-augmented productivity tools are expanding the attack surface in ways traditional patch cycles struggle to address proactively.</div>
     </article></div>
     </section>
           <div class="divider"></div>
           <footer class="page-footer">
-            <div>Mahesh Thiagarajan &middot; 2026-03-11 04:16 UTC &middot; 12 stories &middot;
+            <div>Mahesh Thiagarajan &middot; 2026-03-11 07:36 UTC &middot; 12 stories &middot;
             Powered by <a href="https://claude.ai">Claude</a></div>
             <div class="footer-briefings">
               <div class="footer-briefings-label">View other briefings</div>
@@ -817,14 +784,5 @@
         </div>
       </main>
     </div>
-    <script>
-    (function(){
-      var panel = document.querySelector('.audience-panel.active');
-      var nav = document.getElementById('header-nav');
-      if (panel && nav && panel.dataset.secNav) {
-        nav.innerHTML = panel.dataset.secNav;
-      }
-    })();
-    </script>
 </body>
 </html>

@@ -1,0 +1,5 @@
+{
+  "headline": "Nvidia Backs Murati's Thinking Machines, Deepening Hardware-AI Lab Lock-in",
+  "summary": "Nvidia has made a significant undisclosed investment in Thinking Machines Lab, Mira Murati's post-OpenAI AI startup, paired with a commitment from Thinking Machines to purchase billions in Nvidia hardware. This deepens Nvidia's strategy of equity-anchored supply agreements that create durable demand while locking frontier labs into its stack. The implication: top-tier AI labs are increasingly pre-committed to Nvidia compute, narrowing the window for hyperscalers to compete on hardware differentiation alone.",
+  "oci_implication": "OCI should evaluate a direct engagement with Thinking Machines Lab as a cloud infrastructure partner before Nvidia's influence solidifies a single-cloud preference \u2014 specifically positioning OCI's bare-metal H100/H200 capacity and RDMA networking as a differentiated deployment substrate. Partnering with system integrators like Wipro or Infosys who are building Thinking Machines-adjacent enterprise AI practices could provide an indirect channel into the lab's commercial rollout."
+}

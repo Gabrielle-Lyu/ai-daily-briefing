@@ -1,0 +1,5 @@
+{
+  "headline": "Rhoda AI hits $1.7B valuation training robots on internet video at scale",
+  "summary": "Rhoda AI raised $450M Series A to build foundational robotics models trained on publicly available internet video \u2014 a novel, data-efficient approach that sidesteps expensive real-world robot training. The Premji Invest-led round signals serious institutional conviction in video-based learning as a path to general-purpose robotics. If this approach proves out, it could compress the timeline for deployable physical AI by years.",
+  "oci_implication": "Robotics AI training workloads are GPU-intensive and episodic \u2014 a strong potential fit for OCI's HPC and GPU cluster offerings as this sector scales. Tracking Rhoda AI as a prospective cloud infrastructure customer and watching whether hyperscalers move to lock up exclusive deals in this space."
+}

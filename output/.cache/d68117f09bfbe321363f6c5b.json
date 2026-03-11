@@ -1,0 +1,5 @@
+{
+  "headline": "Meta Acquires Moltbook to Build Always-On Agent Discovery Infrastructure",
+  "summary": "Meta acquired Moltbook, an AI agent social network, citing its 'always-on-directory' architecture for agent interconnection as the key technical differentiator. The platform went viral despite being seeded with synthetic/fake posts, raising questions about the signal-to-noise ratio in agent-generated content at scale. Meta is clearly investing in the plumbing layer for multi-agent coordination, positioning itself to own the discovery and routing substrate before standards solidify.",
+  "oci_implication": "If Meta ships an open agent directory protocol or SDK on top of Moltbook's architecture, it could become a de facto standard for agent-to-agent communication, pressuring OCI's AI platform to either adopt compatibility or build a competing agent registry within OCI Generative AI / agent orchestration services."
+}

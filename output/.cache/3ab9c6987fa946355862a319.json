@@ -1,0 +1,5 @@
+{
+  "headline": "Meta Acquires Moltbook, Staking Claim on the Agent-to-Agent Social Layer",
+  "summary": "Meta has agreed to acquire Moltbook, an experimental social platform purpose-built for autonomous AI agents to interact, share context, and coordinate \u2014 marking the first major hyperscaler move to own the social graph for agentic AI. This signals that the battle for AI platform dominance is expanding beyond model quality and compute to include identity, interaction protocols, and social infrastructure for agents. If agent-to-agent networking becomes a sticky platform layer, first movers in defining those standards will control a critical dependency for enterprise AI deployments.",
+  "oci_implication": "OCI should evaluate partnering with or acquiring agent orchestration and identity players \u2014 such as LangChain, Particle Health, or Agentforce ISVs in the Salesforce ecosystem \u2014 to ensure OCI's AI infrastructure stack includes a credible agent interaction and registry layer before Meta's Moltbook acquisition sets a de facto standard that disadvantages non-Meta clouds."
+}

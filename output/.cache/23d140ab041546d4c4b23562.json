@@ -1,0 +1,5 @@
+{
+  "headline": "AWS Security Hub Goes Multicloud, Threatening OCI's Security Differentiation Play",
+  "summary": "AWS has repositioned Security Hub as a cross-cloud security aggregation layer, directly competing with SIEM/SOAR vendors like Splunk, Palo Alto Prisma, and Wiz on multicloud visibility. This move signals AWS is willing to commoditize security tooling to deepen platform lock-in across rival clouds. The strategic implication: customers who centralize security operations in AWS Security Hub will have a lower switching cost from OCI workloads back to AWS.",
+  "oci_implication": "OCI should evaluate accelerating its partnership with Wiz or CrowdStrike Falcon to offer a credible, OCI-native multicloud security aggregation story before AWS Security Hub becomes the default control plane for joint AWS-OCI customers. Engaging Accenture and Deloitte's cloud security practices to position OCI Security Zones + a preferred ISV as the alternative architecture would create a concrete wedge in enterprise deals."
+}

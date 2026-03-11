@@ -1,0 +1,5 @@
+{
+  "headline": "Google Embeds Gemini Deeper Into Workspace, Intensifying Productivity AI Arms Race",
+  "summary": "Google has expanded Gemini's native integration across Docs, Sheets, Slides, and Drive, positioning AI-assisted collaboration as a core Workspace differentiator. The move follows Gemini's February model update and signals Google's intent to make LLM capabilities invisible infrastructure rather than opt-in features. This raises the competitive bar for enterprise productivity suites and accelerates customer expectations for ambient AI across all cloud-native tooling.",
+  "oci_implication": "OCI's developer platform must accelerate AI-native integrations within its own productivity and collaboration touchpoints to retain enterprise customers evaluating Google Workspace as a bundled alternative; the deeper Gemini lock-in also amplifies data-residency and sovereign-cloud concerns for regulated OCI customers who cannot tolerate Google processing their documents through U.S.-domiciled LLM infrastructure."
+}

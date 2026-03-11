@@ -1,0 +1,5 @@
+{
+  "headline": "Legora Hits $5.55B Valuation as Vertical AI Agents Capture Legal Workflow",
+  "summary": "Legora closed a $550M Series D led by Accel, reaching a $5.55B valuation on the strength of AI agents that automate contract review, due diligence, and legal research. The round signals that vertical-specific agentic systems\u2014built on top of foundation models but tuned for domain workflows\u2014are commanding infrastructure-scale valuations without requiring proprietary model development. This validates the pattern where inference-heavy, multi-step agent pipelines (document ingestion, retrieval, reasoning, output generation) become the dominant enterprise AI workload shape.",
+  "oci_implication": "Legal AI agents are document-intensive, latency-tolerant workloads with high retrieval and long-context inference demands\u2014exactly the profile that maps well to OCI's GPU clusters and object storage stack; positioning OCI as the preferred cloud for vertical AI agent vendors like Legora requires demonstrable advantages in throughput per dollar on long-context models and tight integration between object storage and inference endpoints."
+}

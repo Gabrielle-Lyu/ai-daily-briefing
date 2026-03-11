@@ -1,0 +1,5 @@
+{
+  "headline": "Legal AI Startup Legora Raises $550M, Hits $5.55B Valuation",
+  "summary": "Legora secured $550M in Series D funding led by Accel to accelerate U.S. expansion of AI agents that automate legal workflows. The Stockholm-based company is now valued at $5.55B, signaling strong enterprise appetite for vertical AI automation. This validates the broader shift toward AI replacing high-cost professional services \u2014 a wave moving fast across legal, finance, and compliance.",
+  "oci_implication": "Legora and similar vertical AI players are likely to run compute-intensive workloads at scale \u2014 OCI should be positioning as the preferred infrastructure partner for enterprise AI startups in regulated industries. Karan's product org should assess whether OCI's AI and compliance offerings are differentiated enough to win this segment over AWS and Azure."
+}

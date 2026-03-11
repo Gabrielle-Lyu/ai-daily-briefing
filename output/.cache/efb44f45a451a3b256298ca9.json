@@ -1,0 +1,5 @@
+{
+  "headline": "Mend.io Targets AI Security Gap With System Prompt Hardening Tool",
+  "summary": "Mend.io launched a tool that scans and strengthens the hidden instructions embedded in AI systems before they execute, reducing manipulation and logic risks. As enterprises deploy more LLM-powered applications, vulnerable system prompts have become an exploitable attack surface. This signals a maturing AI security market where prompt integrity is becoming a baseline expectation.",
+  "oci_implication": "OCI's AI platform and managed AI services should evaluate native system prompt validation as a differentiator, since enterprise customers will increasingly demand it as part of secure AI deployment. Partnering with or acquiring capabilities in this space could accelerate trust in OCI-hosted AI workloads."
+}

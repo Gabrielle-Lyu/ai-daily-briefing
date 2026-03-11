@@ -1,0 +1,5 @@
+{
+  "headline": "LeCun's AMI Labs Raises $1B to Build AI That Understands the Physical World",
+  "summary": "Yann LeCun, Meta's former chief AI scientist, has launched AMI Labs with $1.03B in seed funding backed by Bezos, Nvidia, and top-tier VCs. The company is focused on 'world models' \u2014 AI that reasons about physical cause and effect, a capability current LLMs lack. This signals a major new compute and infrastructure demand center forming around a fundamentally different AI architecture.",
+  "oci_implication": "AMI Labs will need massive GPU compute at scale, making them a high-value prospective OCI customer worth engaging early. A world-model paradigm shift could also reshape what AI infrastructure buyers prioritize, giving OCI an opening to differentiate on workload-specific offerings."
+}

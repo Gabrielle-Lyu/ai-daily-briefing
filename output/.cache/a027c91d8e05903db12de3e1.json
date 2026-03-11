@@ -1,0 +1,5 @@
+{
+  "headline": "Domo Surges 30% on Earnings Beat, But Revenue Growth Remains Thin",
+  "summary": "Domo posted Q4 FY2026 adjusted EPS of $0.03 versus an expected loss, triggering a 30% after-hours share spike, but underlying revenue growth remains modest \u2014 signaling the market is rewarding profitability trajectory over top-line expansion. The BI/data visualization segment continues to consolidate around a handful of survivors as margins improve through AI-assisted query and dashboard generation. Domo's survival hinges on embedding LLM-driven analytics deeply enough to justify retention against Tableau, Power BI, and cloud-native alternatives.",
+  "oci_implication": "Domo's squeeze toward profitability without meaningful revenue acceleration confirms that standalone BI visualization is commoditizing rapidly \u2014 OCI's data platform differentiation should lean into integrated analytics with direct lakehouse and vector DB connectivity rather than competing in the charting layer where margins are collapsing."
+}

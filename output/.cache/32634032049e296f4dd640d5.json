@@ -1,0 +1,5 @@
+{
+  "headline": "Meta's Oversight Board demands stronger AI deepfake detection on its platforms",
+  "summary": "Meta's independent Oversight Board has formally warned the company its misinformation policies are inadequate against AI-generated deepfakes, calling for significant investment in detection technology. This signals mounting regulatory and governance pressure on major platforms to police synthetic content at scale. Cloud providers enabling AI workloads will face growing scrutiny over the infrastructure powering deepfake creation.",
+  "oci_implication": "As OCI expands AI cloud services, enterprise customers will increasingly require platform-level trust and content provenance tools \u2014 an area where OCI can differentiate by building compliance-ready infrastructure. This also creates a product opportunity around AI governance tooling for customers in regulated industries."
+}

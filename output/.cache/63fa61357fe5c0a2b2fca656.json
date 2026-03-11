@@ -1,0 +1,10 @@
+{
+  "bullets": [
+    "Oracle cloud revenue up 44%, beating estimates \u2014 guidance raised, AI demand is accelerating OCI's growth trajectory.",
+    "AWS launches multicloud security hub, directly targeting enterprises that run workloads across OCI, Azure, and AWS.",
+    "AI infrastructure funding wave: Rhoda AI ($450M), AMI Labs ($1.03B), and Thinking Machines (Nvidia-backed) all buying compute at scale.",
+    "Google deepens Gemini across Workspace \u2014 tightening its grip on enterprise productivity ahead of Oracle's own AI suite push.",
+    "Legora's $550M raise signals enterprise AI agents are moving from pilot to production, especially in high-value verticals like legal."
+  ],
+  "oci_implication_of_day": "Oracle's 44% cloud revenue surge validates OCI's infrastructure bet, but AWS's multicloud security move is a direct play to become the control plane for enterprises already running on OCI \u2014 Oracle should prioritize native security aggregation features to prevent AWS from owning that layer. The surge in large AI training workloads (Rhoda, AMI Labs, Thinking Machines) represents immediate, high-value pipeline; OCI's GPU capacity and pricing must be positioned aggressively to capture these deals before Nvidia's cloud partnerships steer them elsewhere."
+}

@@ -1,0 +1,5 @@
+{
+  "headline": "Google Deploys Gemini Natively in Chrome for 1.4B Indian Users Across 8 Languages",
+  "summary": "Google is integrating Gemini directly into Chrome for Indian users with support for Hindi, Bengali, Gujarati, Kannada, Malayalam, Marathi, Telugu, and Tamil \u2014 covering the majority of India's 1.4 billion population. This is a browser-level inference deployment, meaning Gemini assistance runs within Chrome's UI layer rather than requiring explicit app switching, lowering the activation barrier significantly. The move accelerates Google's multilingual LLM footprint in a market where vernacular language support is a genuine differentiator, and where cloud AI adoption is growing rapidly.",
+  "oci_implication": "India is a high-growth market for OCI's GPU and AI infrastructure \u2014 Google embedding Gemini at the browser layer means enterprise and developer mindshare in India will increasingly default to Google's AI stack unless OCI offers competitive multilingual model hosting and inference APIs on its own infrastructure."
+}

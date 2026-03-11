@@ -1,0 +1,5 @@
+{
+  "headline": "Excel Copilot Agent Exploit Enables Zero-Click Data Exfiltration via Prompt Injection",
+  "summary": "A zero-click attack chain in Microsoft Excel weaponizes Copilot's agentic capabilities through prompt injection in spreadsheet cells, allowing silent exfiltration of sensitive financial and personal data without user interaction. The vulnerability exploits the trust boundary between LLM-driven agents and document content\u2014a fundamental architectural risk when AI agents process untrusted data with tool-use permissions. This is a concrete demonstration of why agentic AI systems require strict input sanitization and least-privilege tool access, not just at the application layer but enforced at the model orchestration level.",
+  "oci_implication": "As OCI builds out AI agent infrastructure and enterprise customers deploy agentic workflows over sensitive data, this class of prompt-injection-to-tool-abuse attack must be treated as a first-order threat model\u2014particularly for any OCI AI service that grants agents access to structured data stores, object storage, or downstream APIs."
+}

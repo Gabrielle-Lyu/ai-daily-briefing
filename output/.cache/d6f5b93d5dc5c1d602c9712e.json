@@ -1,0 +1,5 @@
+{
+  "headline": "Nvidia Backs Mira Murati's AI Startup in Billion-Dollar Hardware Deal",
+  "summary": "Nvidia has made a significant undisclosed investment in Thinking Machines Lab, the AI startup founded by former OpenAI CTO Mira Murati. In return, Thinking Machines will purchase billions in Nvidia hardware \u2014 a strategic lock-in that deepens Nvidia's grip on next-generation AI infrastructure. This signals that top-tier AI labs are still overwhelmingly committing to Nvidia's stack, not exploring alternatives.",
+  "oci_implication": "As OCI competes for AI workloads, this deal reinforces Nvidia's ecosystem dominance and may make it harder to win frontier AI labs as customers without strong Nvidia GPU availability. OCI's product strategy should prioritize GPU supply credibility and differentiated value \u2014 such as price-performance or networking \u2014 to attract labs outside Nvidia's direct investment orbit."
+}

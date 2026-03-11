@@ -1,0 +1,5 @@
+{
+  "headline": "AWS Security Hub now aggregates threats across multicloud, targeting OCI customers",
+  "summary": "AWS expanded Security Hub to unify security findings across multicloud environments and third-party tools from a single console. This positions AWS as a control plane for security teams running workloads on multiple clouds \u2014 including OCI. The move is a direct attempt to embed AWS tooling into mixed-cloud enterprises, increasing switching costs and AWS stickiness.",
+  "oci_implication": "OCI should evaluate whether its own security observability story \u2014 native or partnered \u2014 is compelling enough to prevent AWS from becoming the de facto security layer for joint customers. This is a product gap worth assessing, particularly for enterprise accounts running workloads across both clouds."
+}

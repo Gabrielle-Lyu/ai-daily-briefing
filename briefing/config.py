@@ -14,7 +14,7 @@ AUDIENCE_PROFILES = {
         "id": "karan",
         "name": "Karan Batta",
         "title": "SVP, Product",
-        "email": "karan.batta@oracle.com",
+        "email": "karan@example.com",
         "tone": "concise, high signal, strategic",
         "tone_guidance": (
             "Be concise and strategic. Lead with the bottom line. "
@@ -34,7 +34,7 @@ AUDIENCE_PROFILES = {
         "id": "nathan",
         "name": "Nathan Thomas",
         "title": "SVP, Product",
-        "email": "nathan.thomas@oracle.com",
+        "email": "nathan@example.com",
         "tone": "ecosystem, partner-aware",
         "tone_guidance": (
             "Focus on multi-cloud dynamics, partner ecosystem shifts, and deal flow. "
@@ -54,7 +54,7 @@ AUDIENCE_PROFILES = {
         "id": "greg",
         "name": "Greg Pavlik",
         "title": "EVP, Data & AI",
-        "email": "greg.pavlik@oracle.com",
+        "email": "greg@example.com",
         "tone": "technical executive",
         "tone_guidance": (
             "Prioritize technical depth. Cover model benchmarks, infrastructure advances, "
@@ -74,7 +74,7 @@ AUDIENCE_PROFILES = {
         "id": "mahesh",
         "name": "Mahesh Thiagarajan",
         "title": "EVP, Security & Developer Platform",
-        "email": "mahesh.thiagarajan@oracle.com",
+        "email": "mahesh@example.com",
         "tone": "platform, resilience, scale",
         "tone_guidance": (
             "Focus on infrastructure scale, power/energy constraints, security posture, "

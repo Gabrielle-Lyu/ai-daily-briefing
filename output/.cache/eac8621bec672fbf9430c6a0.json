@@ -1,0 +1,5 @@
+{
+  "headline": "Meta's Deepfake Crisis Signals Escalating AI Content Integrity Mandate for Cloud Platforms",
+  "summary": "Meta's Oversight Board has formally demanded stronger deepfake detection and moderation policies, citing inadequate controls against AI-generated misinformation proliferating across its platforms. The ruling reflects a hardening regulatory posture globally, with the EU AI Act's provisions on synthetic media and manipulated content directly relevant to platform operators. Strategic implication: cloud providers hosting AI-generated content workloads face increasing pressure to offer native content provenance and integrity tooling as a compliance differentiator.",
+  "oci_implication": "OCI's sovereign cloud and security certification posture\u2014particularly for FedRAMP High and EU AI Act compliance\u2014will be strengthened by proactively investing in content authenticity APIs and deepfake-detection capabilities within the Developer Platform, positioning OCI ahead of forthcoming regulatory mandates rather than reacting to them."
+}

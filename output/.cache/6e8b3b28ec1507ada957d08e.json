@@ -1,0 +1,5 @@
+{
+  "headline": "Google Embeds Gemini Natively in Chrome Across India's Eight Major Languages",
+  "summary": "Google is rolling out Gemini directly within the Chrome browser for Indian users, with support for Hindi, Bengali, Gujarati, Kannada, Malayalam, Marathi, Telugu, and Tamil. This move deepens Google's AI lock-in at the browser layer, effectively making Gemini the default AI assistant for hundreds of millions of Indian internet users. The strategic implication is a significant competitive moat for Google's developer ecosystem in one of the world's largest cloud-growth markets.",
+  "oci_implication": "OCI's developer platform strategy in India must account for Google's browser-level AI entrenchment, which could influence developer tooling preferences and erode neutral cloud adoption. This also raises data residency questions under India's DPDP Act, as Gemini interactions in-browser may route through Google's infrastructure \u2014 an angle OCI's sovereign-cloud pitch can leverage with Indian enterprise and government customers."
+}

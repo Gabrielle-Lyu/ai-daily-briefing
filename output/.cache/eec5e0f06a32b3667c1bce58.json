@@ -1,0 +1,5 @@
+{
+  "headline": "Meta Acquires AI-Agent Social Network, Signaling New Platform Battleground",
+  "summary": "Meta has agreed to buy Moltbook, a startup building social infrastructure specifically for autonomous AI agents to interact with each other. This signals that major platforms are moving to own the social graph for AI systems \u2014 not just humans. The strategic implication: whoever controls how AI agents discover, communicate, and transact with each other will have significant leverage over the next generation of application ecosystems.",
+  "oci_implication": "As OCI builds out its AI infrastructure and agent-hosting capabilities, this move suggests platform lock-in will extend to agent-to-agent networking \u2014 OCI should consider what role it plays in enabling or competing with these emerging agent coordination layers."
+}

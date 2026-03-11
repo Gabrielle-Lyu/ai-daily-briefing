@@ -1,0 +1,5 @@
+{
+  "headline": "Meta Acquires Moltbook to Own the AI Agent Discovery and Directory Layer",
+  "summary": "Meta has acquired Moltbook, an AI agent social network, citing its 'always-on-directory' approach to agent interconnection as the strategic prize\u2014not the viral content layer that drove its growth. This signals hyperscalers and platforms are racing to own the identity and routing infrastructure for multi-agent ecosystems, a chokepoint that will shape ISV and GSI toolchain decisions. If Meta controls agent discovery at scale, it gains leverage over where enterprise AI workloads originate and route\u2014a direct threat to cloud-neutral orchestration plays.",
+  "oci_implication": "OCI should evaluate building or partnering on an open agent registry\u2014engaging ISVs like LangChain, CrewAI, and GSIs like Accenture and Deloitte\u2014to ensure OCI-hosted agents remain discoverable and interoperable without routing through Meta or AWS infrastructure."
+}

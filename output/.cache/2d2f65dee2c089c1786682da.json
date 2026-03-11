@@ -1,0 +1,5 @@
+{
+  "headline": "AI Legal Agent Startup Legora Hits $5.5B Valuation on $550M Series D",
+  "summary": "Legora AB secured $550M led by Accel, valuing the Stockholm-based AI legal automation platform at $5.55B as it accelerates U.S. market entry. The raise signals institutional conviction that agentic AI workflows are ready for high-stakes, compliance-sensitive enterprise verticals. For security and platform leaders, this underscores growing enterprise demand for AI agents operating within strict data residency, privilege, and audit-trail requirements.",
+  "oci_implication": "Legora's U.S. expansion will require cloud infrastructure meeting FedRAMP and data sovereignty standards, making OCI's sovereign-cloud and isolated-region offerings a credible hosting target over hyperscalers with less jurisdictional flexibility. The developer platform team should monitor whether Legora's agent architecture presents integration opportunities or competitive signals for OCI's own AI agent and secure enclave services."
+}

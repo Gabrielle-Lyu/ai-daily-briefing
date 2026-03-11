@@ -1,0 +1,5 @@
+{
+  "headline": "Meta Acquires AI Agent Directory Moltbook, Signaling Platform Race Intensifies",
+  "summary": "Meta has acquired Moltbook, an AI agent social network notable for its 'always-on-directory' connecting autonomous agents \u2014 despite the platform's viral growth being partly attributed to fabricated content. The acquisition signals Big Tech's move to control the discovery and identity layer for AI agents, a critical infrastructure chokepoint. For platform providers, whoever owns agent directories owns the trust graph \u2014 raising immediate questions about identity verification, provenance, and governance standards.",
+  "oci_implication": "OCI's developer platform strategy must accelerate its own agent identity and registry capabilities \u2014 or risk ceding the agent orchestration layer to Meta's ecosystem. The Moltbook acquisition also highlights supply-chain and trust risks for enterprise customers running multi-agent workloads, reinforcing the value of OCI's sovereign and isolated deployment options for regulated industries requiring auditable agent provenance."
+}

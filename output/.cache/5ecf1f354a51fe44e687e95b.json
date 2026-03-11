@@ -1,0 +1,5 @@
+{
+  "headline": "OCI Cloud Revenue Up 44% as AI Infrastructure Demand Offsets Software Cannibalization Fears",
+  "summary": "Oracle reported Q3 adjusted EPS of $1.79 vs. $1.70 consensus, with cloud revenue growing 44% YoY, directly contradicting analyst concerns that AI tooling would erode Oracle's core software licensing base. The beat was driven by OCI compute demand rather than legacy database refresh cycles, signaling that the infrastructure layer\u2014not the application layer\u2014is capturing the near-term AI spend. Oracle subsequently raised full-year revenue guidance, validating the capital investment thesis behind OCI GPU cluster buildouts and the Stargate partnership.",
+  "oci_implication": "The 44% cloud growth figure confirms that OCI's positioning as a cost-competitive alternative to AWS/Azure for large-scale AI training and inference workloads is converting into measurable revenue; sustaining this trajectory requires continued focus on GPU availability, interconnect throughput, and competitive pricing at scale."
+}

@@ -1,0 +1,5 @@
+{
+  "headline": "Google Embeds Gemini Directly into Workspace Document Pipeline with Cross-Context Retrieval",
+  "summary": "Google has updated Workspace to allow Gemini to pull context from Drive files, Gmail, and other corpus sources when creating and editing Docs, Sheets, and Slides \u2014 effectively making the LLM a first-class editor with RAG over the user's full data estate. This moves beyond chatbot-style sidebars into inline agentic document generation, tightening the feedback loop between enterprise data and LLM output. For productivity suite incumbents, this is a significant moat-deepening move that ties Gemini's utility directly to data gravity within Google's ecosystem.",
+  "oci_implication": "OCI's AI and data strategy needs a clear answer to cross-service context retrieval: if enterprise customers consolidate data in Google or Microsoft clouds, Gemini and Copilot gain retrieval advantages that are hard to replicate from outside the ecosystem \u2014 OCI should accelerate native RAG integrations between OCI Object Storage, Autonomous DB, and open model deployments on OCI AI infrastructure."
+}

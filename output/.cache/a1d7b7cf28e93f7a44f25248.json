@@ -1,0 +1,5 @@
+{
+  "headline": "Google Deepens Gemini Lock-In Across Workspace, Raising Switching-Cost Stakes",
+  "summary": "Google has embedded Gemini more deeply into Docs, Sheets, Slides, and Drive, effectively making AI-assisted workflows a native feature of its productivity suite rather than an add-on. This move tightens the Google Workspace ecosystem and raises the switching cost for enterprise customers already standardized on G Suite. As Microsoft continues its Copilot push in M365, Google is accelerating a productivity-layer AI arms race that forces enterprise buyers to choose platforms \u2014 not just tools.",
+  "oci_implication": "OCI should evaluate a strategic partnership or co-sell motion with ISVs like Notion, Box, or Zoho that sit outside the Google/Microsoft duopoly, positioning OCI as the neutral cloud backbone for enterprises seeking productivity AI without hyperscaler lock-in. Engaging GSIs like Deloitte and Accenture on 'AI-neutral enterprise productivity' reference architectures could open mid-market and regulated-industry deal flow where Workspace and M365 dominance is contested."
+}

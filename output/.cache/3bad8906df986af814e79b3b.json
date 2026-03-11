@@ -1,0 +1,5 @@
+{
+  "headline": "Google Embeds Gemini Deeper Into Workspace, Raising the Productivity AI Bar",
+  "summary": "Google has expanded Gemini's integration across Docs, Sheets, Slides, and Drive, building on the February 2026 model update to deliver in-context AI assistance directly within document workflows. The move tightens the feedback loop between LLM inference and productivity tooling, reducing context-switching and positioning Gemini as a persistent co-pilot rather than a discrete feature. For enterprise customers already on Workspace, this raises the switching cost and sets a concrete benchmark for what embedded AI assistance looks like at scale.",
+  "oci_implication": "Microsoft 365 Copilot and now Google Workspace Gemini are both converging on deep document-layer AI integration, which puts pressure on OCI to articulate a comparable value proposition for enterprise customers running Oracle Fusion or third-party productivity stacks on OCI infrastructure \u2014 particularly around AI inference latency and data residency guarantees that neither Google nor Microsoft can match for regulated workloads."
+}

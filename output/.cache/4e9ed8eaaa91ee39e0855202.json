@@ -1,0 +1,5 @@
+{
+  "headline": "AI Startup Raises $5.8M to Modernize U.S. Food Distribution Infrastructure",
+  "summary": "Anchr secured $5.8M seed funding from a16z Speedrun and OpenAI to apply AI to the fragmented U.S. food supply chain \u2014 from restaurant ordering to grocery shelf stocking. The backing by OpenAI signals growing investor conviction that vertical AI in physical supply chains is a near-term, high-value opportunity. As AI-native players target legacy distribution workflows, the infrastructure layer they run on becomes a critical differentiator.",
+  "oci_implication": "Food distribution AI workloads \u2014 real-time inventory, demand forecasting, logistics optimization \u2014 are cloud-intensive and latency-sensitive, representing a credible OCI pipeline opportunity as startups like Anchr scale. Karan's product team should consider whether OCI's industry cloud or startup program is positioned to engage a16z Speedrun portfolio companies early."
+}

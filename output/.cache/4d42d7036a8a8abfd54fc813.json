@@ -1,0 +1,5 @@
+{
+  "headline": "Thinking Machines Lab Secures 1GW Nvidia Compute Deal, Signals Hyperscale AI Arms Race",
+  "summary": "Thinking Machines Lab has signed a multi-year agreement with Nvidia encompassing at least one gigawatt of compute capacity, accompanied by a strategic Nvidia investment. This deal signals that frontier AI labs are locking in dedicated GPU supply chains at sovereign-infrastructure scale, compressing availability for cloud providers without similar off-take agreements. The strategic implication is clear: hyperscale AI compute is increasingly pre-allocated years out, making OCI's own Nvidia supply relationships and RDMA fabric capacity a direct competitive differentiator.",
+  "oci_implication": "OCI's existing strategic Nvidia partnership and investments in GB200 NVL72 rack-scale deployments position it well, but deals of this magnitude tighten GPU supply visibility for on-demand sovereign and FedRAMP-scoped cloud customers\u2014OCI should assess whether reserved-capacity commitments for IL4/IL5 and EU sovereign workloads remain adequately backstopped."
+}

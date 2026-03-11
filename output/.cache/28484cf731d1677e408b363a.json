@@ -1,0 +1,5 @@
+{
+  "headline": "Iran Conflict Drives Energy Price Volatility Threatening Data Center OpEx",
+  "summary": "The Trump administration's military engagement with Iran has triggered oil and gas price increases with compounding supply chain risk for global energy markets. Data center operators face direct exposure through rising electricity costs, with natural gas-pegged grid pricing in key US and European markets particularly vulnerable to Middle East supply disruption. For hyperscale infrastructure, even a 10-15% sustained energy cost increase materially compresses margins on GPU-dense AI workloads where PUE efficiency gains are already near ceiling.",
+  "oci_implication": "OCI's capacity expansion planning in energy-intensive AI regions (Ashburn, Phoenix, London) should model a sustained high-energy-cost scenario; long-term power purchase agreements and nuclear/renewable hedging become strategically urgent rather than optional."
+}

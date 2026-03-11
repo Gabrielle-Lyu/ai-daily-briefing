@@ -1,0 +1,5 @@
+{
+  "headline": "Excel Copilot Agent Zero-Click Flaw Enables Silent Data Exfiltration via AI",
+  "summary": "A critical zero-click information disclosure vulnerability in Microsoft Excel weaponizes the Copilot Agent to exfiltrate sensitive personal and financial data without user interaction. The March Patch Tuesday batch addressed 83 CVEs with two publicly known flaws, though none are under active exploitation\u2014a relative reprieve following February's six zero-days. The strategic implication is clear: AI-augmented productivity tools are expanding the attack surface in ways traditional patch cycles struggle to address proactively.",
+  "oci_implication": "OCI's developer platform and security certification posture (FedRAMP, DISA IL) must account for AI agent-to-agent attack vectors as Copilot-class integrations proliferate in enterprise workflows\u2014any OCI-hosted workloads processing Excel data via AI pipelines warrant immediate exposure review. This also reinforces OCI's sovereign-cloud differentiation: customers in regulated verticals will scrutinize Microsoft's AI-native toolchain risk as justification for air-gapped, OCI-managed alternatives."
+}
