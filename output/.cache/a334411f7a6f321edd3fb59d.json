@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "healthcare IT",
+    "government tech",
+    "data aggregation"
+  ],
+  "entities": [
+    "Palantir",
+    "Ming Tang",
+    "NHS"
+  ],
+  "section": "partnerships",
+  "confidence": "high"
+}

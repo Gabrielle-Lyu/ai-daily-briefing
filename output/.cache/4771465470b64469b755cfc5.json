@@ -1,0 +1,5 @@
+{
+  "headline": "Anthropic Fails to Block Pentagon Blacklisting, Exposing AI Vendor Federal Risk",
+  "summary": "A federal appeals court denied Anthropic's emergency stay request in its lawsuit against the DoD, leaving the company's Pentagon blacklisting in place while litigation proceeds. The ruling signals courts are reluctant to intervene in national security procurement decisions, even against prominent AI vendors. For enterprise AI suppliers, this underscores that federal contract eligibility is a fragile asset subject to rapid administrative action with limited judicial recourse.",
+  "oci_implication": "OCI's sovereign and government cloud strategy should treat this as a cautionary signal: AI platform partners embedded in government workloads face supply-chain and continuity risk if their federal standing is revoked. This reinforces the value of OCI's own FedRAMP and IL5 posture as a differentiator over hyperscalers reliant on third-party AI vendors with uncertain federal eligibility."
+}

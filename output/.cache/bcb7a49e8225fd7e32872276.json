@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "antitrust litigation",
+    "regulatory enforcement",
+    "tech competition"
+  ],
+  "entities": [
+    "US Department of Justice",
+    "Apple",
+    "Alphabet",
+    "Live Nation Entertainment",
+    "Ticketmaster"
+  ],
+  "section": "compete",
+  "confidence": "medium"
+}

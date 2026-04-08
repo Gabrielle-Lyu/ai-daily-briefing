@@ -1,0 +1,5 @@
+{
+  "headline": "OpenAI Eyes Public Markets as Enterprise Revenue Hits 40%, Eyes Parity With Consumer",
+  "summary": "OpenAI is preparing for its IPO and will allocate shares to retail investors, signaling a shift toward mainstream credibility and broader capital access. Enterprise revenue now represents 40% of the company's total and is projected to match consumer by end of 2026\u2014a structural pivot that validates the B2B AI platform model. This trajectory will intensify competition for cloud infrastructure, ISV integrations, and GSI channel partnerships as OpenAI seeks enterprise lock-in at scale.",
+  "oci_implication": "As OpenAI deepens its enterprise footprint, OCI should accelerate conversations with ISVs and GSIs that may be evaluating multi-cloud AI deployments\u2014positioning OCI's GPU infrastructure and sovereign cloud capabilities as a neutral, cost-competitive alternative to Azure, which holds OpenAI's primary cloud commitment. Nathan should watch for partner ecosystem shifts as SIs build OpenAI-native practices and assess whether OCI can capture adjacent workloads from enterprises seeking to diversify AI provider dependency."
+}

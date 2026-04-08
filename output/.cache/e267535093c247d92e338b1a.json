@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "EU vehicle regulations",
+    "automotive trade barriers",
+    "pickup truck standards",
+    "market access"
+  ],
+  "entities": [
+    "Ford",
+    "General Motors",
+    "Tesla",
+    "European Union"
+  ],
+  "section": "compete",
+  "confidence": "low"
+}

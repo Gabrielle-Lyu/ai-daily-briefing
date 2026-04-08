@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "tech market rally",
+    "AI security",
+    "Mythos model access",
+    "hardware launch"
+  ],
+  "entities": [
+    "Anthropic",
+    "Apple",
+    "Mythos",
+    "Bloomberg"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

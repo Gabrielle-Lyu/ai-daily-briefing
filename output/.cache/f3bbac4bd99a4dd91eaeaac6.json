@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "data center expansion",
+    "infrastructure financing",
+    "capital investment"
+  ],
+  "entities": [
+    "Pimco",
+    "Oracle",
+    "Bank of America",
+    "Michigan"
+  ],
+  "section": "datacenter",
+  "confidence": "high"
+}

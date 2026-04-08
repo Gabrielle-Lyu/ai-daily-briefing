@@ -1,0 +1,5 @@
+{
+  "headline": "SMS-Native AI Agent Startup Poke Bets on Zero-Friction Consumer Adoption",
+  "summary": "Poke deploys AI agents through text messaging, eliminating app installs and onboarding friction entirely \u2014 targeting the mass-market segment that never adopted chatbot interfaces. The approach signals a broader architectural shift: agent delivery layers decoupling from underlying infrastructure, with carriers and messaging protocols becoming the new UX surface. Strategically, this validates that agent accessibility, not raw capability, is now the primary adoption barrier.",
+  "oci_implication": "OCI's agent infrastructure play must account for SMS/messaging-gateway ingress patterns if enterprise customers demand similar low-friction deployment for internal workflows; this also reinforces the case for OCI to expose agent-hosting primitives that are interface-agnostic rather than tied to web or API surfaces."
+}

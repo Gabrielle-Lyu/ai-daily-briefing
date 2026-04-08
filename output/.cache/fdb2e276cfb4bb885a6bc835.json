@@ -1,0 +1,5 @@
+{
+  "headline": "OpenAI's Enterprise Revenue Hits 40%, Signaling Cloud Infrastructure Demand Surge",
+  "summary": "OpenAI's enterprise segment now represents 40% of total revenue and is projected to match consumer revenue by end of 2026. This rapid enterprise adoption signals that AI workloads are shifting from experimental to mission-critical at scale. The implication: the race for enterprise AI infrastructure is accelerating, and cloud providers who can offer integrated, compliant, high-performance compute will capture disproportionate share.",
+  "oci_implication": "OpenAI's enterprise growth trajectory directly expands the addressable market for OCI's GPU clusters and sovereign cloud offerings \u2014 enterprises buying OpenAI are also buying infrastructure. OCI should prioritize deepening partnership or compatibility positioning with OpenAI's enterprise stack before Azure's exclusivity advantage compounds further."
+}

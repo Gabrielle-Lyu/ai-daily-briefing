@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "shipping logistics",
+    "geopolitical risk",
+    "supply chain security"
+  ],
+  "entities": [
+    "Iran",
+    "Hormuz Strait"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

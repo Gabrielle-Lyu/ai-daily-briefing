@@ -1,0 +1,5 @@
+{
+  "headline": "Canva Acquires Agentic AI and Marketing Automation Firms to Build Full-Stack Platform",
+  "summary": "Canva has acquired Simtheory (agentic AI) and Ortto (marketing automation/CDP) to extend beyond design into an integrated AI-driven marketing platform. The move signals a broader industry pattern: SaaS incumbents vertically integrating AI agents, data infrastructure, and customer engagement pipelines rather than relying on third-party AI platforms. The strategic implication is that the competitive surface for AI platforms is shifting from model access to full-stack orchestration ownership.",
+  "oci_implication": "As SaaS players like Canva internalize agentic AI and data infrastructure capabilities, OCI's value proposition must increasingly center on being the trusted, high-performance substrate for these workloads\u2014particularly for enterprises that won't cede data control to application-layer vendors. This reinforces the urgency of OCI's AI infrastructure and sovereign cloud differentiation over commoditizing API-layer plays."
+}

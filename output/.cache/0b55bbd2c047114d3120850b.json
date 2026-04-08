@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "government litigation",
+    "AI regulation",
+    "defense policy",
+    "legal challenge"
+  ],
+  "entities": [
+    "Anthropic",
+    "Pentagon",
+    "Department of Defense"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

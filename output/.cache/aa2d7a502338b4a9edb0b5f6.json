@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "geopolitics",
+    "maritime trade",
+    "international relations"
+  ],
+  "entities": [
+    "UK",
+    "Starmer",
+    "Reuters"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

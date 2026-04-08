@@ -47,7 +47,7 @@ class Article(Base):
     full_text = Column(Text, default="")
     tier = Column(Integer, default=2)
     raw_score = Column(Float, default=0.0)
-    embedding_json = Column(JSON, nullable=True)  # 384-float embedding
+    embedding_json = Column(JSON, nullable=True)  # 256-float embedding (nomic-embed-text-v1.5 Matryoshka)
     ingest_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     source_name = Column(String(255), nullable=True)
 

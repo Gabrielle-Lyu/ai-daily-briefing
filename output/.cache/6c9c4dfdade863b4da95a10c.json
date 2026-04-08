@@ -1,0 +1,5 @@
+{
+  "headline": "Avride AV Kills Duck Near Austin, Reigniting Edge-Case Perception Debate",
+  "summary": "An Avride autonomous vehicle near Austin struck and killed a duck without decelerating, drawing community backlash and renewed scrutiny of AV perception systems in unstructured real-world environments. The incident highlights a persistent gap between benchmark performance and edge-case robustness in deployed autonomy stacks\u2014small, low-contrast objects at ground level remain a known failure mode for LiDAR/camera fusion pipelines. For AI infrastructure providers, incidents like this reinforce enterprise demand for simulation, synthetic data generation, and continuous edge-case evaluation pipelines at scale.",
+  "oci_implication": "OCI's AI infrastructure positioning should emphasize support for the full AV development loop\u2014large-scale simulation workloads, sensor-fusion model training, and real-time inference validation\u2014as AV players face mounting pressure to close the gap between controlled test performance and messy real-world deployment."
+}

@@ -1,0 +1,5 @@
+{
+  "headline": "Amazon Forces Kindle Hardware Upgrade Cycle, Deepening Ecosystem Lock-In",
+  "summary": "Amazon is terminating support for all Kindle e-readers manufactured in 2012 or earlier, rendering them unable to receive new content or updates. This follows a familiar hyperscaler playbook: accelerate hardware obsolescence to drive ecosystem re-engagement and newer device adoption. The strategic implication is a reminder that platform control over end-to-end hardware-software stacks creates durable customer dependency \u2014 a lever Amazon exercises across consumer and enterprise portfolios alike.",
+  "oci_implication": "Low direct relevance to OCI's AI and data strategy; however, the pattern of enforced hardware refresh cycles mirrors how cloud platform vendors manage deprecation to consolidate workloads on current-generation infrastructure \u2014 a dynamic OCI should monitor as it positions its own GPU and AI compute generations for enterprise customers considering long-term platform commitments."
+}

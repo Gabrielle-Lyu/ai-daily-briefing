@@ -1,0 +1,5 @@
+{
+  "headline": "Meta's $3B Ohio AI Data Center Debt Sale Signals Hyperscaler Infrastructure Arms Race",
+  "summary": "A syndicate of global banks including Natixis, MUFG, and Societe Generale is offloading $3 billion in loans backing a Meta-owned AI data center in Ohio, reflecting the scale of private capital now flowing into hyperscaler infrastructure. This deal is part of a broader wave of sale-leaseback and debt-financed data center buildouts as major platforms decouple capital expenditure from balance sheet risk. The strategic implication: AI infrastructure is becoming a financeable asset class, accelerating capacity expansion timelines for well-capitalized players.",
+  "oci_implication": "As Meta and peers leverage debt markets to scale AI capacity independent of operating cash flow, OCI has an opening to position sovereign and regulated-industry cloud infrastructure \u2014 where hyperscalers face friction \u2014 as the differentiated destination for ISVs and GSIs needing dedicated, compliance-friendly capacity without hyperscaler lock-in dependencies."
+}

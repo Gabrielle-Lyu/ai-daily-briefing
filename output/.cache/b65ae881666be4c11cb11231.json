@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "light pollution",
+    "satellite monitoring",
+    "environmental data"
+  ],
+  "entities": [
+    "Reuters"
+  ],
+  "section": "power",
+  "confidence": "low"
+}

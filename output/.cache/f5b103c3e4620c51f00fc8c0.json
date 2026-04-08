@@ -1,0 +1,10 @@
+{
+  "bullets": [
+    "Oracle's Michigan data center is attracting $14B in debt financing from Pimco and Bank of America, signaling that capital markets view OCI's infrastructure buildout as a creditworthy, large-scale bet \u2014 this is the largest single data center debt deal in recent memory and validates Oracle's positioning as a hyperscaler-tier AI infrastructure provider.",
+    "OpenAI's enterprise segment is now 40% of revenue and on track to match consumer by end of 2026, confirming the enterprise AI spend cycle is accelerating and intensifying competition for the workloads OCI is targeting with GPU clusters and sovereign cloud.",
+    "Anthropic is granting early access to its unreleased Mythos model to select tech firms under a cybersecurity framing, a distribution tactic that builds lock-in with enterprise buyers before general availability \u2014 a playbook OCI should watch as a signal of where AI vendor-customer relationships are heading.",
+    "The US-Iran ceasefire triggered a broad tech rally led by Alphabet, Meta, Amazon, and Nvidia, easing near-term macro headwinds and likely sustaining the capex appetite of hyperscalers who are OCI's largest co-location and interconnect partners.",
+    "The exit of DOJ's top antitrust litigators following the Ticketmaster settlement weakens the enforcement posture that has constrained Google and Apple \u2014 reducing regulatory pressure on OCI's most formidable cloud competitors at a sensitive moment."
+  ],
+  "oci_implication_of_day": "The $14B Pimco financing for Oracle's Michigan data center is a direct OCI capacity story: if this deal closes, it materially expands OCI's ability to fulfill the sovereign and enterprise GPU reservation backlog without diluting equity. Karan's product team should align roadmap commitments \u2014 particularly GPU availability windows and region launch timelines \u2014 to this financing timeline, and ensure enterprise sales is messaging the capacity expansion proactively to customers currently on waitlists at AWS or Azure."
+}

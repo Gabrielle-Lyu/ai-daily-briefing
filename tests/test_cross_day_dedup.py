@@ -131,7 +131,7 @@ def test_cosine_threshold_suppress():
     )
 
     # Create a fake cluster with nearly identical embedding
-    base_embedding = list(np.random.randn(384).astype(float))
+    base_embedding = list(np.random.randn(256).astype(float))
     # Use same embedding for article (cosine ~1.0)
     article_embedding = base_embedding.copy()
 
@@ -165,10 +165,10 @@ def test_cosine_threshold_followup():
     )
 
     # Build an embedding with cosine ~0.85 (related but not identical)
-    base_vec = np.random.randn(384)
+    base_vec = np.random.randn(256)
     base_vec = base_vec / np.linalg.norm(base_vec)
     # Perturb to get cosine ~0.85
-    noise = np.random.randn(384) * 0.4
+    noise = np.random.randn(256) * 0.4
     article_vec = base_vec + noise
     article_vec = article_vec / np.linalg.norm(article_vec)
     # Adjust to ensure cosine is in 0.75-0.95 range
@@ -224,10 +224,10 @@ def test_cosine_threshold_new():
     )
 
     # Completely different embedding (cosine near 0)
-    base_embedding = np.random.randn(384)
+    base_embedding = np.random.randn(256)
     base_embedding = base_embedding / np.linalg.norm(base_embedding)
     # Orthogonal vector
-    article_embedding = np.random.randn(384)
+    article_embedding = np.random.randn(256)
     article_embedding = article_embedding / np.linalg.norm(article_embedding)
     # Ensure low cosine by making them somewhat orthogonal
     # Subtract the component along base

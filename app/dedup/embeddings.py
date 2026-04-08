@@ -1,9 +1,9 @@
 """
 embeddings.py -- Embedding utilities for cross-day deduplication.
 
-Provides semantic similarity via sentence-transformers (all-MiniLM-L6-v2)
-so the dedup pipeline can detect near-duplicate stories across different days
-even when surface-level token overlap is low.
+Provides semantic similarity via sentence-transformers (nomic-embed-text-v1.5)
+with Matryoshka truncation to 256 dimensions for efficient storage and comparison.
+8K context window supports full article text in the future.
 """
 
 import logging
@@ -16,8 +16,8 @@ logger = logging.getLogger(__name__)
 # Module-level singleton; populated lazily by load_model().
 _model: Optional[object] = None
 
-MODEL_NAME = "all-MiniLM-L6-v2"
-EMBEDDING_DIM = 384
+MODEL_NAME = "nomic-ai/nomic-embed-text-v1.5"
+EMBEDDING_DIM = 256  # Matryoshka truncation from 768 → 256
 
 
 def load_model():
@@ -34,8 +34,8 @@ def load_model():
     logger.info("Loading sentence-transformers model: %s", MODEL_NAME)
     try:
         from sentence_transformers import SentenceTransformer
-        _model = SentenceTransformer(MODEL_NAME)
-        logger.info("Model loaded successfully (dim=%d)", EMBEDDING_DIM)
+        _model = SentenceTransformer(MODEL_NAME, trust_remote_code=True)
+        logger.info("Model loaded successfully (full_dim=768, truncated_dim=%d)", EMBEDDING_DIM)
     except Exception as exc:
         logger.error("Failed to load sentence-transformers model: %s", exc)
         raise
@@ -45,10 +45,12 @@ def load_model():
 
 def compute_embeddings(texts: list[str]) -> list[list[float]]:
     """
-    Batch-encode a list of texts into 384-dimensional embeddings.
+    Batch-encode a list of texts into 256-dimensional embeddings.
 
-    Returns a list of lists (one per input text), each containing 384 floats.
-    Internally calls load_model() so the model is initialized on first use.
+    Uses nomic-embed-text-v1.5 which encodes to 768d, then truncates to 256d
+    via Matryoshka representation learning (retains ~95% quality).
+
+    Returns a list of lists (one per input text), each containing 256 floats.
     """
     if not texts:
         logger.debug("compute_embeddings called with empty input; returning []")
@@ -57,8 +59,9 @@ def compute_embeddings(texts: list[str]) -> list[list[float]]:
     model = load_model()
 
     logger.debug("Encoding %d texts", len(texts))
-    # SentenceTransformer.encode returns a numpy ndarray of shape (n, 384)
+    # Encode to full 768d, then truncate to 256d (Matryoshka)
     embeddings: np.ndarray = model.encode(texts, show_progress_bar=False)
+    embeddings = embeddings[:, :EMBEDDING_DIM]
 
     # Convert to plain Python lists for JSON-serializability / DB storage
     return embeddings.tolist()

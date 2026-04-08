@@ -1,0 +1,5 @@
+{
+  "headline": "Pimco Eyes $14B Debt Deal to Fund Massive Oracle Michigan Data Center",
+  "summary": "Pacific Investment Management is in advanced talks with Bank of America to provide ~$14B in debt financing for a large-scale Oracle data center build in Michigan. This represents one of the largest single data center financing deals in recent memory, signaling institutional investor confidence in Oracle's long-term infrastructure demand. The scale suggests Oracle is accelerating capacity commitments to meet AI workload contracts, likely tied to existing or anticipated hyperscale customer deals.",
+  "oci_implication": "This financing directly expands OCI's physical capacity footprint, positioning the platform to absorb large sovereign and enterprise AI workloads that require dedicated, regionally anchored infrastructure. Karan's product roadmap should anticipate accelerated region availability and capacity SLAs as a competitive differentiator against AWS and Azure in deal negotiations."
+}

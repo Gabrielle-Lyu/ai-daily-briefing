@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "food security",
+    "geopolitical risk",
+    "commodity prices"
+  ],
+  "entities": [
+    "IMF",
+    "World Bank",
+    "UN"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

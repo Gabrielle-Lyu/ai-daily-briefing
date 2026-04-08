@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "geopolitical conflict",
+    "regional security",
+    "middle east"
+  ],
+  "entities": [
+    "Israel",
+    "Hezbollah",
+    "Lebanon"
+  ],
+  "section": "security",
+  "confidence": "low"
+}
