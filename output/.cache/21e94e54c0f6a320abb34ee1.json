@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "AI public perception",
+    "corporate communications",
+    "regulatory concerns",
+    "reputation management"
+  ],
+  "entities": [
+    "OpenAI",
+    "Google",
+    "Microsoft",
+    "Meta",
+    "Anthropic"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

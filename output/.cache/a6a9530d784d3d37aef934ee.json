@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "Iran ceasefire",
+    "stock market volatility",
+    "oil prices"
+  ],
+  "entities": [
+    "Donald Trump",
+    "Iran",
+    "JD Vance",
+    "Brent crude"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

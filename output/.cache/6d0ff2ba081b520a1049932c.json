@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "market sentiment",
+    "economic outlook",
+    "closing bell analysis",
+    "financial markets"
+  ],
+  "entities": [
+    "Citigroup",
+    "Charles Schwab",
+    "Tradeweb",
+    "Apollo Private Equity",
+    "Coldwell Banker"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

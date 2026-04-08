@@ -6,3 +6,5 @@ python-dateutil>=2.9
 sentence-transformers>=2.7
 einops>=0.8
 sqlalchemy>=2.0
+trafilatura>=2.0
+spacy>=3.7

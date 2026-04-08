@@ -116,7 +116,7 @@ Classify this article and respond ONLY with valid JSON (no markdown, no code fen
 
 Article title: {article['title']}
 Source: {article['source']}
-Summary: {article.get('summary', '')[:800]}
+Summary: {article.get('full_text', '')[:1500] or article.get('summary', '')[:800]}
 
 Return this exact JSON structure:
 {{
@@ -176,7 +176,7 @@ Write a personalised briefing item for this article. Respond ONLY with valid JSO
 
 Article title: {article['title']}
 Source: {article['source']} (published: {article['published_at'].strftime('%Y-%m-%d %H:%M UTC') if hasattr(article['published_at'], 'strftime') else str(article['published_at'])})
-Summary: {article.get('summary', '')[:1200]}
+Summary: {article.get('full_text', '')[:2000] or article.get('summary', '')[:1200]}
 
 Return this exact JSON structure:
 {{

@@ -148,7 +148,7 @@ def step_cross_day_dedup(articles: list[dict]) -> list[dict]:
         return articles
 
     # 4b. Compute embeddings for all surviving articles
-    texts = [f"{a['title']} {a.get('summary', '')}" for a in articles]
+    texts = [f"{a['title']} {a.get('full_text', '') or a.get('summary', '')}" for a in articles]
     embeddings = compute_embeddings(texts)
     print(f"      Computed embeddings for {len(embeddings)} articles")
 

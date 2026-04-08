@@ -73,6 +73,33 @@ def _make_article_id(url: str) -> str:
     return hashlib.sha256(url.encode()).hexdigest()[:16]
 
 
+_BROWSER_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml",
+}
+
+
+def _fetch_full_text(url: str) -> str:
+    """Download page with httpx (browser headers) and extract text with trafilatura.
+
+    Returns extracted text (capped at 5000 chars) or empty string on failure.
+    """
+    try:
+        import trafilatura
+        import httpx as _httpx
+        resp = _httpx.get(url, headers=_BROWSER_HEADERS, follow_redirects=True, timeout=15)
+        if resp.status_code >= 400:
+            return ""
+        text = trafilatura.extract(resp.text)
+        if text is None:
+            return ""
+        return text[:5000]
+    except Exception as exc:
+        logger.warning("Full text extraction failed for %s: %s", url[:60], exc)
+        return ""
+
+
 def _fetch_feed(source: dict, cutoff: datetime) -> list[dict]:
     """
     Fetch a single RSS source and return a list of Article dicts.
@@ -116,6 +143,7 @@ def _fetch_feed(source: dict, cutoff: datetime) -> list[dict]:
                 "title":        title,
                 "url":          url,
                 "summary":      summary,
+                "full_text":    "",
                 "published_at": published_at,
                 "source":       source["name"],
                 "tier":         source["tier"],
@@ -168,4 +196,22 @@ def ingest_feeds(sources: list[dict] | None = None, window_hours: int = INGEST_W
                 logger.warning("  [%s] unexpected error: %s", src["name"], exc)
 
     logger.info("Total ingested: %d unique articles", len(all_articles))
+
+    # Fetch full article text concurrently using trafilatura
+    if all_articles:
+        logger.info("Fetching full text for %d articles...", len(all_articles))
+        with ThreadPoolExecutor(max_workers=10) as text_pool:
+            future_to_article = {
+                text_pool.submit(_fetch_full_text, a["url"]): a
+                for a in all_articles
+            }
+            for future in as_completed(future_to_article):
+                article = future_to_article[future]
+                try:
+                    article["full_text"] = future.result(timeout=10)
+                except Exception:
+                    article["full_text"] = ""
+        fetched = sum(1 for a in all_articles if a.get("full_text"))
+        logger.info("Full text fetched for %d/%d articles", fetched, len(all_articles))
+
     return all_articles

@@ -132,6 +132,12 @@ RSS_SOURCES = [
     # CNCF removed — feed returns 403
     # Tier 4 — community signal
     {"url": "https://news.ycombinator.com/rss",                 "name": "Hacker News",      "tier": 4, "sections": ["community", "ai", "compete"]},
+    # Tier 4 — Reddit community signal
+    {"url": "https://www.reddit.com/r/cloudcomputing/.rss", "name": "r/cloudcomputing", "tier": 4, "sections": ["compete", "infrastructure"]},
+    {"url": "https://www.reddit.com/r/aws/.rss", "name": "r/aws", "tier": 4, "sections": ["compete", "infrastructure"]},
+    {"url": "https://www.reddit.com/r/kubernetes/.rss", "name": "r/kubernetes", "tier": 4, "sections": ["infrastructure", "oss"]},
+    {"url": "https://www.reddit.com/r/artificial/.rss", "name": "r/artificial", "tier": 4, "sections": ["ai", "compete"]},
+    {"url": "https://www.reddit.com/r/MachineLearning/.rss", "name": "r/MachineLearning", "tier": 4, "sections": ["ai"]},
 ]
 
 # ---------------------------------------------------------------------------

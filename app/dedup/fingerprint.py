@@ -2,7 +2,7 @@
 Fact extraction and delta scoring for cross-day deduplication.
 
 Extracts structured facts (numbers, entities, quotes) from articles using
-regex-only techniques, then scores how much genuinely new information a
+SpaCy NER (with regex fallback), then scores how much genuinely new information a
 candidate article carries compared to an already-seen canonical cluster.
 """
 
@@ -42,15 +42,31 @@ _PROGRESSION_VERBS = {
 }
 
 # ---------------------------------------------------------------------------
+# SpaCy NER (lazy-loaded singleton)
+# ---------------------------------------------------------------------------
+
+_nlp = None
+
+def _get_nlp():
+    """Lazy-load the SpaCy English model (singleton)."""
+    global _nlp
+    if _nlp is None:
+        import spacy
+        _nlp = spacy.load("en_core_web_sm")
+    return _nlp
+
+_NER_LABELS = {"PERSON", "ORG", "GPE", "PRODUCT", "EVENT", "MONEY"}
+
+# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
 
 def _safe_text(article: dict) -> str:
-    """Combine title and summary into a single searchable string."""
+    """Combine title and best available body text into a single searchable string."""
     title = article.get("title") or ""
-    summary = article.get("summary") or ""
-    return f"{title} {summary}"
+    body = article.get("full_text") or article.get("summary") or ""
+    return f"{title} {body}"
 
 
 def _parse_datetime(value) -> datetime:
@@ -110,7 +126,16 @@ def extract_facts(article: dict) -> dict:
     # Normalise whitespace inside each match for cleaner comparisons
     numbers = [n.strip() for n in numbers]
 
-    entities = _ENTITY_RE.findall(text)
+    # Entity extraction via SpaCy NER
+    try:
+        nlp = _get_nlp()
+        doc = nlp(text[:10000])  # cap input length for performance
+        entities = list(dict.fromkeys(
+            ent.text.strip() for ent in doc.ents if ent.label_ in _NER_LABELS
+        ))
+    except Exception as exc:
+        logger.warning("SpaCy NER failed, falling back to regex: %s", exc)
+        entities = _ENTITY_RE.findall(text)
 
     quotes = _QUOTE_RE.findall(text)
 
