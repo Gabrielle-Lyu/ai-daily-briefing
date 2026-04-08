@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "small modular reactors",
+    "regulatory approval",
+    "clean energy",
+    "nuclear power"
+  ],
+  "entities": [
+    "Antares Nuclear Inc.",
+    "US Department of Energy"
+  ],
+  "section": "power",
+  "confidence": "medium"
+}

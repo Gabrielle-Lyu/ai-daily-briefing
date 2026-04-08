@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "military preparedness",
+    "Iran relations",
+    "diplomacy"
+  ],
+  "entities": [
+    "US Military",
+    "Iran",
+    "Reuters"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

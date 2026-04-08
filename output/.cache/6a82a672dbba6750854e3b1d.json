@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "cyber attacks",
+    "critical infrastructure",
+    "nation-state threats",
+    "cybersecurity"
+  ],
+  "entities": [
+    "Iran",
+    "United States"
+  ],
+  "section": "security",
+  "confidence": "high"
+}

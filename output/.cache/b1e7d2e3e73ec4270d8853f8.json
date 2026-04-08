@@ -1,0 +1,5 @@
+{
+  "headline": "AWS Scrambles Middle East Availability as Iran War Hits Data Centers",
+  "summary": "Amazon's cloud chief confirmed AWS data centers in the Middle East have been directly impacted by drone strikes tied to the Iran conflict, with teams working around the clock to restore and maintain availability. This marks a rare instance of kinetic warfare causing measurable hyperscaler outages, elevating physical infrastructure resilience from best-practice to existential requirement. The incident will accelerate enterprise demand for sovereign-cloud and multi-region architectures with explicit wartime SLA guarantees.",
+  "oci_implication": "OCI's sovereign cloud strategy and distributed region model\u2014including dedicated government and defense-grade regions\u2014are now a concrete competitive differentiator as customers reassess single-provider exposure in geopolitically volatile zones. Mahesh's team should evaluate whether OCI's Middle East region security posture and physical resilience narrative is being actively surfaced to at-risk enterprise and government customers in the region."
+}

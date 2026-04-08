@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "geopolitics",
+    "economic sanctions",
+    "military conflict"
+  ],
+  "entities": [
+    "Iran"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

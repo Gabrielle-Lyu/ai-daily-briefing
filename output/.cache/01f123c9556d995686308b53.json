@@ -1,0 +1,5 @@
+{
+  "headline": "Ryder Cup AI Deployment Signals Real-Time Edge Infrastructure Demand at Scale",
+  "summary": "The Ryder Cup's adoption of AI-powered operations demonstrates enterprise appetite for real-time analytics and low-latency inference at major live events. Sports venues are emerging as proving grounds for sovereign, high-availability edge deployments where data residency, uptime SLAs, and burst compute matter enormously. For cloud infrastructure providers, winning these workloads requires demonstrating not just performance, but compliance with cross-border data handling requirements across US and European jurisdictions.",
+  "oci_implication": "OCI's sovereign cloud and distributed cloud edge capabilities are well-positioned to capture sports and live-event AI workloads where EU data residency rules and transatlantic data transfer constraints disqualify hyperscalers with less flexible architectures. This use case reinforces the case for investing in low-latency edge nodes co-located with high-profile venues as a differentiated go-to-market play for the developer platform."
+}

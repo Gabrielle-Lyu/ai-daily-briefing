@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "semiconductor stocks",
+    "market recovery",
+    "investment sentiment",
+    "earnings"
+  ],
+  "entities": [
+    "Broadcom"
+  ],
+  "section": "financial",
+  "confidence": "high"
+}

@@ -1,0 +1,5 @@
+{
+  "headline": "FBI, NSA, CISA Warn Iranian Hackers Escalate Attacks on U.S. Critical Infrastructure",
+  "summary": "A joint advisory from FBI, NSA, and CISA confirms Iranian state-linked actors have escalated cyberattacks on U.S. critical infrastructure amid the U.S.-Israel-Iran conflict. The escalation signals a shift from espionage to potentially disruptive operations targeting energy, water, and communications sectors. For cloud providers serving government and regulated industries, this raises the stakes on sovereign resilience and compliance posture.",
+  "oci_implication": "OCI's federal and critical infrastructure customers will face increased pressure to demonstrate hardened, isolated cloud environments\u2014accelerating demand for OCI's dedicated region and sovereign cloud offerings. This is a near-term sales catalyst and a credibility moment to differentiate from hyperscalers on security architecture for high-sensitivity workloads."
+}

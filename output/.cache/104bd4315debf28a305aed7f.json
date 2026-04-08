@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "AI agents",
+    "multi-model systems",
+    "research automation"
+  ],
+  "entities": [
+    "Microsoft",
+    "Anthropic",
+    "OpenAI",
+    "Research Agent"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

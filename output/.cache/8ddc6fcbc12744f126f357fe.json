@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "semiconductor manufacturing",
+    "U.S. chip onshoring",
+    "strategic partnerships",
+    "chip fabrication"
+  ],
+  "entities": [
+    "Intel",
+    "SpaceX",
+    "Tesla",
+    "Elon Musk",
+    "Terafab"
+  ],
+  "section": "partnerships",
+  "confidence": "high"
+}

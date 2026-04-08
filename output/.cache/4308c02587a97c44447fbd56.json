@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "energy prices",
+    "commodity markets",
+    "geopolitical risk"
+  ],
+  "entities": [
+    "Reuters"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

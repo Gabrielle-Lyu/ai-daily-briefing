@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "M&A activity",
+    "bank profitability",
+    "geopolitical risk"
+  ],
+  "entities": [
+    "US Banks",
+    "Iran"
+  ],
+  "section": "deals",
+  "confidence": "low"
+}

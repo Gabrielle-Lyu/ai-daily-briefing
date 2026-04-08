@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "maritime shipping",
+    "geopolitical risk",
+    "supply chain security"
+  ],
+  "entities": [
+    "Maersk",
+    "US",
+    "Iran"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

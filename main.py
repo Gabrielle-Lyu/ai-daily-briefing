@@ -11,7 +11,6 @@ Usage:
 """
 
 import argparse
-import asyncio
 import logging
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -25,11 +24,19 @@ from briefing.config import (
     MAX_ARTICLES_TO_CLASSIFY,
     MAX_CONCURRENT_LLM,
     TOP_ARTICLES_PER_AUDIENCE,
+    TIER_CREDIBILITY_SCORES,
+    TIMELINESS_SCORES,
 )
 from briefing.ingest  import ingest_feeds
-from briefing.score   import score_all_articles, get_top_articles_for_audience, get_top_articles_global
-from briefing.process import normalize_articles
+from briefing.score   import (
+    score_all_articles, get_top_articles_for_audience, get_top_articles_global,
+    _source_credibility_score, _timeliness_score,
+)
 from briefing.render  import save_briefings
+from app.dedup.pipeline import run_dedup_pipeline
+from app.db.models import (
+    init_db, get_session, Article as DBArticle, AudienceBriefing,
+)
 
 # ── Logging ──────────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -88,29 +95,160 @@ def _dry_run_exec_summary(top_articles: list[dict], audience_id: str) -> dict:
 # ---------------------------------------------------------------------------
 
 def step_ingest() -> list[dict]:
-    print("\n[1/7] Ingesting RSS feeds...")
+    print("\n[1/9] Ingesting RSS feeds...")
     articles = ingest_feeds()
     print(f"      → {len(articles)} articles ingested")
     return articles
 
 
-def step_score(articles: list[dict]) -> list[dict]:
-    print("\n[2/7] Scoring articles across all audiences...")
-    articles = score_all_articles(articles)
-    print(f"      → Scored {len(articles)} articles")
+def step_prescore(articles: list[dict]) -> list[dict]:
+    """Lightweight pre-score using only source credibility + timeliness."""
+    print("\n[2/9] Pre-scoring articles (source credibility + timeliness)...")
+    for article in articles:
+        credibility = _source_credibility_score(article["tier"])
+        timeliness = _timeliness_score(article["published_at"])
+        prescore = credibility + timeliness
+        article["scores"] = {"_prescore": prescore}
+    articles.sort(key=lambda a: a["scores"].get("_prescore", 0), reverse=True)
+    print(f"      → Pre-scored {len(articles)} articles")
     return articles
 
 
-def step_normalize(articles: list[dict]) -> list[dict]:
-    print("\n[3/7] Normalizing and deduplicating...")
-    articles = normalize_articles(articles)
-    print(f"      → {len(articles)} articles in canonical bundle")
+def step_inrun_dedup(articles: list[dict]) -> list[dict]:
+    """In-run dedup: remove same-day duplicates within this batch."""
+    print("\n[3/9] In-run deduplication...")
+    articles = run_dedup_pipeline(articles, save_to_db=True)
+    print(f"      → {len(articles)} articles after in-run dedup")
     return articles
+
+
+def step_cross_day_dedup(articles: list[dict]) -> list[dict]:
+    """Cross-day dedup: compare against 7-day cluster history using embeddings."""
+    print("\n[4/9] Cross-day deduplication (embedding-based)...")
+
+    from app.dedup.embeddings import compute_embeddings
+    from app.dedup.fingerprint import extract_facts
+    from app.dedup.cross_day import (
+        load_recent_clusters,
+        check_against_history,
+        save_new_cluster,
+        update_cluster_seen,
+    )
+    from app.db.models import (
+        init_db as _init_db, get_session as _get_session,
+        Article as _Article, SuppressionLog as _SuppressionLog,
+    )
+
+    # 4a. Load cluster history
+    clusters = load_recent_clusters(days=7)
+    print(f"      Loaded {len(clusters)} clusters from last 7 days")
+
+    if not articles:
+        print("      → No articles to process")
+        return articles
+
+    # 4b. Compute embeddings for all surviving articles
+    texts = [f"{a['title']} {a.get('summary', '')}" for a in articles]
+    embeddings = compute_embeddings(texts)
+    print(f"      Computed embeddings for {len(embeddings)} articles")
+
+    # 4c-d. Check each article against history
+    kept: list[dict] = []
+    suppressed_articles: list[dict] = []
+    suppressed_count = 0
+    followup_count = 0
+    new_count = 0
+
+    for article, embedding in zip(articles, embeddings):
+        decision, matched_cluster = check_against_history(
+            article, embedding, clusters
+        )
+
+        if decision == "suppress":
+            suppressed_count += 1
+            article["_suppression_reason"] = "cross_day_duplicate"
+            article["_similarity_score"] = matched_cluster.get("_cosine_score", 0.0) if matched_cluster else 0.0
+            article["_matched_cluster_id"] = matched_cluster["id"] if matched_cluster else None
+            suppressed_articles.append(article)
+            logger.info(
+                "cross_day_suppress: %s (matched cluster %s)",
+                article["title"][:60],
+                matched_cluster["headline"][:40] if matched_cluster else "?",
+            )
+            # Update cluster last_seen (skip for in-memory-only clusters)
+            if matched_cluster and matched_cluster.get("id") is not None:
+                facts = extract_facts(article)
+                update_cluster_seen(matched_cluster["id"], facts)
+        elif decision == "followup":
+            followup_count += 1
+            article["_is_followup"] = True
+            article["_followup_of"] = matched_cluster["canonical_url"] if matched_cluster else None
+            kept.append(article)
+            logger.info(
+                "cross_day_followup: %s (follow-up to %s)",
+                article["title"][:60],
+                matched_cluster["headline"][:40] if matched_cluster else "?",
+            )
+            # Update cluster with new facts (skip for in-memory-only clusters)
+            if matched_cluster and matched_cluster.get("id") is not None:
+                facts = extract_facts(article)
+                update_cluster_seen(matched_cluster["id"], facts)
+        else:
+            # New story — save as new cluster
+            new_count += 1
+            facts = extract_facts(article)
+            save_new_cluster(article, embedding, facts)
+            kept.append(article)
+            # Append to in-memory cluster list so subsequent articles
+            # in this batch can match against it (fixes duplicate clusters)
+            clusters.append({
+                "id": None,  # DB id not needed for comparison
+                "canonical_url": article["url"],
+                "headline": article["title"],
+                "embedding": embedding,
+                "fact_snapshot": facts,
+            })
+
+    # 4f. Persist suppressions to DB
+    if suppressed_articles:
+        try:
+            _engine = _init_db()
+            _session = _get_session(_engine)
+            for sup in suppressed_articles:
+                db_art = _session.query(_Article).filter_by(url=sup["url"]).first()
+                if not db_art:
+                    db_art = _Article(
+                        url=sup["url"],
+                        title=sup["title"],
+                        published_at=sup.get("published_at"),
+                        summary=sup.get("summary", ""),
+                        tier=sup.get("tier", 2),
+                        raw_score=max(sup.get("scores", {}).values(), default=0),
+                        source_name=sup.get("source", ""),
+                    )
+                    _session.add(db_art)
+                    _session.flush()
+                log = _SuppressionLog(
+                    article_id=db_art.id,
+                    reason=sup["_suppression_reason"],
+                    similarity_score=sup.get("_similarity_score", 0.0),
+                    matched_cluster_id=sup.get("_matched_cluster_id"),
+                )
+                _session.add(log)
+            _session.commit()
+            _session.close()
+            logger.info("Persisted %d suppressions to DB", len(suppressed_articles))
+        except Exception as exc:
+            logger.warning("Failed to persist suppressions: %s", exc)
+
+    print(f"      → {len(kept)} kept, {suppressed_count} suppressed, "
+          f"{followup_count} follow-ups, {new_count} new clusters")
+    return kept
 
 
 def step_classify(articles: list[dict], dry_run: bool, no_cache: bool) -> list[dict]:
     """Classify top-N articles with Haiku (or use placeholders in dry-run mode)."""
-    print(f"\n[4/7] Classifying top {MAX_ARTICLES_TO_CLASSIFY} articles...")
+    print(f"\n[5/9] Classifying top {MAX_ARTICLES_TO_CLASSIFY} articles...")
 
     to_classify = get_top_articles_global(articles, n=MAX_ARTICLES_TO_CLASSIFY)
 
@@ -160,6 +298,14 @@ def step_classify(articles: list[dict], dry_run: bool, no_cache: bool) -> list[d
     return articles
 
 
+def step_full_score(articles: list[dict]) -> list[dict]:
+    """Full audience-relevance scoring (after classification)."""
+    print("\n[6/9] Full audience scoring...")
+    articles = score_all_articles(articles)
+    print(f"      → Scored {len(articles)} articles across all audiences")
+    return articles
+
+
 def step_generate_summaries(
     articles: list[dict],
     audience_ids: list[str],
@@ -167,7 +313,7 @@ def step_generate_summaries(
     no_cache: bool,
 ) -> list[dict]:
     """Generate per-audience summaries for top articles."""
-    print(f"\n[5/7] Generating article summaries (audiences: {', '.join(audience_ids)})...")
+    print(f"\n[7/9] Generating article summaries (audiences: {', '.join(audience_ids)})...")
 
     if not dry_run:
         from briefing.llm import generate_summary, CACHE_DIR
@@ -212,7 +358,7 @@ def step_executive_summaries(
     dry_run: bool,
 ) -> dict[str, dict]:
     """Generate executive summary per audience."""
-    print(f"\n[6/7] Generating executive summaries...")
+    print(f"\n[8/9] Generating executive summaries...")
     exec_summaries: dict[str, dict] = {}
 
     for aud_id in audience_ids:
@@ -242,7 +388,7 @@ def step_render(
     generation_time: datetime,
 ) -> dict[str, Path]:
     """Render HTML files."""
-    print(f"\n[7/7] Rendering HTML briefings...")
+    print(f"\n[9/9] Rendering HTML briefings...")
 
     all_audience_data: dict[str, dict] = {}
     for aud_id in audience_ids:
@@ -300,7 +446,7 @@ def main() -> None:
     print(f"  Output    : {output_dir}")
     print("=" * 60)
 
-    # ── 1. Ingest ──────────────────────────────────────────────────────────
+    # ── 1. Fetch ──────────────────────────────────────────────────────────
     articles = step_ingest()
 
     if not articles:
@@ -308,27 +454,40 @@ def main() -> None:
         print("         Using synthetic demo articles for dry-run mode...")
         articles = _synthetic_articles(generation_time)
 
-    # ── 2. Score ───────────────────────────────────────────────────────────
-    articles = step_score(articles)
+    # ── 2. Pre-score ──────────────────────────────────────────────────────
+    articles = step_prescore(articles)
 
-    # ── 3. Normalize ───────────────────────────────────────────────────────
-    articles = step_normalize(articles)
+    # ── 3. In-run dedup ──────────────────────────────────────────────────
+    articles = step_inrun_dedup(articles)
 
     if not articles:
-        print("ERROR: No articles after normalization. Exiting.")
+        print("ERROR: No articles after in-run dedup. Exiting.")
         sys.exit(1)
 
-    # ── 4. Classify ────────────────────────────────────────────────────────
+    # ── 4. Cross-day dedup (runs even in dry-run — no LLM needed) ────────
+    articles = step_cross_day_dedup(articles)
+
+    if not articles:
+        print("ERROR: No articles after cross-day dedup. Exiting.")
+        sys.exit(1)
+
+    # ── 5. Classify ────────────────────────────────────────────────────────
     articles = step_classify(articles, dry_run=dry_run, no_cache=no_cache)
 
-    # ── 5. Generate summaries ──────────────────────────────────────────────
+    # ── 6. Full audience score ────────────────────────────────────────────
+    articles = step_full_score(articles)
+
+    # ── 7. Generate summaries ──────────────────────────────────────────────
     articles = step_generate_summaries(articles, audience_ids, dry_run=dry_run, no_cache=no_cache)
 
-    # ── 6. Executive summaries ─────────────────────────────────────────────
+    # ── 8. Executive summaries ─────────────────────────────────────────────
     exec_summaries = step_executive_summaries(articles, audience_ids, dry_run=dry_run)
 
-    # ── 7. Render ──────────────────────────────────────────────────────────
+    # ── 9. Render ──────────────────────────────────────────────────────────
     paths = step_render(articles, audience_ids, exec_summaries, output_dir, generation_time)
+
+    # ── Persist to DB ─────────────────────────────────────────────────────
+    _persist_to_db(articles, audience_ids, exec_summaries, date_str)
 
     # ── Done ───────────────────────────────────────────────────────────────
     print("\n" + "=" * 60)
@@ -336,6 +495,81 @@ def main() -> None:
     print(f"  Open: http://localhost:8000/{date_str}/index.html")
     print("  Run:  python3 serve.py")
     print("=" * 60)
+
+
+# ---------------------------------------------------------------------------
+# DB persistence — save articles, scores, and briefings to SQLite
+# ---------------------------------------------------------------------------
+
+def _persist_to_db(
+    articles: list[dict],
+    audience_ids: list[str],
+    exec_summaries: dict[str, dict],
+    date_str: str,
+) -> None:
+    """Save pipeline results to the database for admin dashboard monitoring."""
+    try:
+        engine = init_db()
+        session = get_session(engine)
+
+        # Save/update articles
+        article_count = 0
+        for article in articles:
+            existing = session.query(DBArticle).filter_by(url=article["url"]).first()
+            if existing:
+                existing.raw_score = max(article.get("scores", {}).values(), default=0)
+                existing.embedding_json = article.get("_embedding_json")
+                existing.source_name = article.get("source", "")
+            else:
+                db_art = DBArticle(
+                    url=article["url"],
+                    title=article["title"],
+                    published_at=article.get("published_at"),
+                    summary=article.get("summary", ""),
+                    tier=article.get("tier", 2),
+                    raw_score=max(article.get("scores", {}).values(), default=0),
+                    embedding_json=article.get("_embedding_json"),
+                    source_name=article.get("source", ""),
+                )
+                session.add(db_art)
+                article_count += 1
+
+        # Save audience briefings
+        briefing_count = 0
+        for aud_id in audience_ids:
+            existing = session.query(AudienceBriefing).filter_by(
+                audience_id=aud_id, briefing_date=date_str
+            ).first()
+            if existing:
+                existing.exec_summary_json = exec_summaries.get(aud_id, {})
+                existing.article_ids_json = [
+                    a["url"] for a in sorted(
+                        articles,
+                        key=lambda a: a.get("scores", {}).get(aud_id, 0),
+                        reverse=True,
+                    )[:TOP_ARTICLES_PER_AUDIENCE]
+                ]
+            else:
+                briefing = AudienceBriefing(
+                    audience_id=aud_id,
+                    briefing_date=date_str,
+                    article_ids_json=[
+                        a["url"] for a in sorted(
+                            articles,
+                            key=lambda a: a.get("scores", {}).get(aud_id, 0),
+                            reverse=True,
+                        )[:TOP_ARTICLES_PER_AUDIENCE]
+                    ],
+                    exec_summary_json=exec_summaries.get(aud_id, {}),
+                )
+                session.add(briefing)
+                briefing_count += 1
+
+        session.commit()
+        session.close()
+        logger.info("Persisted %d new articles and %d briefings to DB", article_count, briefing_count)
+    except Exception as exc:
+        logger.warning("Failed to persist to DB: %s", exc)
 
 
 # ---------------------------------------------------------------------------

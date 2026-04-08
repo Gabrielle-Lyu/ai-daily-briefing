@@ -1,0 +1,5 @@
+{
+  "headline": "OpenAI Formalizes Child Safety Standards as AI-Generated CSAM Becomes Regulatory Flashpoint",
+  "summary": "OpenAI has published a Child Safety Blueprint establishing policy commitments and technical controls to combat AI-facilitated child sexual exploitation material (CSAM). The move comes as regulators in the US, EU, and UK are accelerating legislative pressure on AI platforms to implement proactive detection and reporting obligations. For cloud and AI platform providers, this signals that child safety compliance will soon be a baseline expectation, not a differentiator.",
+  "oci_implication": "OCI's generative AI and GPU cloud services need documented, enforceable child safety policies and technical safeguards before regulators mandate them\u2014lagging here creates both legal exposure and enterprise sales risk, particularly with public sector and education customers."
+}

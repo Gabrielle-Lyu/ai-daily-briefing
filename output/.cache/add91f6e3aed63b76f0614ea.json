@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "mobile apps",
+    "iOS features",
+    "entertainment tech",
+    "live activities"
+  ],
+  "entities": [
+    "Apple",
+    "iPhone",
+    "Live Activities"
+  ],
+  "section": "compete",
+  "confidence": "low"
+}

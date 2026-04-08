@@ -1,0 +1,5 @@
+{
+  "headline": "Airline Cost Pressure Opens Door for Cloud-Driven Operational Efficiency Plays",
+  "summary": "Delta is curtailing expansion as fuel costs surge, forcing a pivot toward margin preservation over growth. Airlines under cost pressure historically accelerate digital transformation and vendor consolidation to squeeze efficiency from existing operations. This creates near-term demand for cloud-based fuel optimization, dynamic pricing, and predictive maintenance workloads.",
+  "oci_implication": "OCI should engage Delta and peer carriers through travel-sector ISVs and GSI partners (Accenture, Infosys) with cost-reduction narratives anchored in OCI's price-performance advantage \u2014 positioning HPC and analytics workloads as direct levers against fuel and operational spend. Airline fleet and route optimization are computationally intensive use cases where OCI's bare-metal and GPU offerings can differentiate against AWS and Azure on total cost."
+}

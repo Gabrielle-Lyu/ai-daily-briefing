@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "geopolitical tensions",
+    "supply chain security",
+    "Strait of Hormuz"
+  ],
+  "entities": [
+    "Trump",
+    "Iran"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

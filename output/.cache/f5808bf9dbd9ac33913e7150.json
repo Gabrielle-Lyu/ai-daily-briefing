@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "electric vehicles",
+    "US-China competition",
+    "automotive technology",
+    "trade policy"
+  ],
+  "entities": [
+    "China",
+    "United States",
+    "EV manufacturers"
+  ],
+  "section": "compete",
+  "confidence": "medium"
+}

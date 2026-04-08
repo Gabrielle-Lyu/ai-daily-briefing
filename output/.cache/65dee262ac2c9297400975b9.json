@@ -1,0 +1,5 @@
+{
+  "headline": "Nvidia's TSMC Packaging Lock-In Creates AI Supply Chain Chokepoint Beyond Chips",
+  "summary": "Nvidia has cornered the majority of TSMC's advanced packaging capacity, making the back-end assembly process\u2014not just raw silicon\u2014the next structural bottleneck in AI infrastructure buildout. This packaging constraint is largely invisible to hyperscaler procurement teams focused on chip allocations, yet it will throttle GPU availability regardless of fab output. The strategic implication: AI infrastructure timelines will slip for cloud providers unable to secure priority positioning in Nvidia's supply chain, accelerating interest in alternative accelerator ecosystems.",
+  "oci_implication": "OCI's differentiated bet on clustering density and bare-metal GPU access becomes more defensible as supply scarcity intensifies\u2014partners and ISVs locked out of competing clouds due to constrained H100/B200 availability represent a near-term expansion opportunity. This is also a catalyst to accelerate OCI's AMD and custom silicon (OCI Supercluster) narrative with GSIs and strategic ISVs who need supply chain optionality."
+}

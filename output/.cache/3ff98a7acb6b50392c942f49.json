@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "foldable devices",
+    "product delays",
+    "hardware engineering",
+    "stock impact"
+  ],
+  "entities": [
+    "Apple",
+    "iPhone",
+    "foldable phone"
+  ],
+  "section": "financial",
+  "confidence": "medium"
+}

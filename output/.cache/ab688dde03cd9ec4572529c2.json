@@ -1,0 +1,5 @@
+{
+  "headline": "Russian State Hackers Weaponize Home Routers to Harvest Enterprise Credentials",
+  "summary": "APT28 (Fancy Bear) compromised thousands of residential routers to intercept passwords and authentication tokens, targeting remote workers accessing corporate systems from home networks. This represents a shift in nation-state tactics \u2014 bypassing hardened enterprise perimeters by attacking the weakest link in the hybrid-work chain. The strategic implication: perimeter security is irrelevant when the endpoint connecting to your cloud is already owned.",
+  "oci_implication": "OCI should assess whether this vector is being exploited against customers using OCI remote access or VPN-adjacent services, and consider it a product signal to accelerate zero-trust and continuous authentication capabilities as a differentiator against AWS and Azure \u2014 both of whom face the same exposure."
+}

@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "energy storage",
+    "data center power",
+    "battery systems",
+    "government funding"
+  ],
+  "entities": [
+    "Electrovaya",
+    "US DOE",
+    "Binghamton University"
+  ],
+  "section": "datacenter",
+  "confidence": "high"
+}

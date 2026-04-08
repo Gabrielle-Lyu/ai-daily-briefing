@@ -1,0 +1,5 @@
+{
+  "headline": "Nvidia-Backed Firmus Hits $5.5B Valuation, Reshaping Asia AI Infrastructure Race",
+  "summary": "Firmus has raised $1.35B in six months to build out AI data centers across Asia, reaching a $5.5B valuation with Nvidia's backing as a strategic anchor. The 'Southgate' model\u2014purpose-built AI-optimized facilities co-developed with a hyperscaler chip supplier\u2014signals a new class of infrastructure player emerging outside the traditional cloud giants. This accelerates the bifurcation of AI compute into sovereign/regional players versus global hyperscalers, compressing OCI's window to lock in regional enterprise and ISV relationships.",
+  "oci_implication": "Firmus's Nvidia alignment creates a potential channel conflict risk for OCI in Asia-Pacific\u2014ISVs and GSIs evaluating GPU-dense deployments may increasingly route through Firmus rather than OCI regions. OCI should evaluate co-location or partnership angles with Firmus to ensure OCI services (databases, networking, sovereign cloud) ride on top of their infrastructure rather than compete against it."
+}

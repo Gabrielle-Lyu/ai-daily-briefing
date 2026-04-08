@@ -1,0 +1,5 @@
+{
+  "headline": "Intel Joins Musk's Terafab Consortium, Reshaping AI Infrastructure Alliances",
+  "summary": "Intel is partnering with Tesla, SpaceX, and xAI on the Terafab AI infrastructure project, signaling a major consolidation of compute supply chains around Musk's ecosystem. Separately, Broadcom and Google deepened their agreement with Anthropic, reinforcing the TPU-as-a-service model as a credible alternative to Nvidia-centric stacks. These moves indicate hyperscalers and chip vendors are locking in preferred AI partners early, compressing the window for late movers.",
+  "oci_implication": "As Broadcom-Google-Anthropic tighten their supply chain, OCI's differentiated bet on Nvidia H100/H200 capacity and RDMA networking needs an equally visible anchor partnership\u2014consider accelerating public commitments with a frontier model lab to avoid being positioned as the unaffiliated option in a rapidly partitioning market."
+}

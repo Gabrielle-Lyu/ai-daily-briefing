@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "labor action",
+    "airline operations",
+    "strike"
+  ],
+  "entities": [
+    "Lufthansa"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

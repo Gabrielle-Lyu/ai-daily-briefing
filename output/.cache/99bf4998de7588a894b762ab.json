@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "portable audio",
+    "consumer electronics discount",
+    "Bose deals"
+  ],
+  "entities": [
+    "Bose",
+    "Soundlink Flex",
+    "Amazon",
+    "Walmart",
+    "Best Buy"
+  ],
+  "section": "deals",
+  "confidence": "low"
+}

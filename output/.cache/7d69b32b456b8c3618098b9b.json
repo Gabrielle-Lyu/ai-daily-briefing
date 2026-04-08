@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "data centre expansion",
+    "cloud infrastructure",
+    "EU expansion"
+  ],
+  "entities": [
+    "TikTok",
+    "Finland",
+    "ByteDance"
+  ],
+  "section": "datacenter",
+  "confidence": "high"
+}

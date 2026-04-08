@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "oil production",
+    "geopolitical risk",
+    "energy trading",
+    "capital flows"
+  ],
+  "entities": [
+    "Shell",
+    "Iran"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

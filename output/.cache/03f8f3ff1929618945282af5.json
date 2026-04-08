@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "OpenAI governance",
+    "nonprofit conversion",
+    "legal dispute",
+    "corporate structure"
+  ],
+  "entities": [
+    "Elon Musk",
+    "OpenAI",
+    "Sam Altman",
+    "Tesla"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

@@ -1,0 +1,5 @@
+{
+  "headline": "Nuclear Startup Clears Federal Hurdle, Opening New Power Infrastructure Race",
+  "summary": "Antares Nuclear Inc. has become the first company authorized under a DOE accelerator program to complete a small modular reactor demonstration system. This milestone signals that next-generation fission is moving from policy discussion to operational reality, with federal backing de-risking the commercialization timeline. For hyperscalers and cloud providers locked in a compute capacity arms race, credible near-term nuclear supply changes the calculus on long-term power procurement strategy.",
+  "oci_implication": "OCI's data center expansion roadmap \u2014 particularly in regions where grid reliability and power density are constraints \u2014 should flag SMR offtake agreements as a differentiated infrastructure play that could underpin sovereign and high-performance compute offerings ahead of competitors. Engaging energy ISVs and GSI partners who are building grid and energy management solutions on OCI positions the platform as the natural cloud backbone for the emerging nuclear-as-infrastructure ecosystem."
+}

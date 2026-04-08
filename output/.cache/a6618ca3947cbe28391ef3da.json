@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "cloud storage",
+    "file systems",
+    "AWS infrastructure"
+  ],
+  "entities": [
+    "Amazon",
+    "AWS",
+    "S3 Files"
+  ],
+  "section": "infrastructure",
+  "confidence": "high"
+}

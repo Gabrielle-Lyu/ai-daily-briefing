@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "geopolitical risk",
+    "investor strategy",
+    "energy markets",
+    "policy impact"
+  ],
+  "entities": [
+    "Trump",
+    "Iran",
+    "Reuters"
+  ],
+  "section": "financial",
+  "confidence": "medium"
+}

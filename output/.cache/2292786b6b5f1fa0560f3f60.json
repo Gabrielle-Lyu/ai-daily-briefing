@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "prediction markets",
+    "geopolitical risk",
+    "market regulation"
+  ],
+  "entities": [
+    "Polymarket",
+    "Iran",
+    "United States"
+  ],
+  "section": "financial",
+  "confidence": "medium"
+}

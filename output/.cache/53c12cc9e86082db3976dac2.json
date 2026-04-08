@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "geopolitical unrest",
+    "consulate security",
+    "middle east incident",
+    "protest"
+  ],
+  "entities": [
+    "Kuwait",
+    "Iraq",
+    "Basra",
+    "Reuters"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

@@ -1,0 +1,5 @@
+{
+  "headline": "Uber Deepens AWS Chip Bet, Signaling Hyperscaler Lock-In Risk for OCI",
+  "summary": "Uber is expanding its AWS contract to run ride-sharing workloads on Amazon's custom AI chips (Trainium/Inferentia), a direct rebuff to Oracle and Google's recent cloud overtures. The move reflects a broader pattern of large platform companies consolidating AI compute spend with vertically integrated chip-to-cloud vendors. For OCI, this underscores the urgency of differentiating on price-performance and winning ISV commitments before AWS cements multi-year AI infrastructure deals.",
+  "oci_implication": "OCI must accelerate its ISV and GSI partner strategy to embed early in AI workload decisions at Tier-1 platform companies like Uber \u2014 particularly through targeted NVIDIA GPU cluster pricing and co-sell motions with SIs before AWS lock-in hardens. This is also an opportunity to position OCI's neutrality (no competing chip agenda) as a strategic advantage in partner conversations."
+}

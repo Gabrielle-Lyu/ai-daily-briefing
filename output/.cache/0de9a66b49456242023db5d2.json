@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "geopolitical tariffs",
+    "Iran sanctions",
+    "trade policy",
+    "supply chain risk"
+  ],
+  "entities": [
+    "Trump",
+    "Iran"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

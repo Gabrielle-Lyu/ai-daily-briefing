@@ -1,0 +1,5 @@
+{
+  "headline": "DOE Backs Battery Storage Trial at Data Center, Signaling Grid Independence Push",
+  "summary": "Electrovaya has secured $5M in US Department of Energy funding to pilot battery energy storage systems (BESS) in a live data center environment at Binghamton University. The trial tests whether BESS can serve as viable on-site power backup and grid-balancing infrastructure, addressing the acute energy constraint bottleneck limiting hyperscaler expansion. If validated, this accelerates a shift away from diesel generator dependency and opens a regulatory pathway for utilities to credit data centers as grid assets.",
+  "oci_implication": "OCI's aggressive capacity expansion in the US\u2014particularly in regions facing grid congestion\u2014stands to benefit directly if BESS achieves DOE certification as a primary resilience layer, reducing permitting friction for new builds. Sovereign cloud deployments in energy-constrained markets (EU, Middle East) would gain a credible off-grid resilience architecture, strengthening OCI's differentiation on infrastructure independence and uptime guarantees."
+}

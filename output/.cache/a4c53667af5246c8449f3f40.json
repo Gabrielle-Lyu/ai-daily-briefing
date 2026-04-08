@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "executive departures",
+    "developer tools",
+    "GitHub operations"
+  ],
+  "entities": [
+    "Microsoft",
+    "GitHub",
+    "Julia Liuson",
+    "Thomas Dohmke"
+  ],
+  "section": "compete",
+  "confidence": "medium"
+}

@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "datacenter attack",
+    "infrastructure security",
+    "geopolitical risk",
+    "cloud resilience"
+  ],
+  "entities": [
+    "Oracle",
+    "Iran",
+    "Dubai",
+    "Dubai Media Office"
+  ],
+  "section": "datacenter",
+  "confidence": "high"
+}

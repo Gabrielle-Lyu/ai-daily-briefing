@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "geopolitical risk relief",
+    "tech stock rally",
+    "market sentiment"
+  ],
+  "entities": [
+    "Alphabet",
+    "Meta",
+    "Amazon",
+    "Nvidia"
+  ],
+  "section": "financial",
+  "confidence": "high"
+}

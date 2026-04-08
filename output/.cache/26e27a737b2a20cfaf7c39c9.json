@@ -1,0 +1,5 @@
+{
+  "headline": "Uber Deepens AWS Bet on Custom Chips, Snubbing OCI and Google",
+  "summary": "Uber is expanding its AWS contract to run ride-sharing workloads on Amazon's Trainium/Inferentia chips, signaling that custom silicon is now a enterprise cloud differentiator, not just a cost play. AWS is converting infrastructure stickiness into AI chip adoption by leveraging existing large-scale contracts. The strategic implication: cloud incumbency is becoming a forcing function for AI silicon decisions.",
+  "oci_implication": "OCI's GPU/AI compute story needs a sharper wedge against AWS's integrated chip-plus-contract playbook \u2014 particularly for large platform companies that consolidate spend. Winning Uber-scale logos requires either a custom silicon roadmap or a price-performance narrative that overcomes switching inertia at the contract renewal stage."
+}

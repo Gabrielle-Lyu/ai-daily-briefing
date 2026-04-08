@@ -1,0 +1,5 @@
+{
+  "headline": "Microsoft Bets on Multi-Model AI to Dominate Enterprise Research Workflows",
+  "summary": "Microsoft is strengthening its Copilot Research Agent by orchestrating outputs from both Anthropic and OpenAI models, using cross-model comparison to improve quality and refine results. This signals a pragmatic, best-of-breed approach to enterprise AI rather than single-vendor lock-in. The strategic implication: Microsoft is racing to own the enterprise research workflow layer, making the underlying model provider a commodity input.",
+  "oci_implication": "OCI's AI Infrastructure play gains relevance as multi-model orchestration becomes standard \u2014 enterprises will need neutral, high-throughput compute to run diverse model fleets. Oracle should position OCI as the preferred multi-cloud AI backbone for enterprises that don't want Microsoft controlling both the application and infrastructure layers."
+}

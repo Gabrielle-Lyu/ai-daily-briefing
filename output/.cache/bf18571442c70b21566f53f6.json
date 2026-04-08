@@ -1,0 +1,5 @@
+{
+  "headline": "FBI, NSA, CISA Warn of Escalated Iranian Attacks on U.S. Critical Infrastructure",
+  "summary": "A tri-agency advisory confirms Iranian state-sponsored hackers have intensified campaigns against U.S. critical infrastructure amid the ongoing U.S.-Israel-Iran conflict. The escalation targets sectors including energy, water, and transportation\u2014industries with deep cloud dependencies and growing OCI footprints. For hyperscaler and sovereign cloud providers, this raises the stakes on compliance posture, incident response SLAs, and government-grade security differentiation.",
+  "oci_implication": "OCI's isolated cloud regions, dedicated government cloud infrastructure, and FedRAMP/IL5 positioning become active deal accelerators as critical infrastructure operators reassess their cloud security posture\u2014this is a direct opening for OCI to displace incumbents on security-first procurement cycles, particularly with ISV partners serving energy and utilities verticals."
+}

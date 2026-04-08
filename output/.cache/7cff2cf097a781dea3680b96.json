@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "data center construction",
+    "infrastructure expansion",
+    "facility development",
+    "regulatory approval"
+  ],
+  "entities": [
+    "Iron County",
+    "Utah"
+  ],
+  "section": "datacenter",
+  "confidence": "high"
+}

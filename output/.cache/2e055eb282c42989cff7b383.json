@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "phone surveillance",
+    "government procurement",
+    "regulatory policy",
+    "vendor scrutiny"
+  ],
+  "entities": [
+    "ICE",
+    "Paragon",
+    "US lawmakers"
+  ],
+  "section": "security",
+  "confidence": "medium"
+}

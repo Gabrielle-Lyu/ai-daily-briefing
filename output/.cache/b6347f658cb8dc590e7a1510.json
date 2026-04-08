@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "M&A",
+    "datacenter infrastructure",
+    "chip design",
+    "rack-scale computing"
+  ],
+  "entities": [
+    "d-Matrix",
+    "GigaIO",
+    "SuperNODE",
+    "FabreX"
+  ],
+  "section": "deals",
+  "confidence": "high"
+}

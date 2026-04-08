@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "OpenAI leadership dispute",
+    "CEO ouster",
+    "corporate governance"
+  ],
+  "entities": [
+    "Elon Musk",
+    "Sam Altman",
+    "Greg Brockman",
+    "OpenAI"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

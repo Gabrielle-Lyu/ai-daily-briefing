@@ -1,0 +1,5 @@
+{
+  "headline": "YouTube Doubles Down on TV-First Interactive Video, Reshaping Streaming Infrastructure Demands",
+  "summary": "YouTube is aggressively expanding its connected TV presence through hiring, partnerships, and a new Bengaluru engineering hub focused on interactive video formats. This signals a platform shift from passive streaming to compute-intensive, real-time interactive experiences at massive scale. The implication: cloud infrastructure underpinning next-gen video will face latency, rendering, and personalization workloads that dwarf current streaming demands.",
+  "oci_implication": "As interactive video scales, the compute and low-latency networking requirements create an opening for OCI to position GPU clusters and distributed inference infrastructure as the backbone for media companies building competing or complementary platforms to YouTube \u2014 particularly those needing sovereign or cost-competitive alternatives to GCP, which already holds YouTube's workloads."
+}

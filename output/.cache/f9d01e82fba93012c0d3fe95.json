@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "Trade policy",
+    "Aluminum tariffs",
+    "Supply chain",
+    "Automotive manufacturing"
+  ],
+  "entities": [
+    "Automakers",
+    "White House"
+  ],
+  "section": "compete",
+  "confidence": "low"
+}

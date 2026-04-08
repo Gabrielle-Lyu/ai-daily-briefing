@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "android spyware",
+    "credential theft",
+    "phishing",
+    "hack-for-hire"
+  ],
+  "entities": [
+    "Android",
+    "iCloud",
+    "Apple"
+  ],
+  "section": "security",
+  "confidence": "high"
+}

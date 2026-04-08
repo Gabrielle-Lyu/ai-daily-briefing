@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "browser features",
+    "user experience",
+    "tab management"
+  ],
+  "entities": [
+    "Google",
+    "Chrome"
+  ],
+  "section": "compete",
+  "confidence": "low"
+}

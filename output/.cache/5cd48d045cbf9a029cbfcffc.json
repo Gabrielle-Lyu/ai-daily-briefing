@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "APT espionage",
+    "router compromise",
+    "credential theft"
+  ],
+  "entities": [
+    "Fancy Bear",
+    "APT28",
+    "Russian government"
+  ],
+  "section": "security",
+  "confidence": "medium"
+}

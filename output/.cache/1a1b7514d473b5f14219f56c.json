@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "wireless charging",
+    "Qi2.2 standard",
+    "mobile accessories"
+  ],
+  "entities": [
+    "Satechi",
+    "Belkin",
+    "Nomad",
+    "Kuxiu"
+  ],
+  "section": "power",
+  "confidence": "low"
+}

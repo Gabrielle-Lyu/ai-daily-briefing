@@ -1,0 +1,5 @@
+{
+  "headline": "Tubi's ChatGPT Integration Signals AI Platforms as the New App Distribution Layer",
+  "summary": "Tubi has become the first streaming service to launch a native app inside ChatGPT, marking OpenAI's pivot from chatbot to ambient platform with embedded ISV ecosystems. This mirrors the App Store moment for conversational AI\u2014where distribution, discovery, and engagement collapse into a single AI-native surface. For platform product leaders, the strategic question is no longer which cloud runs your workload, but which AI runtime hosts your user experience.",
+  "oci_implication": "OCI should assess how its ISV and media/entertainment partners\u2014many running streaming and content workloads on OCI infrastructure\u2014are evaluating ChatGPT and competing AI runtimes (Gemini, Alexa+) as new distribution channels, and whether OCI can position its GenAI platform as the backend of record for these integrations. This is a GSI and ISV co-sell angle: partners building ChatGPT-native apps still need sovereign, scalable cloud infrastructure, and OCI's price-performance story is directly relevant."
+}

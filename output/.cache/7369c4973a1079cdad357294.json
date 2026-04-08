@@ -1,0 +1,5 @@
+{
+  "headline": "Global Wave of Child Social Media Bans Signals Expanding Platform Regulation Era",
+  "summary": "Australia's late-2025 child social media ban is inspiring a growing cohort of nations to enact similar age-based restrictions, creating a fragmented global compliance landscape for platform operators. Governments are responding to documented harms\u2014cyberbullying, addiction mechanics, and predatory exposure\u2014with blunt legislative tools rather than waiting for voluntary industry action. The trend signals that sovereign regulatory intervention in platform design and data access is accelerating, not plateauing.",
+  "oci_implication": "As cloud infrastructure underpinning these platforms, OCI should anticipate downstream demand from customers needing compliant age-verification, data residency, and audit-logging capabilities across multiple jurisdictions simultaneously. This regulatory fragmentation may also accelerate enterprise and public-sector customers' preference for OCI's sovereign cloud regions over hyperscaler alternatives with perceived US-platform entanglement."
+}

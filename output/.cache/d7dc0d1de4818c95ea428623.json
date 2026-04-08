@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "cryptocurrency holdings",
+    "unrealized losses",
+    "Q1 financial results",
+    "Bitcoin"
+  ],
+  "entities": [
+    "MicroStrategy",
+    "Michael Saylor",
+    "Bitcoin"
+  ],
+  "section": "financial",
+  "confidence": "high"
+}

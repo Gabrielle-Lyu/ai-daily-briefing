@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "facility fire",
+    "emergency response",
+    "venue operations"
+  ],
+  "entities": [
+    "Rio Olympic Park",
+    "Reuters"
+  ],
+  "section": "infrastructure",
+  "confidence": "low"
+}

@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "AI security",
+    "Claude capabilities",
+    "cybersecurity assessment",
+    "AI model evaluation"
+  ],
+  "entities": [
+    "Claude",
+    "Anthropic",
+    "Claude Mythos Preview"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

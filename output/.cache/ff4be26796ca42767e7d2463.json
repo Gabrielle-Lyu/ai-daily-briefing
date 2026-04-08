@@ -1,0 +1,5 @@
+{
+  "headline": "Anthropic's $30B Run-Rate Fuels Massive Google-Broadcom Compute Expansion",
+  "summary": "Anthropic has expanded its compute commitments with Google and Broadcom as its annualized revenue hits $30 billion, signaling that frontier AI demand is outpacing infrastructure supply at every tier. This deal deepens Anthropic's lock-in to Google's TPU stack and Broadcom's custom silicon, reinforcing a vertically integrated AI supply chain outside of x86/GPU norms. The strategic implication: hyperscalers who control both the model relationship and the silicon layer will compound their moat faster than those offering compute alone.",
+  "oci_implication": "OCI must accelerate differentiated AI infrastructure partnerships\u2014particularly with model providers not yet anchored to a hyperscaler\u2014before the Anthropic/Google pattern becomes the industry default. If compute commitments increasingly bundle model access with cloud spend, OCI's GPU capacity story alone will not be sufficient to win enterprise AI workloads."
+}

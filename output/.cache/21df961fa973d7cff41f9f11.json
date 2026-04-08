@@ -1,0 +1,5 @@
+{
+  "headline": "Meta's Purpose-Built Social AI Model Tests ROI Case for Hyperscaler Spend",
+  "summary": "Meta has released Muse Spark, its first AI model since Zuckerberg committed to massive AI infrastructure investment, positioning it specifically for social media application workloads. The narrow, vertical focus signals a broader industry shift toward domain-specific models over general-purpose LLMs, as investor scrutiny on AI capex returns intensifies. For platform players, this validates the ISV opportunity in purpose-built AI infrastructure optimized for defined workload classes.",
+  "oci_implication": "OCI has a direct opening to court Meta's ISV and developer ecosystem building on top of Muse Spark, positioning OCI's GPU clusters and sovereign cloud footprint as the preferred inference and fine-tuning substrate outside Meta's own walls. The investor pressure on hyperscaler AI ROI also strengthens OCI's cost-performance narrative in multi-cloud deal cycles where alternatives to AWS and Azure are being actively evaluated."
+}

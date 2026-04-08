@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "M&A",
+    "cancer pipeline",
+    "biotech acquisition"
+  ],
+  "entities": [
+    "Gilead Sciences",
+    "Tubulis"
+  ],
+  "section": "deals",
+  "confidence": "medium"
+}

@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "geopolitical risk",
+    "energy infrastructure attack",
+    "supply chain disruption"
+  ],
+  "entities": [
+    "Iran",
+    "Saudi Arabia",
+    "Reuters"
+  ],
+  "section": "infrastructure",
+  "confidence": "low"
+}

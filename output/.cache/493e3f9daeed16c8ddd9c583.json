@@ -1,0 +1,5 @@
+{
+  "headline": "AWS Middle East Data Centers Hit by Iran War, Availability at Risk",
+  "summary": "Drone strikes linked to the Iran conflict have disrupted AWS infrastructure in the Middle East, with CEO Matt Garman acknowledging teams are working around the clock to restore availability. This marks a rare, high-visibility public admission of regional cloud fragility from Amazon's cloud chief. For enterprise customers already evaluating multi-cloud resilience, this event will accelerate conversations about geographic redundancy and vendor concentration risk.",
+  "oci_implication": "OCI has a direct opening to position its Middle East region\u2014including the UAE and Saudi Arabia sovereign cloud footprints\u2014as a stable alternative for customers exposed to AWS availability risk in the region. Karan's product org should fast-track any region-specific reliability messaging and ensure field teams are equipped to engage accounts with AWS Middle East dependencies."
+}

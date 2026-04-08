@@ -1,0 +1,5 @@
+{
+  "headline": "Shrapnel Strike on Oracle Dubai DC Validates Sovereign Cloud Resilience Imperative",
+  "summary": "A suspected Iranian attack caused limited physical damage to an Oracle data center in Dubai via shrapnel impact, initially denied then confirmed by the Dubai Media Office. The incident underscores the real-world kinetic threat surface for hyperscale infrastructure in geopolitically active regions. For sovereign and regulated-cloud customers, this event will sharpen scrutiny of physical resilience, geographic redundancy, and crisis communication protocols.",
+  "oci_implication": "OCI's sovereign cloud and multi-region strategy in the Middle East\u2014including UAE sovereign zones\u2014will face immediate customer and regulatory pressure to demonstrate blast-radius containment, failover SLA adherence, and hardened physical security posture. Mahesh's security organization should expect inbound inquiries on OCI's physical threat modeling and incident disclosure standards for sovereign deployments."
+}

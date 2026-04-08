@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "cybersecurity",
+    "critical infrastructure",
+    "nation-state threats"
+  ],
+  "entities": [
+    "FBI",
+    "NSA",
+    "CISA",
+    "Iran"
+  ],
+  "section": "security",
+  "confidence": "high"
+}

@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "generative AI",
+    "education technology",
+    "document processing",
+    "AI-powered learning tools"
+  ],
+  "entities": [
+    "Adobe",
+    "Acrobat",
+    "Student Spaces"
+  ],
+  "section": "ai",
+  "confidence": "medium"
+}

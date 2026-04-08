@@ -1,0 +1,5 @@
+{
+  "headline": "Anthropic's Cyber AI Model Lands at AWS, Azure, Apple\u2014OCI Notably Absent",
+  "summary": "Anthropic has released Claude Mythos, a specialized AI model for detecting hidden software vulnerabilities, with initial access granted to Amazon, Microsoft, and Apple\u2014days after a significant source code leak. The timing signals Anthropic is doubling down on security-focused AI as a differentiator, while the selective partner rollout reinforces existing hyperscaler alignment. This creates a two-tier ecosystem where preferred cloud partners gain early access to critical AI security capabilities, widening the gap with competitors not in that inner circle.",
+  "oci_implication": "OCI's absence from Mythos' launch partner list is a strategic signal worth escalating\u2014security AI is becoming table stakes for enterprise cloud deals, and GSI partners evaluating multi-cloud security posture will notice. This is a concrete opportunity to accelerate OCI's Anthropic partnership conversations or engage alternative cybersecurity AI ISVs to fill the gap before enterprise procurement cycles lock in."
+}

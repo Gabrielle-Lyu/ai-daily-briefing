@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "automotive recall",
+    "product safety",
+    "manufacturing quality"
+  ],
+  "entities": [
+    "Ford"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

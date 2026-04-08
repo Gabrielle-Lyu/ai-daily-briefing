@@ -1,0 +1,5 @@
+{
+  "headline": "Eclipse Raises $1.3B to Incubate Physical AI Startups at Infrastructure Layer",
+  "summary": "VC firm Eclipse has closed a $1.3B fund specifically targeting 'physical AI' \u2014 robotics, autonomous systems, and industrial intelligence \u2014 with a twist: they will incubate and co-build startups, not just back them. This signals institutional conviction that physical AI is ready for scaled investment, and that the bottleneck is now company formation speed, not capital. The implication is an accelerating pipeline of compute-hungry physical AI workloads requiring specialized training and inference infrastructure.",
+  "oci_implication": "Physical AI workloads \u2014 simulation, sensor fusion, real-time inference at the edge \u2014 are among the most demanding in the stack and represent a greenfield opportunity for OCI's GPU clusters and distributed cloud footprint. Engaging Eclipse-backed portfolio companies early, before they standardize on AWS or Azure, could position OCI as the default infrastructure partner for this emerging cohort."
+}

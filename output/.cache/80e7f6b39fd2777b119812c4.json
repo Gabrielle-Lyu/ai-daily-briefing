@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "AI models",
+    "cybersecurity"
+  ],
+  "entities": [
+    "Anthropic",
+    "Mythos"
+  ],
+  "section": "security",
+  "confidence": "high"
+}

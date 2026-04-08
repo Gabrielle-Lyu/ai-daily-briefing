@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "market volatility",
+    "geopolitical risk",
+    "Iran sanctions"
+  ],
+  "entities": [
+    "Trump",
+    "Iran",
+    "Wall Street"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

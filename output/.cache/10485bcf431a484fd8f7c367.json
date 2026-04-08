@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "military bases",
+    "U.S.-Portugal relations",
+    "Azores facility"
+  ],
+  "entities": [
+    "Portugal",
+    "United States",
+    "Azores"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

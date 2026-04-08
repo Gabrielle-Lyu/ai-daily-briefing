@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "cybersecurity",
+    "vulnerability detection",
+    "tech partnerships"
+  ],
+  "entities": [
+    "Anthropic",
+    "Project Glasswing",
+    "Nvidia",
+    "Google",
+    "Microsoft"
+  ],
+  "section": "security",
+  "confidence": "high"
+}

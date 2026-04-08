@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "AI operations",
+    "sports technology",
+    "event management",
+    "AI applications"
+  ],
+  "entities": [
+    "Ryder Cup",
+    "DC Dynamics"
+  ],
+  "section": "ai",
+  "confidence": "medium"
+}

@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "AI validation",
+    "cybersecurity stocks",
+    "enterprise tech",
+    "market sentiment"
+  ],
+  "entities": [
+    "Anthropic"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "semiconductor manufacturing",
+    "strategic partnerships",
+    "AI infrastructure",
+    "custom chips"
+  ],
+  "entities": [
+    "Intel",
+    "Tesla",
+    "SpaceX",
+    "xAI",
+    "Terafab"
+  ],
+  "section": "partnerships",
+  "confidence": "high"
+}

@@ -1,0 +1,5 @@
+{
+  "headline": "Uber Deepens AWS Commitment on Custom Silicon, Snubbing OCI and GCP",
+  "summary": "Uber is expanding its AWS contract to migrate ride-sharing workloads onto Amazon's Trainium and Inferentia chips, signaling confidence in vertically integrated cloud-silicon stacks. The move reflects a broader industry pattern where hyperscalers with proprietary AI silicon are winning large-scale ML inference deals away from competitors. For OCI, this underscores the urgency of articulating a differentiated silicon story\u2014whether through NVIDIA density advantages, Arm Ampere efficiency, or sovereign/security positioning\u2014to retain and win AI-native enterprises.",
+  "oci_implication": "OCI's competitive gap widens if custom silicon becomes the primary enterprise AI procurement lever; Mahesh's platform team should prioritize developer tooling and security compliance narratives that Amazon's proprietary chip ecosystem cannot easily replicate, particularly for regulated verticals and sovereign-cloud deployments where AWS lock-in carries policy risk."
+}

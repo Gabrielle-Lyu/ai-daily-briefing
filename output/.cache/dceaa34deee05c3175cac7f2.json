@@ -1,0 +1,5 @@
+{
+  "headline": "Arcee's Lean Open-Source LLM Signals ISV Opportunity for OCI's AI Platform",
+  "summary": "Arcee, a 26-person startup, has built a high-performing open-source LLM gaining rapid traction\u2014demonstrating that lean ISVs can now compete with hyperscaler-backed foundation models. This shift accelerates enterprise demand for flexible, cost-efficient AI infrastructure uncoupled from proprietary model lock-in. The strategic implication: ISVs like Arcee are becoming kingmakers in enterprise AI adoption, and the cloud platform they run on becomes the de facto standard.",
+  "oci_implication": "OCI should actively court Arcee and similar open-source model ISVs as anchor tenants\u2014offering compute credits, co-sell motions, and Marketplace listing\u2014to position OCI as the neutral, high-performance alternative to AWS and Azure for model builders wary of hyperscaler conflict of interest. A growing open-source model ecosystem on OCI directly differentiates the platform in enterprise multi-cloud deals where customers want model portability."
+}

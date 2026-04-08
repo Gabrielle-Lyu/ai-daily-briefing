@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "Bitcoin",
+    "cryptocurrency",
+    "cryptography"
+  ],
+  "entities": [
+    "Bitcoin"
+  ],
+  "section": "financial",
+  "confidence": "medium"
+}

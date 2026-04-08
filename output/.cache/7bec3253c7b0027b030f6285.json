@@ -1,0 +1,5 @@
+{
+  "headline": "Nvidia Locks Up TSMC Packaging Capacity, Threatening Next AI Chip Cycle",
+  "summary": "Nvidia has secured the bulk of TSMC's advanced chip packaging capacity, making this lesser-known manufacturing step the next critical bottleneck in AI hardware supply chains. Even chips fabbed in the U.S. must route through Taiwan for final packaging, meaning domestic manufacturing investments don't fully de-risk supply. Any disruption to this chokepoint could delay next-generation GPU availability across the entire industry.",
+  "oci_implication": "OCI's GPU capacity roadmap\u2014and its ability to compete with AWS and Azure on H100/B200 availability\u2014is exposed to the same packaging constraints as everyone else; securing long-term supply agreements or diversifying toward AMD and custom silicon (e.g., OCI's own accelerator strategy) becomes a higher-priority hedge. This is also a customer conversation opportunity: enterprises evaluating cloud AI infrastructure need to hear OCI's supply continuity story now, before the bottleneck tightens."
+}

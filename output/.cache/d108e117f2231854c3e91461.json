@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "podcast discovery",
+    "music streaming",
+    "AI recommendations"
+  ],
+  "entities": [
+    "Spotify"
+  ],
+  "section": "ai",
+  "confidence": "low"
+}

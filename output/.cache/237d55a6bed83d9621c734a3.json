@@ -1,0 +1,5 @@
+{
+  "headline": "Iran Conflict Forces AWS Into Emergency Mode Across Middle East Data Centers",
+  "summary": "AWS CEO Matt Garman confirmed drone strikes have directly impacted Amazon data centers in the Middle East region, with teams working around the clock to maintain availability. This marks a rare instance of kinetic conflict causing measurable cloud service disruption for a hyperscaler, exposing the hard physical limits of cloud resilience planning. The incident underscores that geopolitical risk is now a first-order infrastructure concern, not just a compliance footnote.",
+  "oci_implication": "OCI's Middle East presence\u2014particularly its UAE and Saudi Arabia regions serving sovereign and enterprise customers\u2014should be stress-tested against this threat model, and any competitive displacement opportunity from AWS instability should be pursued with urgency given regional customers' elevated appetite for multi-cloud or alternative providers."
+}

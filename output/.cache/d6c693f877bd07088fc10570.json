@@ -1,0 +1,5 @@
+{
+  "headline": "AWS Middle East Disruptions Open Multi-Cloud Resilience Window for OCI",
+  "summary": "AWS is operating under crisis conditions in the Middle East after drone strikes damaged regional data center infrastructure, with CEO Matt Garman confirming around-the-clock recovery efforts. This marks a rare, high-visibility availability failure for the market leader in a strategically critical and fast-growing region. Enterprises with single-cloud dependencies on AWS in the Middle East are now urgently reassessing their resilience posture.",
+  "oci_implication": "OCI's sovereign and distributed cloud strategy\u2014including UAE and Saudi Arabia region investments\u2014positions it as the credible multi-cloud failover and co-primary option for government, defense-adjacent, and FSI workloads that cannot tolerate hyperscaler concentration risk; Nathan should accelerate GSI and ISV partner briefings in the region to convert inbound resilience inquiries into pipeline before AWS stabilizes."
+}

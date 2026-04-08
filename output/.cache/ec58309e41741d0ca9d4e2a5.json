@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "healthcare stocks",
+    "biotech market",
+    "medical technology",
+    "market analysis"
+  ],
+  "entities": [
+    "Gilead Sciences",
+    "Pro Medicus"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

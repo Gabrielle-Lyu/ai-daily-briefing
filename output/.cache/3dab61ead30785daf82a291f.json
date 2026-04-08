@@ -1,0 +1,5 @@
+{
+  "headline": "Anthropic Grants Apple and Amazon Early Access to Next-Gen AI Ahead of Launch",
+  "summary": "Anthropic is providing select enterprise partners\u2014including Apple and Amazon\u2014pre-release access to its unreleased 'Mythos' model to stress-test cybersecurity risks before broader deployment. This controlled rollout signals Anthropic's intent to gate frontier model access through strategic partners rather than open release. The move reinforces a tiered AI ecosystem where hyperscaler relationships determine who gets first-mover advantage on the most capable models.",
+  "oci_implication": "Amazon's preferential access deepens AWS's AI differentiation at a moment when OCI is competing for enterprise AI workloads\u2014if Mythos lands exclusively or primarily on AWS Bedrock, it becomes a procurement conversation OCI will lose on capability grounds. OCI should accelerate its Anthropic partnership discussions or double down on positioning alternative frontier models (Cohere, Mistral, Meta) as the enterprise-grade, sovereignty-friendly choice."
+}

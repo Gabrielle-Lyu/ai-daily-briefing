@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "oil refinery attack",
+    "critical infrastructure",
+    "Iran energy"
+  ],
+  "entities": [
+    "Iranian Oil Refining Company",
+    "Lavan refinery",
+    "Reuters"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

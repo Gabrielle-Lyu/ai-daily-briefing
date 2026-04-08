@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "payments infrastructure",
+    "banking regulation",
+    "real-time payments",
+    "fintech"
+  ],
+  "entities": [
+    "Federal Reserve",
+    "Banks",
+    "Credit Unions"
+  ],
+  "section": "financial",
+  "confidence": "medium"
+}

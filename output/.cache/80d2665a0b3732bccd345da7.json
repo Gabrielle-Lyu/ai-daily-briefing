@@ -1,0 +1,5 @@
+{
+  "headline": "Uber Deepens AWS Bet on Custom AI Chips, Snubbing OCI and GCP",
+  "summary": "Uber is expanding its AWS footprint specifically to leverage Amazon's custom AI silicon (Trainium/Inferentia) for ride-sharing workloads, a direct signal that proprietary chip economics are shifting enterprise AI infrastructure decisions. This follows a broader pattern of hyperscalers using custom silicon as a moat to lock in AI workloads beyond what GPU spot pricing alone can achieve. The strategic implication: custom silicon differentiation is now a first-order factor in cloud AI platform stickiness, not a secondary feature.",
+  "oci_implication": "OCI's AI infrastructure story remains heavily dependent on NVIDIA supply and partnership depth \u2014 Uber's move underscores the competitive risk of lacking a proprietary silicon narrative to counter AWS Trainium and Google TPU lock-in. Accelerating OCI's differentiation through the NVIDIA GB200 NVL72 density advantage and Alloy/Supercluster positioning is critical, but a longer-term custom silicon or co-designed accelerator strategy deserves board-level urgency."
+}

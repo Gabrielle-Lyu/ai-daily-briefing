@@ -1,0 +1,5 @@
+{
+  "headline": "SpaceX's $1.75T Valuation Signals Infrastructure Dominance Beyond Launch",
+  "summary": "SpaceX is being valued not as a rocket company but as a full-stack infrastructure platform\u2014Starlink's recurring revenue and projected dominance in satellite connectivity are driving the premium. The math reflects investor belief that SpaceX will own the physical layer of global internet delivery, much as AWS owned cloud compute. For hyperscalers and cloud providers, this is a wake-up call that connectivity infrastructure is becoming a strategic moat.",
+  "oci_implication": "If Starlink becomes the default last-mile connectivity layer globally, OCI's edge and regional expansion strategy must account for a world where SpaceX\u2014not telcos or fiber\u2014controls enterprise access in underserved markets. This also signals a potential competitive threat: a vertically integrated SpaceX offering compute-plus-connectivity could compete directly with OCI in markets where terrestrial infrastructure is weak."
+}

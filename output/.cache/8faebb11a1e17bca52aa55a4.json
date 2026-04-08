@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "military operations",
+    "geopolitical tensions",
+    "Iran sanctions"
+  ],
+  "entities": [
+    "Iran",
+    "Kharg Island",
+    "US",
+    "Vance"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

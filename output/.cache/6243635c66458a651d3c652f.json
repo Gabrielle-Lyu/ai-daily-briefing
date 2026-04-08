@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "language models",
+    "long-context AI",
+    "multi-step reasoning",
+    "model capabilities"
+  ],
+  "entities": [
+    "GLM-5.1",
+    "ChatGLM"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

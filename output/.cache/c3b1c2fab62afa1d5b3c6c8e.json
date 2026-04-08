@@ -1,0 +1,5 @@
+{
+  "headline": "Gemini Expands into Spatial Data Annotation, Deepening Google's Multimodal Moat",
+  "summary": "Google is deploying Gemini directly into Maps to auto-generate photo captions from user-contributed content, effectively crowdsourcing a multimodal geospatial training loop at scale. This move embeds a frontier model into a high-frequency consumer surface with hundreds of millions of users, accelerating real-world grounding for vision-language tasks. The strategic implication is that Google is quietly building proprietary spatial and visual datasets that no cloud competitor can replicate through API access alone.",
+  "oci_implication": "OCI's AI platform lacks a comparable consumer data flywheel tied to real-world place data; Oracle's strength in enterprise data assets means differentiation must come through vertical-specific multimodal applications\u2014particularly in healthcare, logistics, and retail\u2014where proprietary structured data, not consumer UGC, drives model value."
+}

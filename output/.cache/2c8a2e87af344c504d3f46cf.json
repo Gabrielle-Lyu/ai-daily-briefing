@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "SpaceX valuation",
+    "Satellite infrastructure",
+    "Venture capital"
+  ],
+  "entities": [
+    "SpaceX",
+    "Starlink",
+    "Elon Musk"
+  ],
+  "section": "financial",
+  "confidence": "medium"
+}

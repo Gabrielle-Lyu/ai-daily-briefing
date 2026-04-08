@@ -98,24 +98,38 @@ AUDIENCE_ORDER = ["karan", "nathan", "greg", "mahesh"]
 # RSS Sources
 # ---------------------------------------------------------------------------
 RSS_SOURCES = [
-    # Tier 1 — primary news wires
-    {"url": "https://feeds.reuters.com/reuters/technologyNews",  "name": "Reuters Tech",     "tier": 1, "sections": ["financial", "compete", "deals"]},
-    {"url": "https://feeds.reuters.com/reuters/businessNews",    "name": "Reuters Business", "tier": 1, "sections": ["financial", "deals"]},
+    # Tier 1 — wire services & business news
+    {"url": "https://news.google.com/rss/search?q=site:reuters.com+technology&hl=en-US&gl=US&ceid=US:en", "name": "Reuters Tech", "tier": 1, "sections": ["financial", "compete", "deals"]},
+    {"url": "https://news.google.com/rss/search?q=site:reuters.com+business+technology&hl=en-US&gl=US&ceid=US:en", "name": "Reuters Business", "tier": 1, "sections": ["financial", "deals"]},
+    {"url": "https://feeds.bloomberg.com/technology/news.rss",   "name": "Bloomberg Tech",   "tier": 1, "sections": ["financial", "compete", "deals"]},
+    {"url": "https://feeds.content.dowjones.io/public/rss/RSSWSJD", "name": "WSJ Tech",     "tier": 1, "sections": ["financial", "compete", "deals"]},
+    {"url": "https://www.ft.com/technology?format=rss",          "name": "Financial Times",  "tier": 1, "sections": ["financial", "compete", "deals"]},
+    {"url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910", "name": "CNBC Tech", "tier": 1, "sections": ["financial", "compete", "deals"]},
     # Tier 2 — quality tech journalism
-    {"url": "https://feeds.arstechnica.com/arstechnica/technology-lab", "name": "Ars Technica",   "tier": 2, "sections": ["ai", "compete", "infrastructure"]},
+    {"url": "https://feeds.arstechnica.com/arstechnica/technology-lab", "name": "Ars Technica", "tier": 2, "sections": ["ai", "compete", "infrastructure"]},
     {"url": "https://techcrunch.com/feed/",                     "name": "TechCrunch",       "tier": 2, "sections": ["ai", "deals", "compete"]},
     {"url": "https://venturebeat.com/category/ai/feed/",        "name": "VentureBeat AI",   "tier": 2, "sections": ["ai", "compete"]},
-    {"url": "https://www.theverge.com/rss/index.xml",           "name": "The Verge",        "tier": 2, "sections": ["ai", "compete"]},
     # Tier 2 — cloud/infra trade press
     {"url": "https://cloudwars.com/feed/",                      "name": "CloudWars",        "tier": 2, "sections": ["compete", "deals", "financial"]},
     {"url": "https://www.datacenterdynamics.com/en/rss/",       "name": "DC Dynamics",      "tier": 2, "sections": ["datacenter", "power"]},
+    {"url": "https://thenewstack.io/blog/feed/",                "name": "The New Stack",    "tier": 2, "sections": ["infrastructure", "oss", "ai"]},
+    {"url": "https://www.lightreading.com/rss.xml",             "name": "Light Reading",    "tier": 2, "sections": ["infrastructure", "datacenter"]},
+    # Tier 2 — AI-focused
+    {"url": "https://newsletter.semianalysis.com/feed",         "name": "SemiAnalysis",     "tier": 2, "sections": ["ai", "datacenter", "compete"]},
+    {"url": "https://importai.substack.com/feed",               "name": "Import AI",        "tier": 2, "sections": ["ai", "compete"]},
+    # Tier 2 — security
+    {"url": "https://krebsonsecurity.com/feed/",                "name": "KrebsOnSecurity",  "tier": 2, "sections": ["security"]},
+    {"url": "https://therecord.media/feed/",                    "name": "The Record",       "tier": 2, "sections": ["security", "compete"]},
     # Tier 3 — vendor blogs
     {"url": "https://aws.amazon.com/blogs/aws/feed/",           "name": "AWS Blog",         "tier": 3, "sections": ["compete", "ai"]},
     {"url": "https://azure.microsoft.com/en-us/blog/feed/",     "name": "Azure Blog",       "tier": 3, "sections": ["compete", "ai"]},
-    {"url": "https://cloud.google.com/blog/rss",                "name": "Google Cloud",     "tier": 3, "sections": ["compete", "ai"]},
-    {"url": "https://blogs.oracle.com/cloud-infrastructure/rss","name": "OCI Blog",         "tier": 3, "sections": ["compete", "ai"]},
+    {"url": "https://cloudblog.withgoogle.com/rss/",              "name": "Google Cloud",     "tier": 3, "sections": ["compete", "ai"]},
+    {"url": "https://news.google.com/rss/search?q=site:blogs.oracle.com+cloud&hl=en-US&gl=US&ceid=US:en", "name": "OCI Blog", "tier": 3, "sections": ["compete", "ai"]},
     {"url": "https://openai.com/news/rss.xml",                  "name": "OpenAI Blog",      "tier": 3, "sections": ["ai"]},
-    {"url": "https://www.anthropic.com/rss.xml",                "name": "Anthropic Blog",   "tier": 3, "sections": ["ai"]},
+    {"url": "https://news.google.com/rss/search?q=site:anthropic.com&hl=en-US&gl=US&ceid=US:en", "name": "Anthropic Blog", "tier": 3, "sections": ["ai"]},
+    {"url": "https://deepmind.google/blog/rss.xml",             "name": "DeepMind Blog",    "tier": 3, "sections": ["ai", "compete"]},
+    {"url": "https://huggingface.co/blog/feed.xml",             "name": "Hugging Face",     "tier": 3, "sections": ["ai", "oss"]},
+    # CNCF removed — feed returns 403
     # Tier 4 — community signal
     {"url": "https://news.ycombinator.com/rss",                 "name": "Hacker News",      "tier": 4, "sections": ["community", "ai", "compete"]},
 ]
@@ -169,4 +183,4 @@ MAX_KEYWORD_BONUS = 10
 INGEST_WINDOW_HOURS = 48
 MAX_ARTICLES_TO_CLASSIFY = 60
 TOP_ARTICLES_PER_AUDIENCE = 12
-MAX_CONCURRENT_LLM = 5
+MAX_CONCURRENT_LLM = 15

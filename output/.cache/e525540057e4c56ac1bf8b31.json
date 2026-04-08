@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "AI chip manufacturing",
+    "data center semiconductors",
+    "humanoid robotics"
+  ],
+  "entities": [
+    "Intel",
+    "Elon Musk",
+    "Terafab",
+    "Tesla"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

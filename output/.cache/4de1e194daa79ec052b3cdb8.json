@@ -1,0 +1,5 @@
+{
+  "headline": "Cryptographer Adam Back Denies Bitcoin Origins Claim; Satoshi Identity Remains Unsolved",
+  "summary": "British cryptographer Adam Back, inventor of Hashcash and a foundational figure in proof-of-work cryptography, has formally denied a New York Times report identifying him as Bitcoin creator Satoshi Nakamoto. The Satoshi identity question resurfaces periodically and carries legal and financial weight, as the pseudonymous founder's wallets hold an estimated 1 million BTC. For enterprise blockchain and distributed ledger initiatives, sustained ambiguity around Bitcoin's intellectual provenance complicates IP lineage questions.",
+  "oci_implication": "This has minimal direct bearing on OCI's near-term strategy; however, OCI's blockchain and Web3 infrastructure offerings benefit from clear IP environments, and any credible resolution of Satoshi's identity could trigger legal activity around Bitcoin's foundational patents that enterprise customers would need to monitor."
+}

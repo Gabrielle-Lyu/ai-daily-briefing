@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "AI investments",
+    "venture capital",
+    "startup ecosystem"
+  ],
+  "entities": [
+    "Alphabet",
+    "Sundar Pichai",
+    "SpaceX",
+    "Anthropic",
+    "Stripe"
+  ],
+  "section": "deals",
+  "confidence": "high"
+}

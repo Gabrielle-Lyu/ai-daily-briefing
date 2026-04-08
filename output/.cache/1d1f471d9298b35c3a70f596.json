@@ -1,0 +1,5 @@
+{
+  "headline": "Anthropic's $30B Run-Rate Surge Locks In Google-Broadcom Compute Alliance",
+  "summary": "Anthropic has expanded its compute agreement with Google and Broadcom as its annualized revenue rockets to $30 billion, cementing a tightly integrated hyperscaler-chipmaker supply chain. This deal deepens Anthropic's dependency on Google Cloud infrastructure at a moment when AI compute is the primary competitive moat. The strategic implication: frontier AI labs are consolidating around single-cloud anchors, making neutrality and multi-cloud optionality increasingly rare\u2014and increasingly valuable.",
+  "oci_implication": "OCI has a narrow but real opening to position itself as the credible multi-cloud alternative for AI workloads, particularly for ISVs and GSIs that want leverage against Google lock-in; partnering with or incubating AI labs that lack a hyperscaler anchor\u2014while showcasing OCI's GPU cluster economics\u2014could differentiate OCI's platform story in enterprise AI deals."
+}

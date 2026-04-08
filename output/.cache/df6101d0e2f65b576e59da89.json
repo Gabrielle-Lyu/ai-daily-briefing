@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "geopolitics",
+    "maritime security",
+    "trade",
+    "shipping"
+  ],
+  "entities": [
+    "China",
+    "Russia",
+    "United Nations"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

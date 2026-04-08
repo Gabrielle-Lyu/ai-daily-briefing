@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "consumer electronics",
+    "product deals",
+    "wireless earbuds"
+  ],
+  "entities": [
+    "Nothing",
+    "CMF Buds 2A",
+    "Amazon"
+  ],
+  "section": "deals",
+  "confidence": "low"
+}

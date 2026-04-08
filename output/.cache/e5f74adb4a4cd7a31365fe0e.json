@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "automotive recalls",
+    "vehicle safety",
+    "camera technology"
+  ],
+  "entities": [
+    "General Motors",
+    "Reuters"
+  ],
+  "section": "compete",
+  "confidence": "low"
+}

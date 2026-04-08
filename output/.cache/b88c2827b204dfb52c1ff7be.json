@@ -1,0 +1,5 @@
+{
+  "headline": "Deep-Sea Mining Consolidation Signals Critical Mineral Supply Chain Shifts Ahead",
+  "summary": "The merger of ex-Rio Tinto CEO Jakob Stausholm's deep-sea mining venture with Odyssey Marine Exploration creates a ~$1B player targeting polymetallic nodules rich in cobalt, nickel, and manganese. These minerals are critical inputs for battery technology and, by extension, the data center UPS and power infrastructure underpinning hyperscale AI compute. Consolidation at the extraction layer signals that major cloud and hardware players may face longer-term commodity price pressure as AI infrastructure buildout competes with EV demand for the same mineral supply chains.",
+  "oci_implication": "OCI's aggressive data center expansion\u2014particularly GPU clusters for AI workloads\u2014creates indirect exposure to critical mineral supply dynamics; procurement and infrastructure teams should monitor whether cobalt and nickel price trajectories affect long-cycle power and cooling hardware costs. This is a slow-moving signal, not an immediate action item, but worth flagging to supply chain strategy given OCI's multi-year capacity commitments."
+}

@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "AI safety",
+    "cybersecurity",
+    "responsible AI"
+  ],
+  "entities": [
+    "Anthropic",
+    "Mythos AI",
+    "Microsoft",
+    "CrowdStrike",
+    "Amazon"
+  ],
+  "section": "security",
+  "confidence": "high"
+}

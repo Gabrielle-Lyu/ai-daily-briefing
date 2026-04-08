@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "cryptocurrency",
+    "tokenization",
+    "digital assets",
+    "blockchain"
+  ],
+  "entities": [
+    "Sharplink",
+    "Franklin Crypto",
+    "Blockstream",
+    "Global Blockchain Business Council",
+    "IMF"
+  ],
+  "section": "financial",
+  "confidence": "medium"
+}

@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "stock market rally",
+    "geopolitical risk relief",
+    "STOXX 600"
+  ],
+  "entities": [
+    "Reuters",
+    "Iran"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

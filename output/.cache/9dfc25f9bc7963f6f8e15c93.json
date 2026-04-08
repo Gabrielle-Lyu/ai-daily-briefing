@@ -1,0 +1,5 @@
+{
+  "headline": "Intel Joins Musk's Terafab: U.S. Chip Sovereignty Push Gains Industrial Weight",
+  "summary": "Intel has signed on to Elon Musk's Terafab initiative alongside SpaceX and Tesla to build a domestic semiconductor fab in Texas. The move signals a serious public-private coalition forming around U.S. chip independence, though Intel's exact role and investment level remain undefined. If this factory delivers at scale, it could reshape domestic supply chains for AI accelerators and custom silicon\u2014territory currently dominated by TSMC.",
+  "oci_implication": "A domestically produced chip supply chain could give hyperscalers like OCI leverage to negotiate outside TSMC's pricing power and reduce geopolitical exposure in silicon sourcing. Karan's product roadmap should track whether Terafab targets general-purpose or AI-specific silicon, as that determines whether OCI could benefit as a customer or be pressured as a competitor to Musk-aligned cloud infrastructure."
+}

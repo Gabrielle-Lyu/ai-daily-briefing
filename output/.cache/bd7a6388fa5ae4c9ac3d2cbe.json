@@ -1,0 +1,5 @@
+{
+  "headline": "Meta's First Post-Spending-Spree AI Model Tests ROI Case for Hyperscale Investment",
+  "summary": "Meta has released Muse Spark, a model purpose-built for social media applications, marking its first major AI release since committing to massive capital expenditure that has unsettled investors. The targeted, vertical-specific positioning signals a shift from general-purpose AI toward domain-optimized models as the industry faces pressure to justify infrastructure spend. If Meta can demonstrate measurable returns from application-layer AI, it strengthens the broader narrative that hyperscale AI investment is defensible\u2014but failure would accelerate investor skepticism across the sector.",
+  "oci_implication": "OCI benefits if vertical-specific AI models become the dominant pattern, as enterprises will need cloud infrastructure optimized for fine-tuning and serving domain-specific workloads\u2014a space where OCI's GPU capacity and cost positioning can compete directly with AWS and Azure. Watch whether Meta's model drives enterprise demand for social/media-adjacent AI services that OCI partners or ISVs could host."
+}

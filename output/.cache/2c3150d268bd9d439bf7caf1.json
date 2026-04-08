@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "AI chip design",
+    "silicon engineering",
+    "custom accelerators"
+  ],
+  "entities": [
+    "Tesla",
+    "Anant Nivarti",
+    "AI6",
+    "Dojo"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

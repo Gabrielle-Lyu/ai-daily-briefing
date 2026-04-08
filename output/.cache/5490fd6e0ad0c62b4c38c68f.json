@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "prediction markets",
+    "regulatory compliance",
+    "content moderation",
+    "internal controls"
+  ],
+  "entities": [
+    "Polymarket",
+    "Bloomberg",
+    "Katherine Doherty",
+    "Katie Greifeld",
+    "Tim Stenovec"
+  ],
+  "section": "security",
+  "confidence": "medium"
+}

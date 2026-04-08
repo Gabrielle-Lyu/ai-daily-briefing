@@ -1,0 +1,5 @@
+{
+  "headline": "SpaceX's $1.75T Valuation Signals Space-as-Platform Reshapes Cloud Infrastructure Calculus",
+  "summary": "SpaceX is approaching a $1.75 trillion valuation, cementing its position as a vertically integrated space-and-connectivity platform rivaling the largest hyperscalers. Starlink's low-latency global coverage is increasingly positioned as a competing edge-compute distribution layer, attracting ISV and enterprise workloads in regions where terrestrial cloud reach is limited. The strategic implication: space-based connectivity is becoming a genuine adjacency to cloud platform competition, not just a niche telecom play.",
+  "oci_implication": "OCI should evaluate Starlink as both a GSI/ISV distribution channel for sovereign and remote-region deployments\u2014particularly in markets where OCI is expanding its dedicated region footprint\u2014and as a potential competitive threat if SpaceX moves to offer compute services co-located with its ground station infrastructure."
+}

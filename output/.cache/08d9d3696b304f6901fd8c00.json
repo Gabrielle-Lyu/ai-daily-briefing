@@ -1,0 +1,5 @@
+{
+  "headline": "Google Embeds Gemini Into Maps Contributions, Deepening Platform Lock-In",
+  "summary": "Google is integrating Gemini directly into Maps to auto-generate captions for user-submitted photos and videos, lowering the friction for local content contribution. This move extends Gemini's footprint into everyday consumer workflows, reinforcing Google's strategy of embedding AI across its entire product surface. The strategic implication is a tighter closed-loop ecosystem where Google's AI models, data flywheel, and platform services become increasingly inseparable.",
+  "oci_implication": "As Google deepens Gemini integration across Maps and other consumer platforms, ISVs and location-data partners face growing pressure to standardize on Google's AI stack \u2014 an opportunity for OCI to position its multicloud and neutral-platform narrative to partners seeking optionality. OCI should engage GSIs and geospatial ISVs who may be evaluating alternatives to Google's tightening ecosystem."
+}

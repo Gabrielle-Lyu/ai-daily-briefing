@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "IPO",
+    "activist investing",
+    "M&A",
+    "private equity"
+  ],
+  "entities": [
+    "Madison Air",
+    "Blackstone",
+    "Palliser Capital",
+    "William Blair",
+    "Skadden"
+  ],
+  "section": "deals",
+  "confidence": "medium"
+}

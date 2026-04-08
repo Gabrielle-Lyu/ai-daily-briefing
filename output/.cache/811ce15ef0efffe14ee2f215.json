@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "device deprecation",
+    "Kindle support",
+    "product lifecycle"
+  ],
+  "entities": [
+    "Amazon",
+    "Kindle",
+    "Kindle Fire"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

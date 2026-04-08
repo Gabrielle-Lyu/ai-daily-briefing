@@ -91,7 +91,7 @@ def cluster_articles(articles: list[dict]) -> list[list[dict]]:
             title_union = len(title_a | title_b)
             title_sim = len(title_a & title_b) / title_union if title_union else 0.0
 
-            if title_sim > 0.30:
+            if title_sim > 0.50:
                 cluster.append(other)
                 assigned.add(other["url"])
                 continue
@@ -187,7 +187,7 @@ def detect_followups(clusters: list[list[dict]]) -> list[list[dict]]:
                 art["_suppressed"] = True
                 art["_suppression_reason"] = "duplicate"
                 art["_similarity_score"] = sim_to_canonical
-            elif not same_source and sim_to_canonical > 0.50:
+            elif not same_source and sim_to_canonical > 0.65:
                 # Cross-source duplicate covering the same event — suppress
                 art["_suppressed"] = True
                 art["_suppression_reason"] = "cross_source_duplicate"

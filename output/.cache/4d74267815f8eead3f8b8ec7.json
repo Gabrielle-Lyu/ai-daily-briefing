@@ -1,0 +1,5 @@
+{
+  "headline": "Hack-for-Hire Group Weaponizes Android Spyware and iCloud Phishing Against Executives",
+  "summary": "Security researchers have exposed a sophisticated hack-for-hire operation deploying Android spyware alongside targeted phishing campaigns to exfiltrate iCloud credentials and compromise devices. The group represents the commercialization of advanced persistent threat techniques previously associated with nation-state actors, now available to any sufficiently motivated buyer. For senior technology leaders, this signals that supply-chain and credential-based attacks are increasingly viable vectors against high-value individuals regardless of organizational security posture.",
+  "oci_implication": "OCI's enterprise and government customers\u2014particularly those in regulated industries\u2014will scrutinize cloud provider security posture and shared-responsibility models in light of credential-harvesting campaigns like this; OCI should reinforce its identity and access management differentiation, including MKI and sovereign cloud controls, as part of its AI and data platform sales narrative to CISOs."
+}

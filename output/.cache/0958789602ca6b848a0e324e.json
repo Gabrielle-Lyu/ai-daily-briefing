@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "electric vehicles",
+    "US-China competition",
+    "automotive manufacturing"
+  ],
+  "entities": [
+    "Windrose",
+    "United States",
+    "China",
+    "Reuters"
+  ],
+  "section": "compete",
+  "confidence": "low"
+}

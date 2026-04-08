@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "energy markets",
+    "geopolitical risk",
+    "oil pricing",
+    "power supply"
+  ],
+  "entities": [
+    "Iran",
+    "OPEC"
+  ],
+  "section": "power",
+  "confidence": "low"
+}

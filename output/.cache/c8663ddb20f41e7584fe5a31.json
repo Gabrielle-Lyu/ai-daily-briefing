@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "AI music generation",
+    "music licensing",
+    "copyright disputes"
+  ],
+  "entities": [
+    "Suno",
+    "Universal Music Group",
+    "Sony Music Entertainment",
+    "Financial Times"
+  ],
+  "section": "deals",
+  "confidence": "high"
+}

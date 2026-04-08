@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "robotaxis",
+    "autonomous vehicles",
+    "partnerships",
+    "ai deployment"
+  ],
+  "entities": [
+    "Waymo",
+    "Lyft",
+    "Nashville",
+    "Alphabet"
+  ],
+  "section": "partnerships",
+  "confidence": "high"
+}

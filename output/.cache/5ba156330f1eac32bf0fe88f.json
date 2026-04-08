@@ -1,0 +1,5 @@
+{
+  "headline": "Regional Fiber Consolidation Reshapes Last-Mile Infrastructure in Michigan's Upper Peninsula",
+  "summary": "UP Fiber has acquired AT&T's entire wireline footprint across Michigan's Upper Peninsula and Mackinaw City, absorbing 9,000+ miles of fiber and 40 central offices. This continues the trend of regional operators absorbing incumbent telco assets as AT&T sheds non-core geography, concentrating infrastructure control in fewer, specialized hands. For cloud providers, such consolidations can reduce redundant carrier options for edge connectivity and signal shifting negotiating dynamics in underserved regions.",
+  "oci_implication": "OCI's sovereign and regional cloud expansion strategy depends on diverse, resilient last-mile and middle-mile connectivity partners; consolidations like this warrant a supply-chain audit of carrier diversity in affected regions to ensure no single-point-of-failure risk emerges for OCI edge or government cloud nodes serving the Great Lakes corridor."
+}

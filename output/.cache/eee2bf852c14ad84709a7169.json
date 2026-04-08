@@ -1,0 +1,10 @@
+{
+  "bullets": [
+    "Anthropic's new 'Mythos' model (Project Glasswing) found vulnerabilities in every major OS and browser, launching with partners AWS, Google, Nvidia, Apple, and Microsoft \u2014 a high-stakes cybersecurity moat that excludes OCI from a potentially defining enterprise security platform.",
+    "Uber expanded its AWS contract to run ride-sharing workloads on Amazon's Trainium/Inferentia chips, a direct competitive loss for OCI and a signal that hyperscaler-native silicon is winning AI inference deals at scale.",
+    "Anthropic's run-rate revenue surged to $30B, prompting a larger compute deal with Google and Broadcom \u2014 reinforcing the Google-Anthropic axis and making OCI's path to premier AI model partnerships increasingly narrow.",
+    "Microsoft is pivoting from 'Copilot everywhere' to intentional, agentic AI integration, signaling that enterprise AI buyers are maturing past experimentation and will now demand demonstrable ROI \u2014 a procurement dynamic OCI must get ahead of in its own AI pitch.",
+    "Iranian state hackers (and separately, Russian APT28) are actively targeting U.S. critical infrastructure and home routers \u2014 enterprise security anxiety is rising, creating an opening for OCI's sovereign and isolated cloud positioning if marketed aggressively."
+  ],
+  "oci_implication_of_day": "OCI is being cut out of two converging power centers simultaneously: Uber's AWS chip expansion shows hyperscaler-native silicon is closing AI infrastructure deals that OCI is not winning, while Project Glasswing cements AWS, Google, and Microsoft as the default platforms for enterprise-grade AI security \u2014 a category that will drive large, sticky contracts. Karan should assess urgently whether OCI has a credible path into the Anthropic or competing model-provider ecosystem, and whether OCI's GPU/chip story is differentiated enough to compete for inference workloads before these deals lock in multi-year."
+}

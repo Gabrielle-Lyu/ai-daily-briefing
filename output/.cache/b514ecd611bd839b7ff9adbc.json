@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "travel policy",
+    "government regulations",
+    "travel permits"
+  ],
+  "entities": [
+    "Germany",
+    "German Ministry"
+  ],
+  "section": "infrastructure",
+  "confidence": "low"
+}

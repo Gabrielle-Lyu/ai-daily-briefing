@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "international diplomacy",
+    "geopolitical relations",
+    "ceasefire negotiations"
+  ],
+  "entities": [
+    "Turkey",
+    "United States",
+    "Iran",
+    "Turkish Intelligence"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

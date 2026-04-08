@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "airline capacity planning",
+    "fuel cost surge",
+    "operational efficiency"
+  ],
+  "entities": [
+    "Delta Air Lines"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

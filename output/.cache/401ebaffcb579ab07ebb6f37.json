@@ -1,0 +1,5 @@
+{
+  "headline": "Apple Foldable iPhone Stays on Track for September Despite Engineering Hurdles",
+  "summary": "Apple's foldable iPhone remains targeted for a September 2026 launch, overcoming engineering test phase challenges flagged earlier this week by Nikkei Asia. The device signals Apple's intent to compete in the premium foldable segment dominated by Samsung, potentially reshaping the high-end mobile market. For enterprise AI platforms, a new Apple form factor typically accelerates on-device AI investment and raises the bar for edge inference capabilities.",
+  "oci_implication": "Apple's foldable launch will intensify competition for on-device AI workloads, but is unlikely to shift enterprise cloud AI spending \u2014 OCI should monitor whether Apple Silicon advances bundled with this device create new benchmarks that influence customer expectations for AI inference performance on OCI's own hardware fleet."
+}

@@ -1,0 +1,5 @@
+{
+  "headline": "Anthropic's AI Security Model Partners With AWS, Google\u2014Not Oracle",
+  "summary": "Anthropic's Project Glasswing autonomously identifies vulnerabilities across major OS and browser platforms, backed by a coalition including AWS, Google, Nvidia, Apple, and Microsoft. The model reportedly surfaced security issues in every major operating system and web browser with minimal human involvement. This signals AI-native security tooling is becoming a strategic differentiator for cloud platforms, not just a feature.",
+  "oci_implication": "OCI's absence from the Project Glasswing consortium is a visible gap\u2014AWS and Google are embedding AI security credibility at the infrastructure layer before enterprise procurement cycles shift. Karan's team should assess whether OCI needs a comparable partnership or first-party AI security capability to stay competitive on enterprise trust and compliance narratives."
+}

@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "AI model access",
+    "cybersecurity",
+    "AI safety"
+  ],
+  "entities": [
+    "Anthropic",
+    "Mythos",
+    "Theresa Payton",
+    "Fortalice Solutions"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

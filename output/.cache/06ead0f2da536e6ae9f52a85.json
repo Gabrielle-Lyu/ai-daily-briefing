@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "semiconductor stocks",
+    "geopolitical risk",
+    "supply chain disruption",
+    "market sentiment"
+  ],
+  "entities": [
+    "semiconductor sector",
+    "U.S.",
+    "Iran",
+    "Hormuz Strait",
+    "Asian tech companies"
+  ],
+  "section": "financial",
+  "confidence": "medium"
+}

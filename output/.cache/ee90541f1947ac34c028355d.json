@@ -1,0 +1,5 @@
+{
+  "headline": "ChatGPT Becomes App Platform: Tubi Integration Signals OpenAI's Developer Ecosystem Push",
+  "summary": "Tubi has launched the first native streaming app embedded within ChatGPT, marking OpenAI's deliberate pivot from AI assistant to full developer platform with third-party integrations. This mirrors the App Store model applied to conversational AI, where distribution and discovery shift to whoever controls the chat interface. The strategic implication is that AI chat layers are becoming the new developer platform gatekeepers, threatening to commoditize the underlying cloud and content layers beneath them.",
+  "oci_implication": "OCI's developer platform strategy must account for AI-native integration surfaces \u2014 if OpenAI's plugin/app ecosystem matures, it could divert developer mindshare away from cloud-native deployment patterns toward AI-mediated distribution. This reinforces the urgency of OCI establishing its own AI developer primitives and sovereign integration points before OpenAI's platform effects lock in enterprise and media workloads on competing infrastructure."
+}

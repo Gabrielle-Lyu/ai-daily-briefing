@@ -1,0 +1,5 @@
+{
+  "headline": "Anthropic Throttles Cybersecurity AI Amid Dual-Use Fears as Cloud Rivals Align",
+  "summary": "Anthropic is restricting deployment of its Mythos model due to concerns it could be weaponized for cyberattacks, even as Microsoft, Amazon, Apple, CrowdStrike, and Palo Alto Networks integrate it into Project Glasswing. This signals that frontier AI labs are now self-imposing guardrails on offensive-capable models \u2014 a precedent that will shape enterprise procurement and liability norms. The strategic implication: cloud platforms that can credibly demonstrate responsible AI deployment pipelines will have a compliance-driven advantage in security-sensitive verticals.",
+  "oci_implication": "Amazon's participation in Project Glasswing deepens AWS's integration with the leading cybersecurity AI stack, putting OCI at risk of being excluded from emerging AI-native security workflows. OCI should assess partnerships with CrowdStrike or Palo Alto Networks to ensure its platform is positioned inside \u2014 not outside \u2014 the next-gen security AI ecosystem."
+}

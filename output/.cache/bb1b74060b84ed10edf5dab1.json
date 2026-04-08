@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "AI captioning",
+    "Google Maps",
+    "Gemini",
+    "user-generated content"
+  ],
+  "entities": [
+    "Google",
+    "Google Maps",
+    "Gemini"
+  ],
+  "section": "ai",
+  "confidence": "medium"
+}

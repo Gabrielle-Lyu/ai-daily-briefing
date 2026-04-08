@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "geopolitics",
+    "military policy",
+    "Middle East tensions"
+  ],
+  "entities": [
+    "Israel",
+    "Trump",
+    "Iran",
+    "Lebanon"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

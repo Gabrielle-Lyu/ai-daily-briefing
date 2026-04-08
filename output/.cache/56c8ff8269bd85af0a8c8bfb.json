@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "chip deals",
+    "AI partnerships",
+    "stock surge"
+  ],
+  "entities": [
+    "Broadcom",
+    "Google",
+    "Anthropic"
+  ],
+  "section": "deals",
+  "confidence": "high"
+}

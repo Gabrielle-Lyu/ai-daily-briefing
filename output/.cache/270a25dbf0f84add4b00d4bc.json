@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "geopolitics",
+    "international relations"
+  ],
+  "entities": [
+    "US",
+    "Iran"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "LLM development",
+    "AI competition",
+    "R&D investment",
+    "AI models"
+  ],
+  "entities": [
+    "Meta",
+    "Google",
+    "OpenAI",
+    "Muse Spark",
+    "Alexandr Wang"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

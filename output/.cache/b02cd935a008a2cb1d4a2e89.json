@@ -1,0 +1,5 @@
+{
+  "headline": "Microsoft Bets on Multi-Model AI to Dominate Enterprise Research Workflows",
+  "summary": "Microsoft is layering Anthropic and OpenAI models into its Research Agent to improve output quality through competitive model comparison and refinement loops. This signals a pragmatic, best-of-breed AI orchestration strategy rather than single-model lock-in\u2014a pattern increasingly favored by enterprise buyers. The strategic implication: platform stickiness will accrue to whoever controls the orchestration layer, not the underlying model.",
+  "oci_implication": "OCI has an opening to position its AI infrastructure and partner ecosystem\u2014including its Cohere relationship and NVIDIA partnerships\u2014as the neutral, multi-model substrate that ISVs and GSIs can build orchestration layers on top of, countering Microsoft's vertical integration play. Engaging Anthropic directly on OCI hosting or co-sell agreements could also blunt Microsoft's differentiation narrative with enterprise accounts currently in competitive evaluations."
+}

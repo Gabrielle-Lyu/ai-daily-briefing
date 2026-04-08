@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "stock market rally",
+    "geopolitical risk",
+    "market sentiment"
+  ],
+  "entities": [
+    "Reuters"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

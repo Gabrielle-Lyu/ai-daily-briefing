@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "military drones",
+    "defense procurement",
+    "missile defense systems"
+  ],
+  "entities": [
+    "Gulf states",
+    "Ukraine",
+    "Iran"
+  ],
+  "section": "security",
+  "confidence": "medium"
+}

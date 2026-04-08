@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "vulnerability detection",
+    "AI security",
+    "enterprise partnerships",
+    "cybersecurity"
+  ],
+  "entities": [
+    "Anthropic",
+    "Claude Mythos",
+    "Amazon",
+    "Microsoft",
+    "Apple"
+  ],
+  "section": "security",
+  "confidence": "high"
+}

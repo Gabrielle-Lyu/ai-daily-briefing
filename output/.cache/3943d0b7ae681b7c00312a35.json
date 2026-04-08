@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "automotive manufacturing",
+    "production resumption",
+    "vehicle sales"
+  ],
+  "entities": [
+    "Hyundai",
+    "Palisade"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

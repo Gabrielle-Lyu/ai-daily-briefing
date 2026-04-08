@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "AWS chips",
+    "cloud infrastructure",
+    "competitive positioning",
+    "AI acceleration"
+  ],
+  "entities": [
+    "Uber",
+    "Amazon",
+    "AWS",
+    "Oracle",
+    "Google"
+  ],
+  "section": "deals",
+  "confidence": "high"
+}

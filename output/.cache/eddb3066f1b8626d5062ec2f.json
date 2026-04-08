@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "AI security",
+    "vulnerability patching",
+    "cybersecurity tools",
+    "enterprise AI"
+  ],
+  "entities": [
+    "Anthropic",
+    "Mythos"
+  ],
+  "section": "security",
+  "confidence": "high"
+}

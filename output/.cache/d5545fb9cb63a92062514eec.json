@@ -1,0 +1,17 @@
+{
+  "topics": [
+    "Bitcoin",
+    "Cryptocurrency",
+    "Identity verification",
+    "Blockchain"
+  ],
+  "entities": [
+    "Bitcoin",
+    "Adam Back",
+    "Blockstream",
+    "Satoshi Nakamoto",
+    "New York Times"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

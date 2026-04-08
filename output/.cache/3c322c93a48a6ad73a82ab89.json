@@ -1,0 +1,5 @@
+{
+  "headline": "World Leaks Gang Exfiltrates LAPD Attorney Files, Exposing Municipal Cloud Risk",
+  "summary": "The World Leaks extortion group breached a digital storage system operated by the Los Angeles City Attorney's Office, stealing and publicly leaking sensitive LAPD police documents. This follows a pattern of ransomware actors targeting government agencies with under-resourced security postures and fragmented, legacy storage infrastructure. The incident underscores that public-sector digital storage\u2014often a patchwork of on-prem and cloud systems\u2014remains a high-value, low-resistance target for sophisticated extortion operations.",
+  "oci_implication": "OCI's growing push into government and public-sector cloud contracts makes this a directionally relevant signal: agencies evaluating cloud consolidation need a credible security narrative, and OCI should ensure its sovereign cloud and security differentiation messaging is sharp for municipal and law enforcement prospects who are now acutely aware of storage exposure risk."
+}

@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "commodity trading",
+    "oil prices",
+    "financial markets",
+    "geopolitical risk"
+  ],
+  "entities": [
+    "Reuters"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

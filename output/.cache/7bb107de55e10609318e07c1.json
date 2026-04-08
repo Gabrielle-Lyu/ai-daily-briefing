@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "Gemma fine-tuning",
+    "Multimodal AI",
+    "ML tools",
+    "Open source models"
+  ],
+  "entities": [
+    "Google",
+    "Gemma",
+    "Apple",
+    "Apple Silicon"
+  ],
+  "section": "ai",
+  "confidence": "high"
+}

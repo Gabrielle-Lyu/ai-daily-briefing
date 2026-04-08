@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "semiconductor manufacturing",
+    "strategic partnership",
+    "compute infrastructure"
+  ],
+  "entities": [
+    "Intel",
+    "Elon Musk",
+    "Tesla",
+    "TeraFab"
+  ],
+  "section": "partnerships",
+  "confidence": "high"
+}

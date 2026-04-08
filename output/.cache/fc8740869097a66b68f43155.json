@@ -1,0 +1,5 @@
+{
+  "headline": "Anthropic Gatekeeps Cybersecurity AI as Microsoft and Amazon Lock In Preferred Access",
+  "summary": "Anthropic is restricting rollout of its Mythos model due to offensive cyberattack risks, selectively channeling access through a vetted initiative called Project Glasswing. Microsoft, Amazon, Apple, CrowdStrike, and Palo Alto Networks are named launch partners, giving them a first-mover advantage in AI-native security tooling. This signals a new era of AI vendor-controlled partner tiering, where hyperscaler relationships directly determine access to frontier security capabilities.",
+  "oci_implication": "OCI's absence from the Project Glasswing partner list puts it at a structural disadvantage in the AI-powered security platform market\u2014a critical differentiator for enterprise cloud procurement. Nathan should evaluate whether OCI's security ISV partnerships (e.g., with CrowdStrike or Palo Alto) can serve as a back-channel to Glasswing access, and whether OCI's own sovereign AI positioning can be used to attract customers wary of the Microsoft-Amazon duopoly controlling sensitive cybersecurity AI."
+}

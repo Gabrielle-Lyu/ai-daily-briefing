@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "data center regulation",
+    "tax policy",
+    "state politics"
+  ],
+  "entities": [
+    "Janet Mills",
+    "Graham Platner",
+    "Maine"
+  ],
+  "section": "datacenter",
+  "confidence": "medium"
+}

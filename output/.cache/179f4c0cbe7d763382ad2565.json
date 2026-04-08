@@ -1,0 +1,5 @@
+{
+  "headline": "Anthropic Locks In Massive Google-Broadcom Compute Pact as Revenue Hits $30B Run Rate",
+  "summary": "Anthropic has expanded its compute agreement with Google and Broadcom, driven by explosive demand that has pushed its annualized revenue to $30 billion. This signals frontier AI labs are entering a phase of sustained hyperscale infrastructure dependency, with custom silicon (Broadcom ASICs) playing a central role alongside TPU/GPU capacity. The strategic implication: compute access and custom silicon partnerships are now as decisive as model quality in determining which labs can scale.",
+  "oci_implication": "This reinforces urgency for OCI to deepen its own frontier-lab partnerships and accelerate custom silicon differentiation\u2014labs at Anthropic's scale will cement multi-year infrastructure allegiances now, and OCI risks being locked out of the top tier if it cannot match Google's integrated TPU+networking+storage offer with a compelling alternative."
+}

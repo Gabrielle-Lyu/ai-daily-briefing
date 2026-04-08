@@ -1,0 +1,5 @@
+{
+  "headline": "NYT Claims Adam Back Is Satoshi Nakamoto, Bitcoin's Pseudonymous Founder",
+  "summary": "The New York Times has published an investigation asserting that Blockstream CEO Adam Back is Satoshi Nakamoto, the pseudonymous creator of Bitcoin. Back is a cryptographer and cypherpunk pioneer whose Hashcash proof-of-work system directly preceded and influenced Bitcoin's design. If substantiated, this resolves one of tech's longest-running identity mysteries, though previous Satoshi claims have failed scrutiny and Back himself has denied being Nakamoto.",
+  "oci_implication": "This story has negligible direct impact on OCI strategy \u2014 it is a media narrative, not a technical or market event. Monitor only if regulatory or institutional Bitcoin developments follow that could affect enterprise blockchain or digital asset infrastructure demand."
+}

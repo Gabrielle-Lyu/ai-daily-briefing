@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "quantum computing",
+    "cryptocurrency security",
+    "cryptography",
+    "risk assessment"
+  ],
+  "entities": [
+    "Adam Back",
+    "Blockstream",
+    "Google",
+    "Bitcoin"
+  ],
+  "section": "security",
+  "confidence": "medium"
+}

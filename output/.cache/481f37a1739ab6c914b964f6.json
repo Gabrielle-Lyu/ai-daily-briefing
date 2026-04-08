@@ -1,0 +1,5 @@
+{
+  "headline": "First US Federal Approval for Small Modular Reactor Signals Nuclear Power Inflection",
+  "summary": "Antares Nuclear has become the first company federally authorized to complete a demonstration reactor under the DOE's accelerated fission program, marking a regulatory breakthrough for the SMR sector. This clears a critical path that has stalled competitors for years, potentially compressing timelines for commercial deployments from decades to single-digit years. Hyperscalers racing to secure carbon-free baseload power for AI infrastructure now have a credible near-term nuclear supply option to evaluate alongside existing PPAs.",
+  "oci_implication": "As OCI scales data center capacity to compete with AWS, Azure, and Google on AI workloads, nuclear SMRs represent a high-density, always-on power source that could differentiate OCI's sustainability story and reduce long-term energy cost exposure \u2014 Karan's product org should flag this to infrastructure and sustainability leads as a potential competitive moat if OCI moves early on power procurement partnerships."
+}

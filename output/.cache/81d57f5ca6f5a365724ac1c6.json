@@ -1,0 +1,5 @@
+{
+  "headline": "Consumer AI Content Tagging Apps Signal Real-Time Streaming Metadata Infrastructure Demand",
+  "summary": "A new iPhone app uses Live Activities to warn viewers of jump scares before they occur, surfacing a growing consumer appetite for real-time, AI-enriched content metadata layered atop streaming platforms. The app's functionality depends on low-latency scene-level data pipelines that streaming ISVs must maintain and expose. As personalization and accessibility features become table-stakes for streaming UX, the underlying metadata infrastructure layer is becoming a competitive differentiator.",
+  "oci_implication": "OCI's low-latency compute and streaming data services (Streaming, GoldenGate) are well-positioned to support ISVs building real-time content intelligence products for major streaming platforms \u2014 a niche but growing segment where OCI can win design wins by targeting media-tech ISVs underserved by AWS's incumbent relationships."
+}

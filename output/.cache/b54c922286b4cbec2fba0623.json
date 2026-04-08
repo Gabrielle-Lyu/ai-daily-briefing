@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "M&A",
+    "network infrastructure",
+    "regional broadband",
+    "telecom"
+  ],
+  "entities": [
+    "UP Fiber",
+    "AT&T"
+  ],
+  "section": "infrastructure",
+  "confidence": "medium"
+}

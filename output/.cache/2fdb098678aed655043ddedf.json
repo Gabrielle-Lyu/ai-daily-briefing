@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "government policy",
+    "border processing",
+    "immigration"
+  ],
+  "entities": [
+    "DHS"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

@@ -1,0 +1,5 @@
+{
+  "headline": "Nscale Secures Nordic Clean Energy for AI Compute Expansion Into EU Market",
+  "summary": "AI cloud provider Nscale is partnering with Finnish energy major Fortum to build a data center in Harjavalta, Finland, leveraging the region's abundant renewable energy and cool climate for power-dense GPU workloads. Finland's position within the EU offers favorable data sovereignty credentials and proximity to Fortum's existing clean-power infrastructure, making it an increasingly attractive anchor for AI infrastructure buildouts facing energy constraints elsewhere. The move signals accelerating European sovereign-AI compute capacity from specialist GPU cloud rivals, compressing OCI's window to establish dominant EU AI infrastructure presence.",
+  "oci_implication": "Nordic EU deployments by GPU-native competitors like Nscale directly contest OCI's sovereign-cloud positioning in EMEA, particularly for regulated AI workloads requiring EU data residency; OCI should assess whether its own EU sovereign regions offer comparable renewable-energy SLAs and power density commitments to counter this narrative with enterprise and government prospects."
+}

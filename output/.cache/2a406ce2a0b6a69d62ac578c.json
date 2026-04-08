@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "quantum computing",
+    "bitcoin security",
+    "cryptography"
+  ],
+  "entities": [
+    "Bitcoin"
+  ],
+  "section": "security",
+  "confidence": "high"
+}

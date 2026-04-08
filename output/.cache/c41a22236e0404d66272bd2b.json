@@ -1,0 +1,5 @@
+{
+  "headline": "On-Device AI Delivers Real-Time Media Content Analysis via iOS Live Activities",
+  "summary": "A new iOS app leverages on-device inference and Apple's Live Activities API to analyze streaming content in real time, surfacing scene-level alerts before scary moments occur. This represents a narrow but illustrative example of edge AI inference applied to media metadata\u2014combining content classification models with low-latency notification pipelines. The strategic signal is the growing consumer expectation for real-time, personalized AI overlays on top of third-party streaming platforms.",
+  "oci_implication": "While the app itself is trivial, the pattern\u2014lightweight inference models running at the edge against media content graphs\u2014mirrors architectures OCI's media and entertainment customers are beginning to demand; OCI's AI infrastructure roadmap should account for edge-adjacent, low-latency inference tiers that complement centralized GPU clusters."
+}

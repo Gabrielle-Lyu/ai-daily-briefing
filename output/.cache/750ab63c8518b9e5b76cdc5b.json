@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "international diplomacy",
+    "military incident",
+    "UN operations"
+  ],
+  "entities": [
+    "Italy",
+    "Israel",
+    "United Nations",
+    "Lebanon"
+  ],
+  "section": "security",
+  "confidence": "low"
+}

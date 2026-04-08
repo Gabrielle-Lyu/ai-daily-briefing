@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "tokenization",
+    "blockchain infrastructure",
+    "financial regulation"
+  ],
+  "entities": [
+    "IMF",
+    "Bloomberg",
+    "Wall Street"
+  ],
+  "section": "financial",
+  "confidence": "medium"
+}

@@ -1,0 +1,16 @@
+{
+  "topics": [
+    "custom chips",
+    "AI infrastructure",
+    "data center deployment",
+    "China AI competition"
+  ],
+  "entities": [
+    "Alibaba",
+    "China Telecom",
+    "China",
+    "custom chips"
+  ],
+  "section": "datacenter",
+  "confidence": "high"
+}

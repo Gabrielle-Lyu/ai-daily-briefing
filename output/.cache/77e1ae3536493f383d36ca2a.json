@@ -1,0 +1,12 @@
+{
+  "topics": [
+    "tariffs",
+    "financial forecasts",
+    "supply chain"
+  ],
+  "entities": [
+    "Bayer"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

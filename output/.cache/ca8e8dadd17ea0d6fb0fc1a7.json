@@ -1,0 +1,15 @@
+{
+  "topics": [
+    "datacenter resilience",
+    "cloud availability",
+    "geopolitical risk",
+    "regional outages"
+  ],
+  "entities": [
+    "Amazon",
+    "AWS",
+    "Matt Garman"
+  ],
+  "section": "datacenter",
+  "confidence": "high"
+}

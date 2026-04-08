@@ -1,0 +1,5 @@
+{
+  "headline": "ChatGPT Becomes a Distribution Layer as Tubi Embeds Native Streaming App",
+  "summary": "Tubi has launched the first native streaming app inside ChatGPT, signaling OpenAI's platform ambitions extend beyond Q&A into a full app ecosystem. This move mirrors the App Store playbook\u2014ChatGPT as OS, with OpenAI capturing distribution leverage over content and service providers. The strategic implication is clear: AI assistants are evolving into primary user interfaces, threatening traditional discovery surfaces and creating new dependency relationships between content owners and AI gatekeepers.",
+  "oci_implication": "OCI's AI and data platform customers\u2014particularly media, retail, and enterprise SaaS\u2014will face pressure to integrate with ChatGPT's app layer or risk distribution disintermediation; OCI should position its AI infrastructure and agent tooling as the backend for building these integrations at scale, while monitoring OpenAI's terms for proprietary lock-in risks that could create openings for OCI-native agentic ecosystems."
+}

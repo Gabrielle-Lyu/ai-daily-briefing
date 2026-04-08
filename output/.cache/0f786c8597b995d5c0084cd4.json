@@ -1,0 +1,14 @@
+{
+  "topics": [
+    "oil prices",
+    "earnings guidance",
+    "geopolitical volatility",
+    "energy markets"
+  ],
+  "entities": [
+    "Exxon",
+    "Iran"
+  ],
+  "section": "financial",
+  "confidence": "low"
+}

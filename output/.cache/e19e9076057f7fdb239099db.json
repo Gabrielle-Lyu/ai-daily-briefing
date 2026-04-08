@@ -1,0 +1,5 @@
+{
+  "headline": "Astropad Workbench Targets AI Agent Oversight, Not Traditional Remote IT",
+  "summary": "Astropad's Workbench reframes remote desktop from human-to-human IT support toward human-to-agent supervision, letting operators monitor and intervene on Mac Mini-hosted AI agents via low-latency iPhone/iPad streaming. This signals a broader market shift: as agentic workloads proliferate, the tooling layer for agent observability and control is becoming a distinct product category. The strategic implication is that compute substrate providers who surface native agent monitoring primitives will have an edge over those treating agents as just another VM workload.",
+  "oci_implication": "OCI should assess whether its agent orchestration stack\u2014particularly within the AI infrastructure and OCI Compute tiers\u2014exposes sufficient control-plane hooks for third-party oversight tools like Workbench to integrate against, or whether OCI should develop first-party agent supervision capabilities to avoid ceding that layer to edge solutions built on commodity hardware."
+}

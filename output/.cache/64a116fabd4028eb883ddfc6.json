@@ -1,0 +1,10 @@
+{
+  "bullets": [
+    "Uber expanded its AWS contract specifically to run on Amazon's custom AI chips, a deal TechCrunch framed as a direct rebuke of OCI and Google \u2014 a named competitive loss that signals AWS is winning the AI infrastructure conversion of large-scale consumer tech workloads.",
+    "Anthropic launched its high-profile 'Project Glasswing' cybersecurity model (Mythos) in partnership with AWS, Google, Nvidia, Apple, and Microsoft \u2014 OCI is absent from this marquee AI security alliance, which will shape enterprise security procurement conversations for the next 12-18 months.",
+    "Microsoft is pivoting from 'Copilot everywhere' to intentional, value-driven AI integration, signaling that enterprises are pushing back on undifferentiated AI bundling \u2014 an opening for OCI to position focused, high-ROI AI infrastructure over broad platform plays.",
+    "Iranian state hackers have escalated attacks on U.S. critical infrastructure per a joint FBI/NSA/CISA advisory, and Russian APT28 is actively compromising thousands of routers for credential theft \u2014 threat environment elevating urgency of OCI's sovereign and secure cloud messaging.",
+    "Nvidia-backed AI data center builder Firmus hit a $5.5B valuation after raising $1.35B in six months, underscoring that GPU-optimized capacity in Asia-Pacific is being aggressively capitalized by competitors \u2014 OCI's regional data center expansion pace is a direct strategic variable."
+  ],
+  "oci_implication_of_day": "The Uber-AWS chip deal and OCI's exclusion from Anthropic's Glasswing cybersecurity partnership are back-to-back public signals that AWS is consolidating AI workload wins at both the infrastructure and application layer. OCI leadership should prioritize two immediate moves: a named enterprise win announcement on AI chip workloads to counter the Uber narrative, and an urgent evaluation of how to join or counter the Glasswing coalition before it hardens into a de facto industry standard that routes security-sensitive AI spend away from OCI."
+}

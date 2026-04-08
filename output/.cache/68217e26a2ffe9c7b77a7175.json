@@ -1,0 +1,13 @@
+{
+  "topics": [
+    "chip packaging",
+    "AI infrastructure",
+    "supply chain bottleneck"
+  ],
+  "entities": [
+    "Nvidia",
+    "TSMC"
+  ],
+  "section": "infrastructure",
+  "confidence": "high"
+}

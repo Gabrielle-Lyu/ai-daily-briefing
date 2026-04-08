@@ -1,0 +1,5 @@
+{
+  "headline": "APT28 Compromises Thousands of Home Routers to Harvest Credentials at Scale",
+  "summary": "Russia's Fancy Bear (APT28) has weaponized residential routers as credential-harvesting infrastructure, exfiltrating passwords and authentication tokens from targets whose traffic transits compromised home networks. This reflects a maturing tradecraft: rather than attacking hardened enterprise perimeters directly, adversaries are exploiting the soft underbelly of hybrid work \u2014 the home networks of high-value employees. The strategic implication is that enterprise identity and zero-trust posture must now account for the integrity of the last-mile network, not just the endpoint.",
+  "oci_implication": "OCI's enterprise and government customers \u2014 many of whom have privileged access users working remotely \u2014 face credential compromise risk that bypasses traditional perimeter controls; this strengthens the case for OCI's investment in hardware-rooted identity, short-lived token architectures, and continuous authentication signals as differentiators in the sovereign and regulated-industry cloud segments."
+}
