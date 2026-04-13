@@ -240,12 +240,13 @@ def main() -> None:
     # ── 2. Pre-score ──────────────────────────────────────────────────────
     # For weekly: give all articles a flat timeliness score (no recency bias)
     # Importance comes from source credibility + section relevance, not freshness
-    from briefing.score import _source_credibility_score, _keyword_bonus
-    print("\n[2/8] Pre-scoring articles (weekly mode: flat timeliness + keyword boost)...")
+    from briefing.score import _source_credibility_score, _keyword_bonus, _deal_size_bonus
+    print("\n[2/8] Pre-scoring articles (weekly mode: flat timeliness + keyword + deal-size boost)...")
     for article in articles:
         credibility = _source_credibility_score(article["tier"])
         keywords = _keyword_bonus(article.get("title", ""), article.get("summary", ""))
-        article["scores"] = {"_prescore": credibility + 8 + keywords}
+        deal_size = _deal_size_bonus(article.get("title", ""), article.get("summary", ""))
+        article["scores"] = {"_prescore": credibility + 8 + keywords + deal_size}
     articles.sort(key=lambda a: a["scores"].get("_prescore", 0), reverse=True)
     print(f"      → Pre-scored {len(articles)} articles")
 
@@ -317,22 +318,55 @@ def main() -> None:
     WEEKLY_ARTICLES_PER_AUDIENCE = 25
 
     def _diverse_top(articles, audience_id, n=None):
-        """Pick top articles with date diversity — max 8 per day for weekly."""
+        """Pick top articles with date + company diversity."""
         n = n or WEEKLY_ARTICLES_PER_AUDIENCE
         ranked = sorted(articles, key=lambda a: a.get("scores", {}).get(audience_id, 0), reverse=True)
         from collections import defaultdict
+        import re as _re
+
         day_counts = defaultdict(int)
+        company_counts = defaultdict(int)
         n_days = len(set(
             a.get("published_at").strftime("%Y-%m-%d") if a.get("published_at") else "x"
             for a in ranked
         ))
-        max_per_day = max(4, n // max(n_days, 1) + 2)  # ~6-8 per day
+        max_per_day = max(5, n // max(n_days, 1) + 2)
+        max_per_company = 4  # cap per company to prevent flooding
+
+        # Major companies to track for diversity
+        company_patterns = [
+            ("anthropic", r"\banthropic\b"),
+            ("openai", r"\bopenai\b"),
+            ("meta", r"\bmeta\b"),
+            ("google", r"\bgoogle\b"),
+            ("amazon", r"\b(?:amazon|aws)\b"),
+            ("microsoft", r"\b(?:microsoft|azure)\b"),
+            ("nvidia", r"\bnvidia\b"),
+            ("apple", r"\bapple\b"),
+            ("coreweave", r"\bcoreweave\b"),
+        ]
+
+        def _get_company(article):
+            title = article.get("title", "").lower()
+            for name, pattern in company_patterns:
+                if _re.search(pattern, title):
+                    return name
+            return "other"
+
         result = []
         for a in ranked:
             day = a.get("published_at").strftime("%Y-%m-%d") if a.get("published_at") else "x"
-            if day_counts[day] < max_per_day:
-                result.append(a)
-                day_counts[day] += 1
+            company = _get_company(a)
+
+            if day_counts[day] >= max_per_day:
+                continue
+            if company != "other" and company_counts[company] >= max_per_company:
+                continue
+
+            result.append(a)
+            day_counts[day] += 1
+            company_counts[company] += 1
+
             if len(result) >= n:
                 break
         return result
@@ -385,6 +419,25 @@ def main() -> None:
 
     # ── Persist to DB ─────────────────────────────────────────────────────
     _persist_to_db(articles, audience_ids, exec_summaries, date_str)
+
+    # ── Email delivery ────────────────────────────────────────────────────
+    if not dry_run:
+        from briefing.render_email import render_email_html
+        from app.delivery.email_delivery import send_all_briefings as _send_emails
+
+        print("\n[Email] Rendering email versions...")
+        email_html = {}
+        for aud_id in audience_ids:
+            top_arts = _diverse_top(articles, aud_id)
+            email_html[aud_id] = render_email_html(
+                aud_id, top_arts, exec_summaries.get(aud_id, {}),
+                generation_time, date_range=date_range,
+            )
+            print(f"      [{aud_id}] {len(email_html[aud_id])} bytes")
+
+        results = _send_emails(email_html, date_str)
+        for r in results:
+            print(f"      [{r['to']}] {r['status']}")
 
     # ── Done ──────────────────────────────────────────────────────────────
     print("\n" + "=" * 60)

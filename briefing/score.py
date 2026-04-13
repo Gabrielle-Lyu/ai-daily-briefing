@@ -52,7 +52,7 @@ def _section_relevance_score(article_sections: list[str], audience_weights: dict
 
 def _keyword_bonus(title: str, summary: str) -> float:
     """
-    Check title + summary for OCI-relevant keywords.
+    Check title + summary for relevant keywords.
     Returns a bonus capped at MAX_KEYWORD_BONUS.
     """
     combined = (title + " " + summary).lower()
@@ -61,6 +61,47 @@ def _keyword_bonus(title: str, summary: str) -> float:
         if keyword in combined:
             bonus += pts
     return min(bonus, MAX_KEYWORD_BONUS)
+
+
+def _deal_size_bonus(title: str, summary: str) -> float:
+    """
+    Bonus for articles mentioning large dollar amounts.
+    Articles about $1B+ deals, revenue, or investments get boosted.
+    Returns 0-8 pts.
+    """
+    import re
+    combined = (title + " " + summary).lower()
+    # Match patterns like "$21 billion", "$15b", "$200 million", "21bn"
+    amounts = re.findall(
+        r'\$\s*([\d,.]+)\s*(billion|bn|b|trillion|tn|t)\b', combined
+    )
+    if not amounts:
+        # Also match "X billion" without $ sign
+        amounts = re.findall(
+            r'([\d,.]+)\s*(billion|bn|b|trillion|tn|t)\s*(?:deal|revenue|investment|capex|funding|contract|agreement)',
+            combined
+        )
+    if not amounts:
+        return 0.0
+
+    # Parse the largest amount
+    max_val = 0
+    for num_str, unit in amounts:
+        try:
+            val = float(num_str.replace(",", ""))
+            if unit in ("trillion", "tn", "t"):
+                val *= 1000
+            max_val = max(max_val, val)
+        except ValueError:
+            pass
+
+    if max_val >= 10:    # $10B+
+        return 8.0
+    elif max_val >= 1:   # $1B+
+        return 5.0
+    elif max_val >= 0.1: # $100M+
+        return 2.0
+    return 0.0
 
 
 # ---------------------------------------------------------------------------
@@ -76,8 +117,9 @@ def score_article_for_audience(article: dict, audience_id: str) -> float:
     timeliness  = _timeliness_score(article["published_at"])
     relevance   = _section_relevance_score(article["sections"], weights)
     keyword     = _keyword_bonus(article["title"], article.get("summary", ""))
+    deal_size   = _deal_size_bonus(article["title"], article.get("summary", ""))
 
-    total = credibility + timeliness + relevance + keyword
+    total = credibility + timeliness + relevance + keyword + deal_size
     return round(total, 2)
 
 

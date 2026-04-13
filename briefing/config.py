@@ -158,11 +158,9 @@ TIMELINESS_SCORES = [
     (None, 0),  # older
 ]
 
-# OCI-relevant keywords for keyword scoring bonus (max +10 pts)
+# Keywords for scoring bonus (max +10 pts)
 OCI_KEYWORDS = {
-    # Oracle / OCI (no special bonus)
-    "oracle": 1, "oci": 1, "oracle cloud": 1,
-    # Hyperscaler competitors (important to track)
+    # Hyperscaler competitors
     "aws": 2, "amazon web services": 2, "azure": 2, "microsoft cloud": 2,
     "google cloud": 2, "gcp": 2,
     # AI / ML
@@ -174,9 +172,10 @@ OCI_KEYWORDS = {
     "datacenter": 2, "data center": 2, "colocation": 1,
     "power grid": 2, "megawatt": 2, "gigawatt": 2, "nuclear": 2,
     "hyperscaler": 2, "sovereign cloud": 2,
-    # Business
+    # Business signals
     "cloud deal": 2, "enterprise contract": 2, "partnership": 1, "acquisition": 2,
-    "ipo": 1, "earnings": 2, "valuation": 1,
+    "ipo": 2, "earnings": 2, "valuation": 1, "revenue": 2, "run rate": 2,
+    "custom silicon": 2, "custom chip": 2,
     # Security / Dev
     "zero trust": 1, "security breach": 2, "ransomware": 2, "kubernetes": 1,
     "open source": 1, "developer platform": 1,
