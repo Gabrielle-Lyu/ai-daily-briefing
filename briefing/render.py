@@ -1,8 +1,8 @@
 """
 render.py — HTML briefing generation.
 
-Design: Unified header bar, 60/40 exec summary with amber OCI callout,
-hero cards with images, compact text-only story rows. Steel-blue/teal + white + charcoal.
+Design: Strict editorial grid. Per-section tint families, uniform card heights,
+3-column layout, sharp rectangular tiles, controlled typography.
 """
 
 import hashlib
@@ -15,22 +15,22 @@ from briefing.config import AUDIENCE_PROFILES, AUDIENCE_ORDER
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# Section metadata
+# Section metadata — each section gets ONE tint family
 # ---------------------------------------------------------------------------
 SECTION_META: dict[str, dict] = {
-    "ai":             {"label": "Artificial Intelligence"},
-    "compete":        {"label": "Competitive Intel"},
-    "financial":      {"label": "Financial & Markets"},
-    "datacenter":     {"label": "Datacenter & Infrastructure"},
-    "power":          {"label": "Power & Energy"},
-    "deals":          {"label": "Deals & Partnerships"},
-    "security":       {"label": "Security & Compliance"},
-    "multicloud":     {"label": "Multi-Cloud & Ecosystem"},
-    "oss":            {"label": "Open Source"},
-    "partnerships":   {"label": "Strategic Partnerships"},
-    "community":      {"label": "Community Signal"},
-    "infrastructure": {"label": "Infrastructure"},
-    "other":          {"label": "Technology"},
+    "financial":      {"label": "Financial & Markets",         "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "ai":             {"label": "Artificial Intelligence",     "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "compete":        {"label": "Competitive Intel",           "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "datacenter":     {"label": "Datacenter & Infrastructure", "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "power":          {"label": "Power & Energy",              "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "security":       {"label": "Security & Compliance",       "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "deals":          {"label": "Deals & Partnerships",        "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "multicloud":     {"label": "Multi-Cloud & Ecosystem",     "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "oss":            {"label": "Open Source",                 "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "partnerships":   {"label": "Strategic Partnerships",      "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "community":      {"label": "Community Signal",            "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "infrastructure": {"label": "Infrastructure",              "tint": "#E8ECF1", "accent": "#8B9BB5"},
+    "other":          {"label": "Technology",                  "tint": "#E8ECF1", "accent": "#8B9BB5"},
 }
 
 TIER_LABELS = {1: "Tier 1", 2: "Tier 2", 3: "Vendor", 4: "Community"}
@@ -40,591 +40,178 @@ TIER_COLORS = {1: "#C0392B", 2: "#2980B9", 3: "#27AE60", 4: "#8E44AD"}
 # CSS
 # ---------------------------------------------------------------------------
 BASE_CSS = """
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    /* Primary palette */
-    --teal:        #5B9DB5;
-    --teal-dark:   #3D7A96;
-    --teal-light:  #D6EAF2;
-    --teal-pale:   #EBF5FA;
-    --charcoal:    #2C3E50;
-    --charcoal2:   #34495E;
-
-    /* Grays */
-    --gray-dark:   #7F8C8D;
-    --gray-mid:    #BDC3C7;
-    --gray-light:  #ECF0F1;
-    --gray-bg:     #F4F6F8;
-    --white:       #FFFFFF;
-
-    /* Text */
-    --text:        #2C3E50;
-    --text-mid:    #555E68;
-    --text-muted:  #95A5A6;
-
-    /* Borders and Shadows */
-    --border:      #D5DDE3;
-    --shadow:      0 2px 8px rgba(44,62,80,0.10);
-    --shadow-sm:   0 1px 3px rgba(44,62,80,0.06);
-
-    /* OCI callout — amber/gold accent */
-    --oci-accent:      #D4880F;
-    --oci-bg:          #FFF8EE;
-    --oci-text:        #7A5200;
-    --oci-label:       #B8730C;
-
-    /* Freshness indicator */
-    --new-badge-bg:    #E8F5E9;
-    --new-badge-text:  #2E7D32;
-    --new-border:      var(--teal);
-
-    /* Misc */
-    --radius:      4px;
-    --serif:       Georgia, 'Times New Roman', serif;
-  }
-
-  html { font-size: 13px; scroll-behavior: smooth; }
-
-  body {
-    background: var(--gray-bg);
-    color: var(--text);
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.5;
-  }
-
-  a { color: var(--teal-dark); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-
-  a:focus-visible,
-  button:focus-visible {
-    outline: 2px solid var(--teal);
-    outline-offset: 2px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      transition-duration: 0.01ms !important;
-    }
-    html { scroll-behavior: auto; }
-  }
-
-  /* -- Unified Header Bar (40px) ---------------------- */
-  .unified-header {
-    background: var(--charcoal);
-    border-bottom: 3px solid var(--teal);
-  }
-
-  .unified-header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-
-  .header-title {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--white);
-    letter-spacing: -0.5px;
-    line-height: 1;
-    text-transform: uppercase;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .header-title span {
-    color: var(--teal);
-    font-style: italic;
-    font-size: 14px;
-    vertical-align: middle;
-    margin-right: 3px;
-  }
-
-  .header-date {
-    font-size: 9px;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: rgba(255,255,255,0.55);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .header-nav {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    overflow-x: auto;
-    flex-shrink: 1;
-    min-width: 0;
-  }
-
-  .header-nav-link {
-    padding: 11px 9px;
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.60);
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: all 0.1s;
-    display: block;
-    text-decoration: none;
-    line-height: 1;
-  }
-
-  .header-nav-link:hover {
-    color: white;
-    border-bottom-color: var(--teal);
-    text-decoration: none;
-  }
-
-  /* -- NEW badge ------------------------------------- */
-  .new-badge {
-    font-size: 7.5px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--new-badge-text);
-    background: var(--new-badge-bg);
-    padding: 1px 4px;
-    border-radius: 3px;
-    flex-shrink: 0;
-    display: inline-block;
-    line-height: 1.4;
-  }
-
-  /* -- Audience panel -------------------------------- */
-  .audience-panel { display: none; }
-  .audience-panel.active { display: block; }
-
-  /* -- Page wrapper ---------------------------------- */
-  .page-wrap {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 14px 24px 32px;
-  }
-
-  /* -- Executive summary ----------------------------- */
-  .cover-block {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 0;
-    background: var(--white);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 14px;
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-
-  .cover-left {
-    background: var(--charcoal);
-    color: white;
-    padding: 14px 16px;
-  }
-
-  .cover-overline {
-    font-size: 8.5px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 6px;
-  }
-
-  .cover-bullets {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .cover-bullets li {
-    display: flex;
-    gap: 7px;
-    align-items: flex-start;
-    padding: 4px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    font-size: 11.5px;
-    color: rgba(255,255,255,0.88);
-    line-height: 1.4;
-  }
-
-  .cover-bullets li:last-child { border-bottom: none; }
-
-  .bullet-num {
-    width: 16px;
-    height: 16px;
-    background: var(--teal);
-    color: white;
-    font-size: 9px;
-    font-weight: 700;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .cover-right {
-    background: var(--oci-bg);
-    border-left: 4px solid var(--oci-accent);
-    padding: 14px 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .oci-badge-strip {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .oci-badge-icon {
-    color: var(--oci-accent);
-    font-size: 10px;
-  }
-
-  .oci-callout-label {
-    font-size: 8px;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--oci-label);
-  }
-
-  .oci-callout-text {
-    font-size: 11.5px;
-    color: var(--oci-text);
-    line-height: 1.5;
-  }
-
-  /* -- Section header -------------------------------- */
-  .section-block { margin-bottom: 14px; }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .section-label-bar {
-    background: var(--teal);
-    color: white;
-    font-size: 8.5px;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-
-  .section-rule {
-    flex: 1;
-    height: 1px;
-    background: var(--teal-light);
-  }
-
-  .section-count {
-    font-size: 9px;
-    color: var(--text-muted);
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  /* -- Hero card ------------------------------------- */
-  .hero-card {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 6px;
-    transition: box-shadow 0.12s;
-  }
-
-  .hero-card:hover { box-shadow: var(--shadow); }
-
-  .hero-img {
-    height: 100%;
-    min-height: 120px;
-    overflow: hidden;
-    position: relative;
-    background: var(--gray-light);
-  }
-
-  .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  .hero-img-badge {
-    position: absolute;
-    top: 5px; left: 5px;
-    font-size: 7.5px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    border-radius: 2px;
-    color: white;
-  }
-
-  .hero-body {
-    padding: 10px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .hero-meta {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    flex-wrap: wrap;
-  }
-
-  .hero-headline {
-    font-family: var(--serif);
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--charcoal);
-    line-height: 1.28;
-  }
-
-  .hero-headline a { color: var(--charcoal); }
-  .hero-headline a:hover { color: var(--teal-dark); text-decoration: underline; }
-
-  .hero-summary {
-    font-size: 11px;
-    color: var(--text-mid);
-    line-height: 1.5;
-    flex: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .hero-oci {
-    font-size: 10px;
-    color: var(--oci-text);
-    background: var(--oci-bg);
-    border-left: 3px solid var(--oci-accent);
-    padding: 4px 8px;
-    border-radius: 2px;
-    line-height: 1.4;
-  }
-
-  .hero-footer {
-    font-size: 9px;
-    color: var(--text-muted);
-    border-top: 1px solid var(--gray-light);
-    padding-top: 4px;
-    margin-top: 2px;
-  }
-
-  /* -- Compact story rows ---------------------------- */
-  .story-list { display: flex; flex-direction: column; gap: 1px; }
-
-  .story-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 8px;
-    align-items: start;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 7px 10px;
-    transition: background 0.1s;
-  }
-
-  .story-row:hover { background: var(--teal-pale); }
-
-  .story-row.is-fresh {
-    border-left: 3px solid var(--new-border);
-    padding-left: 7px;
-  }
-
-  .row-left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-
-  .row-meta {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    flex-wrap: wrap;
-  }
-
-  .src-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: inline-block;
-  }
-
-  .src-name {
-    font-size: 8.5px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .topic-pill {
-    font-size: 8px;
-    font-weight: 600;
-    color: var(--teal-dark);
-    background: var(--teal-light);
-    padding: 1px 5px;
-    border-radius: 8px;
-  }
-
-  .conf-pill {
-    font-size: 8px;
-    font-weight: 600;
-    padding: 1px 5px;
-    border-radius: 8px;
-  }
-
-  .conf-high   { background: #D5EFE0; color: #1A7A3C; }
-  .conf-medium { background: #FEF3CD; color: #856404; }
-  .conf-low    { background: #E9ECEF; color: #6C757D; }
-
-  .row-headline {
-    font-family: var(--serif);
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--charcoal);
-    line-height: 1.28;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .row-headline a { color: var(--charcoal); }
-  .row-headline a:hover { color: var(--teal-dark); text-decoration: underline; }
-
-  .row-summary {
-    font-size: 10.5px;
-    color: var(--text-mid);
-    line-height: 1.45;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* row-oci: REMOVED in v2.2. Safety net to hide if accidentally emitted. */
-  .row-oci {
-    display: none;
-  }
-
-  .row-right {
-    text-align: right;
-    flex-shrink: 0;
-    font-size: 8.5px;
-    color: var(--text-muted);
-    line-height: 1.8;
-    white-space: nowrap;
-  }
-
-  /* -- Divider & footer ------------------------------ */
-  .divider { height: 1px; background: var(--border); margin: 14px 0; }
-
-  .page-footer {
-    text-align: center;
-    font-size: 9px;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-    line-height: 2;
-  }
-
-  .page-footer a { color: var(--teal-dark); }
-
-  .footer-briefings {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid var(--border);
-  }
-
-  .footer-briefings-label {
-    font-size: 8.5px;
-    font-weight: 700;
-    letter-spacing: 0.10em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-  }
-
-  .footer-briefing-link {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--teal-dark);
-    text-decoration: none;
-    padding: 2px 8px;
-    border-radius: 3px;
-    transition: background 0.1s;
-  }
-
-  .footer-briefing-link:hover {
-    background: var(--teal-pale);
-    text-decoration: none;
-  }
-
-  .footer-briefing-link.current {
-    color: var(--text-muted);
-    pointer-events: none;
-    font-weight: 400;
-  }
-
-  /* -- Responsive ------------------------------------ */
-  @media (max-width: 680px) {
-    .unified-header-inner {
-      flex-wrap: wrap;
-      height: auto;
-      padding: 8px 16px;
-      gap: 4px;
-    }
-
-    .header-nav {
-      width: 100%;
-      overflow-x: auto;
-    }
-
-    .header-date {
-      display: none;
-    }
-
-    .cover-block { grid-template-columns: 1fr; }
-
-    .cover-right {
-      border-left: none;
-      border-top: 4px solid var(--oci-accent);
-    }
-
-    .hero-card { grid-template-columns: 1fr; }
-    .hero-img { min-height: 120px; max-height: 160px; }
-
-    .row-headline {
-      -webkit-line-clamp: 3;
-    }
-  }
-
-  /* -- Scrollbar ------------------------------------- */
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: var(--gray-bg); }
-  ::-webkit-scrollbar-thumb { background: var(--gray-mid); border-radius: 3px; }
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:         #1A1D23;
+  --ink-mid:     #3D4350;
+  --ink-light:   #64748B;
+  --ink-muted:   #94A3B8;
+  --surface:     #F4F5F7;
+  --rule:        #D1D5DB;
+  --rule-light:  #E2E8F0;
+  --accent:      #3B5998;
+  --accent-pale: #EDF1F8;
+  --lead-bg:     #1E293B;
+  --lead-text:   #F1F5F9;
+  --lead-muted:  #94A3B8;
+  --new-bg:      #DEF7EC;
+  --new-text:    #166534;
+  --font:        'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html { font-size: 14px; }
+body {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ── Masthead ─────────────────────────────────────── */
+.masthead { background: var(--lead-bg); }
+.masthead-inner {
+  max-width: 1060px; margin: 0 auto; padding: 0 28px;
+  height: 42px; display: flex; align-items: center; justify-content: space-between;
+}
+.masthead-title { font-size: 14px; font-weight: 700; color: #F1F5F9; letter-spacing: 0.03em; }
+.masthead-title em { font-style: normal; font-weight: 400; color: #64748B; margin-right: 2px; }
+.masthead-date { font-size: 10px; color: #64748B; letter-spacing: 0.04em; }
+.masthead-nav { display: flex; overflow-x: auto; flex-shrink: 1; min-width: 0; }
+.masthead-nav a {
+  padding: 12px 8px; font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #64748B; white-space: nowrap;
+  border-bottom: 2px solid transparent; display: block;
+}
+.masthead-nav a:hover { color: #CBD5E1; border-bottom-color: #475569; }
+
+/* ── Page ─────────────────────────────────────────── */
+.page { max-width: 1060px; margin: 0 auto; padding: 20px 28px 36px; }
+
+/* ── Executive Summary ────────────────────────────── */
+.exec-block {
+  display: grid; grid-template-columns: 3fr 2fr; gap: 0;
+  margin-bottom: 24px; overflow: hidden; border: 1px solid #334155;
+}
+.exec-left { background: var(--lead-bg); padding: 14px 18px; }
+.exec-overline {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #64748B; margin-bottom: 10px;
+}
+.exec-items { list-style: none; }
+.exec-item {
+  display: flex; gap: 10px; align-items: baseline;
+  padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 12.5px; line-height: 1.45; color: #CBD5E1;
+}
+.exec-item:last-child { border-bottom: none; }
+.exec-item:first-child { color: #F1F5F9; font-weight: 600; }
+.exec-num {
+  font-size: 10px; font-weight: 700; color: #64748B;
+  flex-shrink: 0; width: 12px; text-align: right;
+}
+.exec-right {
+  background: var(--accent-pale); padding: 14px 18px;
+  border-left: 2px solid var(--accent);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.outlook-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent);
+}
+.outlook-text { font-size: 12.5px; line-height: 1.6; color: var(--ink-mid); }
+
+/* ── Section ──────────────────────────────────────── */
+.section { margin-bottom: 20px; }
+.section-header {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid var(--rule);
+}
+.section-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-light); white-space: nowrap;
+}
+.section-count {
+  font-size: 9px; color: var(--ink-muted); margin-left: auto;
+}
+
+/* ── Card grid — strict 3 columns, equal height ──── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+/* ── Card — sharp rectangular editorial tile ──────── */
+.card {
+  padding: 9px 12px;
+  border-left: 2px solid transparent;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 56px;
+}
+.card a { color: var(--ink); }
+.card a:hover { color: var(--accent); text-decoration: underline; }
+
+.card-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-meta {
+  font-size: 10px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* NEW badge */
+.new-badge {
+  font-size: 7px; font-weight: 700; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--new-text); background: var(--new-bg);
+  padding: 1px 4px; display: inline-block; vertical-align: middle; margin-left: 4px;
+}
+
+/* ── Footer ───────────────────────────────────────── */
+.page-rule { height: 1px; background: var(--rule); margin: 24px 0 14px; }
+.colophon { font-size: 10px; color: var(--ink-muted); text-align: center; line-height: 2; }
+.colophon a { color: var(--ink-light); }
+.colophon-links { margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--rule-light); }
+.colophon-links-label { font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 2px; }
+.colophon-link { font-size: 11px; font-weight: 500; color: var(--accent); padding: 1px 6px; }
+.colophon-link:hover { background: var(--accent-pale); }
+.colophon-link.current { color: var(--ink-muted); pointer-events: none; }
+
+/* ── Audience panel ───────────────────────────────── */
+.audience-panel { display: none; }
+.audience-panel.active { display: block; }
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 768px) {
+  .masthead-inner { padding: 0 16px; flex-wrap: wrap; height: auto; }
+  .masthead-nav { width: 100%; }
+  .masthead-date { display: none; }
+  .page { padding: 16px 14px 28px; }
+  .exec-block { grid-template-columns: 1fr; }
+  .exec-right { border-left: none; border-top: 2px solid var(--accent); }
+  .card-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .card-grid { grid-template-columns: 1fr; }
+}
 """
 
 # ---------------------------------------------------------------------------
@@ -658,101 +245,39 @@ def _group_by_section(articles: list[dict]) -> dict[str, list[dict]]:
     groups: dict[str, list[dict]] = {}
     for a in articles:
         sec = a.get("classified_section") or (a["sections"][0] if a.get("sections") else "other")
+        if not sec or sec == "None":
+            sec = "other"
         groups.setdefault(sec, []).append(a)
     return groups
 
 def _is_fresh(pub: datetime | None, threshold_hours: int = 6) -> bool:
-    """Return True if the story was published within threshold_hours."""
     if pub is None:
         return False
     return (datetime.now(tz=timezone.utc) - pub).total_seconds() / 3600 < threshold_hours
 
 # ---------------------------------------------------------------------------
-# Hero card (first article -- has image)
+# Card rendering — all cards are uniform tiles
 # ---------------------------------------------------------------------------
 
-def _render_hero_card(article: dict, audience_id: str) -> str:
+def _render_card(article: dict, audience_id: str, tint: str, accent: str) -> str:
     per   = article.get("per_audience_summaries", {}).get(audience_id, {})
-    head  = _esc(per.get("headline", article["title"]))
-    summ  = _esc(per.get("summary",  article.get("summary","")[:250]))
-    impl  = _esc(per.get("oci_implication",""))
-    conf  = article.get("confidence","medium")
-    topics= article.get("topics",[])[:2]
-    pub   = article.get("published_at")
-    rel   = _relative_time(pub) if pub else ""
-    abs_t = pub.strftime("%b %d, %H:%M") if pub else ""
-    tcol  = _tier_color(article["tier"])
-    src   = _esc(article["source"])
-    url   = _esc(article["url"])
-    seed  = _image_seed(article["url"])
-    pills = "".join(f'<span class="topic-pill">{_esc(t)}</span>' for t in topics)
-
-    oci = f'<div class="hero-oci">{impl}</div>' if impl else ""
-
-    new_badge = ""
-    if _is_fresh(pub):
-        new_badge = ' <span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>'
-
-    return f"""<article class="hero-card">
-      <div class="hero-img">
-        <img src="https://picsum.photos/seed/{seed}/400/260" alt="" loading="lazy">
-        <span class="hero-img-badge" style="background:{tcol}">{src}</span>
-      </div>
-      <div class="hero-body">
-        <div class="hero-meta">
-          {pills}
-          <span class="conf-pill {_conf_class(conf)}">{conf}</span>
-          {new_badge}
-        </div>
-        <div class="hero-headline"><a href="{url}" target="_blank" rel="noopener">{head}</a></div>
-        <div class="hero-summary">{summ}</div>
-        {oci}
-        <div class="hero-footer">{src} &nbsp;·&nbsp; {abs_t} &nbsp;·&nbsp; {rel}</div>
-      </div>
-    </article>"""
-
-
-# ---------------------------------------------------------------------------
-# Compact list row (non-hero articles -- no image, no OCI)
-# ---------------------------------------------------------------------------
-
-def _render_story_row(article: dict, audience_id: str) -> str:
-    per   = article.get("per_audience_summaries", {}).get(audience_id, {})
-    head  = _esc(per.get("headline", article["title"]))
-    summ  = _esc(per.get("summary",  article.get("summary","")[:180]))
-    impl  = _esc(per.get("oci_implication",""))
-    conf  = article.get("confidence","medium")
-    topics= article.get("topics",[])[:1]
+    title = _esc(per.get("headline", article["title"]))
     pub   = article.get("published_at")
     rel   = _relative_time(pub) if pub else ""
     abs_t = pub.strftime("%b %d") if pub else ""
-    tcol  = _tier_color(article["tier"])
-    src   = _esc(article["source"])
+    src   = _esc(article.get("source", ""))
     url   = _esc(article["url"])
-    pills = "".join(f'<span class="topic-pill">{_esc(t)}</span>' for t in topics)
 
-    # Freshness indicators
-    fresh = _is_fresh(pub)
-    fresh_class = " is-fresh" if fresh else ""
     new_badge = ""
-    if fresh:
-        new_badge = '<span class="new-badge" aria-label="Published within the last 6 hours">NEW</span>'
+    if _is_fresh(pub):
+        new_badge = '<span class="new-badge">NEW</span>'
 
-    return f"""<article class="story-row{fresh_class}">
-      <div class="row-left">
-        <div class="row-meta">
-          <span class="src-dot" style="background:{tcol}"></span>
-          <span class="src-name">{src}</span>
-          {new_badge}
-          {pills}
-          <span class="conf-pill {_conf_class(conf)}">{conf}</span>
-        </div>
-        <div class="row-headline"><a href="{url}" target="_blank" rel="noopener">{head}</a></div>
-        <div class="row-summary">{summ}</div>
-      </div>
-      <div class="row-right">{abs_t}<br>{rel}</div>
-    </article>"""
+    meta = " · ".join(p for p in [src, abs_t, rel] if p)
 
+    return f"""<div class="card" style="background:{tint};border-left-color:{accent}">
+      <div class="card-title"><a href="{url}" target="_blank" rel="noopener">{title}</a>{new_badge}</div>
+      <div class="card-meta">{meta}</div>
+    </div>"""
 
 # ---------------------------------------------------------------------------
 # Section
@@ -762,59 +287,56 @@ def _render_section(section: str, articles: list[dict], audience_id: str) -> str
     meta   = _section_meta(section)
     sec_id = f"{audience_id}-{section}"
     n      = len(articles)
+    tint   = meta["tint"]
+    accent = meta["accent"]
 
-    hero_html = _render_hero_card(articles[0], audience_id) if articles else ""
-    rows_html = "".join(_render_story_row(a, audience_id) for a in articles[1:])
-    rows_block = f'<div class="story-list">{rows_html}</div>' if articles[1:] else ""
+    cards = "".join(_render_card(a, audience_id, tint, accent) for a in articles)
 
-    return f"""<section class="section-block" id="{sec_id}" aria-label="{_esc(meta['label'])}">
+    return f"""<section class="section" id="{sec_id}">
       <div class="section-header">
-        <span class="section-label-bar">{_esc(meta['label'])}</span>
-        <div class="section-rule"></div>
-        <span class="section-count">{n} {"story" if n==1 else "stories"}</span>
+        <span class="section-label">{_esc(meta['label'])}</span>
+        <span class="section-count">{n}</span>
       </div>
-      {hero_html}
-      {rows_block}
+      <div class="card-grid">{cards}</div>
     </section>"""
 
 # ---------------------------------------------------------------------------
-# Section nav (now renders header-nav-link items for the unified header)
+# Section nav
 # ---------------------------------------------------------------------------
 
 def _render_section_nav(sections: list[tuple[str,int]], audience_id: str) -> str:
     return "".join(
-        f'<a class="header-nav-link" href="#{audience_id}-{s}">{_esc(_section_meta(s)["label"])}</a>'
+        f'<a href="#{audience_id}-{s}">{_esc(_section_meta(s)["label"])}</a>'
         for s, c in sections
     )
 
 # ---------------------------------------------------------------------------
-# Executive summary (cover-page block)
+# Executive summary
 # ---------------------------------------------------------------------------
 
 def _render_exec_summary(exec_data: dict, audience_id: str, articles: list[dict]) -> str:
     bullets = exec_data.get("bullets", [])
-    impl    = _esc(exec_data.get("oci_implication_of_day", ""))
+    outlook = _esc(exec_data.get("market_outlook", ""))
 
-    bullet_items = "".join(
-        f'<li><span class="bullet-num">{i+1}</span> {_esc(b)}</li>'
-        for i, b in enumerate(bullets)
-    )
+    import re as _re
+    items = ""
+    for i, b in enumerate(bullets):
+        # Strip "Bullet N:" or "N." prefixes the LLM sometimes adds
+        b = _re.sub(r'^(?:Bullet\s*\d+\s*[:\-–—]\s*|^\d+\.\s*)', '', b)
+        items += f'<li class="exec-item"><span class="exec-num">{i+1}</span> {_esc(b)}</li>'
 
-    oci_box = ""
-    if impl:
-        oci_box = f"""<div class="oci-badge-strip">
-          <span class="oci-badge-icon">&#9670;</span>
-          <span class="oci-callout-label">OCI Implication of the Day</span>
-        </div>
-        <div class="oci-callout-text">{impl}</div>"""
+    outlook_html = ""
+    if outlook:
+        outlook_html = f"""<div class="outlook-label">Market Outlook</div>
+        <div class="outlook-text">{outlook}</div>"""
 
-    return f"""<div class="cover-block" id="{audience_id}-exec" aria-label="Executive Summary">
-      <div class="cover-left">
-        <div class="cover-overline">Executive Summary</div>
-        <ul class="cover-bullets">{bullet_items}</ul>
+    return f"""<div class="exec-block" id="{audience_id}-exec">
+      <div class="exec-left">
+        <div class="exec-overline">Executive Summary</div>
+        <ul class="exec-items">{items}</ul>
       </div>
-      <div class="cover-right" aria-label="OCI Implication of the Day">
-        {oci_box}
+      <div class="exec-right">
+        {outlook_html}
       </div>
     </div>"""
 
@@ -831,16 +353,11 @@ def _render_audience_panel(
     profile = AUDIENCE_PROFILES[audience_id]
     groups  = _group_by_section(articles)
 
-    # order sections by audience weights
+    # Only show sections the audience cares about (per their section_weights)
     ordered: list[tuple[str, list[dict]]] = []
-    seen: set[str] = set()
     for sec in profile["section_weights"]:
         if sec in groups:
             ordered.append((sec, groups[sec]))
-            seen.add(sec)
-    for sec, arts in groups.items():
-        if sec not in seen:
-            ordered.append((sec, arts))
 
     sec_with_counts = [(s, len(a)) for s, a in ordered]
     sec_nav   = _render_section_nav(sec_with_counts, audience_id)
@@ -848,44 +365,39 @@ def _render_audience_panel(
     secs_html = "\n".join(_render_section(s, a, audience_id) for s, a in ordered)
     gen_str   = generation_time.strftime("%Y-%m-%d %H:%M UTC")
 
-    # Footer briefing links
     briefing_links = ""
     for aud_id in AUDIENCE_ORDER:
         p = AUDIENCE_PROFILES[aud_id]
         current_cls = " current" if aud_id == audience_id else ""
-        aria_current = ' aria-current="page"' if aud_id == audience_id else ""
-        briefing_links += f'<a class="footer-briefing-link{current_cls}" href="?audience={aud_id}"{aria_current}>{_esc(p["name"])}</a>\n'
+        briefing_links += f'<a class="colophon-link{current_cls}" href="?audience={aud_id}">{_esc(p["name"])}</a>\n'
 
     return f"""<div class="audience-panel" data-audience="{audience_id}" data-sec-nav="{_esc(sec_nav)}">
-      <main>
-        <div class="page-wrap">
-          {exec_html}
-          {secs_html}
-          <div class="divider"></div>
-          <footer class="page-footer">
-            <div>{_esc(profile['name'])} &middot; {gen_str} &middot; {len(articles)} stories &middot;
-            Powered by <a href="https://claude.ai">Claude</a></div>
-            <div class="footer-briefings">
-              <div class="footer-briefings-label">View other briefings</div>
-              {briefing_links}
-            </div>
-          </footer>
-        </div>
+      <main class="page">
+        {exec_html}
+        {secs_html}
+        <div class="page-rule"></div>
+        <footer class="colophon">
+          <div>{_esc(profile['name'])} · {gen_str} · {len(articles)} stories ·
+          Powered by <a href="https://claude.ai">Claude</a></div>
+          <div class="colophon-links">
+            <div class="colophon-links-label">View other briefings</div>
+            {briefing_links}
+          </div>
+        </footer>
       </main>
     </div>"""
 
 # ---------------------------------------------------------------------------
-# Unified header bar
+# Masthead
 # ---------------------------------------------------------------------------
 
-def _render_masthead(generation_time: datetime) -> str:
-    date_str = generation_time.strftime("%a %b %d, %Y")
-    return f"""<header class="unified-header">
-      <div class="unified-header-inner">
-        <div class="header-title"><span>AI</span> Daily Briefing</div>
-        <div class="header-date">{date_str}</div>
-        <nav class="header-nav" aria-label="Section navigation" id="header-nav">
-        </nav>
+def _render_masthead(generation_time: datetime, date_range: str = "") -> str:
+    date_str = date_range or generation_time.strftime("%a %b %d, %Y")
+    return f"""<header class="masthead">
+      <div class="masthead-inner">
+        <div class="masthead-title"><em>AI</em> Weekly Briefing</div>
+        <div class="masthead-date">{date_str}</div>
+        <nav class="masthead-nav" id="header-nav"></nav>
       </div>
     </header>"""
 
@@ -893,16 +405,13 @@ def _render_audience_tabs() -> str:
     tabs = ""
     for aud_id in AUDIENCE_ORDER:
         p = AUDIENCE_PROFILES[aud_id]
-        accent = _esc(p.get('accent_color', '#FFFFFF'))
-        tabs += f"""<button class="audience-tab" data-switch="{aud_id}" data-accent="{accent}" onclick="switchAudience('{aud_id}')" style="display:none">
+        tabs += f"""<button class="audience-tab" data-switch="{aud_id}" onclick="switchAudience('{aud_id}')" style="display:none">
           {_esc(p['name'])}
         </button>"""
-    return f"""<div style="display:none">
-      {tabs}
-    </div>"""
+    return f'<div style="display:none">{tabs}</div>'
 
 # ---------------------------------------------------------------------------
-# JS switcher
+# JS
 # ---------------------------------------------------------------------------
 SWITCHER_JS = """
   function switchAudience(id) {
@@ -910,140 +419,80 @@ SWITCHER_JS = """
     const p = document.querySelector('.audience-panel[data-audience="'+id+'"]');
     if (p) {
       p.classList.add('active');
-      // Populate header nav from the active panel's section nav data
       var nav = document.getElementById('header-nav');
-      if (nav && p.dataset.secNav) {
-        nav.innerHTML = p.dataset.secNav;
-      }
+      if (nav && p.dataset.secNav) nav.innerHTML = p.dataset.secNav;
     }
     document.querySelectorAll('.audience-tab').forEach(b => {
       b.classList.toggle('active', b.dataset.switch===id);
     });
-    try { localStorage.setItem('oci-aud', id); } catch(e) {}
+    try { localStorage.setItem('briefing-aud', id); } catch(e) {}
   }
+"""
+INIT_JS = """
   (function(){
-    // Check URL parameter first
+    // Priority: URL param > localStorage > first panel
     var params = new URLSearchParams(window.location.search);
-    var urlAud = params.get('audience') || '';
-    var last=''; try { last=localStorage.getItem('oci-aud')||''; } catch(e) {}
-    var ids=Array.from(document.querySelectorAll('.audience-panel')).map(function(p){return p.dataset.audience});
-    var pick = ids.includes(urlAud) ? urlAud : (ids.includes(last) ? last : (ids[0]||''));
-    switchAudience(pick);
+    var fromUrl = params.get('audience');
+    var saved = null;
+    try { saved = localStorage.getItem('briefing-aud'); } catch(e) {}
+    var first = document.querySelector('.audience-panel');
+    switchAudience(fromUrl || saved || (first ? first.dataset.audience : ''));
+    var tabs = document.querySelectorAll('.audience-tab');
+    if (tabs.length > 1) tabs.forEach(function(t){ t.style.display = ''; });
   })();
 """
 
 # ---------------------------------------------------------------------------
-# Page assembly
+# Full page renderers
 # ---------------------------------------------------------------------------
 
-def _page_html(title: str, body: str) -> str:
+def render_combined_html(all_audience_data, generation_time=None):
+    if generation_time is None:
+        generation_time = datetime.now(tz=timezone.utc)
+    panels = ""
+    for aud_id in AUDIENCE_ORDER:
+        data = all_audience_data.get(aud_id)
+        if not data: continue
+        panels += _render_audience_panel(aud_id, data["articles"], data.get("exec_summary", {}), generation_time)
     return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <style>
-{BASE_CSS}
-  .mt {{ margin-top: 16px; }}
-  </style>
-</head>
-<body>
-{body}
-</body>
-</html>"""
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI Weekly Briefing</title><style>{BASE_CSS}</style></head>
+<body>{_render_masthead(generation_time)}{_render_audience_tabs()}{panels}
+<script>{SWITCHER_JS}{INIT_JS}</script></body></html>"""
 
-
-def render_combined_html(
-    all_audience_data: dict[str, dict],
-    generation_time: datetime | None = None,
-) -> str:
+def render_single_audience_html(audience_id, articles, exec_summary, generation_time=None):
     if generation_time is None:
         generation_time = datetime.now(tz=timezone.utc)
-
-    date_str   = generation_time.strftime("%Y-%m-%d")
-    panels     = ""
-    for aud_id in AUDIENCE_ORDER:
-        data   = all_audience_data.get(aud_id, {})
-        panels += _render_audience_panel(
-            aud_id,
-            data.get("articles", []),
-            data.get("exec_summary", {"bullets":[], "oci_implication_of_day":""}),
-            generation_time,
-        )
-
-    body = f"""
-    {_render_masthead(generation_time)}
-    {_render_audience_tabs()}
-    {panels}
-    <script>{SWITCHER_JS}</script>"""
-
-    return _page_html(f"OCI AI Intelligence — {date_str}", body)
-
-
-def render_single_audience_html(
-    audience_id: str,
-    articles: list[dict],
-    exec_summary: dict,
-    generation_time: datetime | None = None,
-) -> str:
-    if generation_time is None:
-        generation_time = datetime.now(tz=timezone.utc)
-
-    profile  = AUDIENCE_PROFILES[audience_id]
-    date_str = generation_time.strftime("%Y-%m-%d")
-    panel    = _render_audience_panel(audience_id, articles, exec_summary, generation_time)
-
-    # make the single panel always visible
-    panel = panel.replace('class="audience-panel"', 'class="audience-panel active"', 1)
-
-    # Extract section nav from the panel's data attribute and inject into header
-    body = f"""
-    {_render_masthead(generation_time)}
-    {panel}
-    <script>
-    (function(){{
-      var panel = document.querySelector('.audience-panel.active');
-      var nav = document.getElementById('header-nav');
-      if (panel && nav && panel.dataset.secNav) {{
-        nav.innerHTML = panel.dataset.secNav;
-      }}
-    }})();
-    </script>"""
-
-    return _page_html(f"OCI AI Intelligence — {_esc(profile['name'])} — {date_str}", body)
-
+    panel = _render_audience_panel(audience_id, articles, exec_summary, generation_time)
+    return f"""<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI Weekly Briefing — {_esc(AUDIENCE_PROFILES[audience_id]['name'])}</title><style>{BASE_CSS}</style></head>
+<body>{_render_masthead(generation_time)}
+<div class="audience-panel active" data-audience="{audience_id}">{panel}</div></body></html>"""
 
 # ---------------------------------------------------------------------------
-# File output
+# Save to disk
 # ---------------------------------------------------------------------------
 
-def save_briefings(
-    all_audience_data: dict[str, dict],
-    output_dir: Path,
-    generation_time: datetime | None = None,
-) -> dict[str, Path]:
+def save_briefings(all_audience_data, output_dir, generation_time=None):
     if generation_time is None:
         generation_time = datetime.now(tz=timezone.utc)
-
+    output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    paths: dict[str, Path] = {}
-
+    paths = {}
     for aud_id in AUDIENCE_ORDER:
-        if aud_id not in all_audience_data:
-            continue
-        data     = all_audience_data[aud_id]
-        articles = data.get("articles", [])
-        html     = render_single_audience_html(aud_id, articles, data.get("exec_summary", {}), generation_time)
-        p        = output_dir / f"{aud_id}.html"
-        p.write_text(html, encoding="utf-8")
-        paths[aud_id] = p
-        logger.info("Wrote %s (%d bytes)", p, len(html))
-
-    combined   = render_combined_html(all_audience_data, generation_time)
+        data = all_audience_data.get(aud_id)
+        if not data: continue
+        html = render_single_audience_html(aud_id, data["articles"], data.get("exec_summary", {}), generation_time)
+        path = output_dir / f"{aud_id}.html"
+        path.write_text(html, encoding="utf-8")
+        logger.info("Wrote %s (%d bytes)", path, len(html))
+        paths[aud_id] = path
+    combined = render_combined_html(all_audience_data, generation_time)
     index_path = output_dir / "index.html"
     index_path.write_text(combined, encoding="utf-8")
-    paths["index"] = index_path
     logger.info("Wrote %s (%d bytes)", index_path, len(combined))
-
+    paths["index"] = index_path
     return paths

@@ -110,7 +110,7 @@ def classify_article(article: dict) -> dict:
     if cached:
         return cached
 
-    prompt = f"""You are an editorial classifier for an executive technology briefing.
+    prompt = f"""You are an editorial classifier for a weekly executive technology briefing read by SVPs and EVPs at a major cloud infrastructure company.
 
 Classify this article and respond ONLY with valid JSON (no markdown, no code fences).
 
@@ -123,14 +123,19 @@ Return this exact JSON structure:
   "topics": ["topic1", "topic2"],
   "entities": ["entity1", "entity2"],
   "section": "one of: financial, compete, ai, datacenter, power, deals, security, multicloud, oss, partnerships, community, infrastructure",
-  "confidence": "one of: high, medium, low"
+  "confidence": "one of: high, medium, low",
+  "executive_relevance": "one of: high, medium, low"
 }}
 
 Rules:
 - topics: 2-4 short topic tags (e.g. "cloud computing", "GPU shortage", "M&A")
 - entities: company names, people, products mentioned (max 5)
 - section: pick the SINGLE best match from the allowed list
-- confidence: high if clearly relevant to cloud/AI/tech enterprise, medium if tangential, low if unclear"""
+- confidence: high if clearly relevant to cloud/AI/tech enterprise, medium if tangential, low if unclear
+- executive_relevance: would a VP/SVP/EVP at a cloud infrastructure company need to know this for a Monday leadership meeting?
+  - high: breaking deal (with dollar amount), major product/model launch, earnings/revenue signal, infrastructure buildout, competitive threat, security breach, regulatory enforcement
+  - medium: concrete industry shift backed by data, significant partnership, notable executive move at a major tech company, policy that directly affects cloud/AI business
+  - low: opinion/editorial columns, consumer advice, how-to guides, product reviews, human interest, lifestyle, entertainment, sports, religion, general politics, legal disputes without business impact, speculative analysis without new data, anything a general newspaper reader would read but a tech executive would skip"""
 
     try:
         raw = call_claude(prompt, model=HAIKU_MODEL, timeout=60)
@@ -159,7 +164,7 @@ Rules:
 
 def generate_summary(article: dict, audience_profile: dict) -> dict:
     """
-    Generate a personalised headline, 2-3 sentence summary, and OCI implication
+    Generate a personalised headline and 2-3 sentence summary
     for one article using claude-sonnet-4-6.  Returns cached result if available.
     """
     cache_key = _cache_key(f"summary:{article['url']}:{audience_profile['id']}")
@@ -167,7 +172,7 @@ def generate_summary(article: dict, audience_profile: dict) -> dict:
     if cached:
         return cached
 
-    prompt = f"""You are the editorial AI for an executive intelligence briefing delivered to OCI (Oracle Cloud Infrastructure) senior leadership.
+    prompt = f"""You are the editorial AI for an executive intelligence briefing delivered to technology executives.
 
 Your audience: {audience_profile['name']}, {audience_profile['title']}
 Tone: {audience_profile['tone_guidance']}
@@ -181,8 +186,7 @@ Summary: {article.get('full_text', '')[:2000] or article.get('summary', '')[:120
 Return this exact JSON structure:
 {{
   "headline": "A rewritten, punchy 10-15 word headline optimised for this executive",
-  "summary": "2-3 sentences. Lead with the most important fact. Add one layer of context. End with the strategic implication.",
-  "oci_implication": "1-2 sentences specifically addressing what this means for OCI's strategy, competitive position, or operations."
+  "summary": "2-3 sentences. Lead with the most important fact. Add one layer of context. End with the strategic implication."
 }}"""
 
     try:
@@ -197,7 +201,6 @@ Return this exact JSON structure:
         result = {
             "headline": article["title"],
             "summary": article.get("summary", "")[:300],
-            "oci_implication": "Assess impact on OCI strategy.",
         }
 
     _cache_set(cache_key, result)
@@ -210,7 +213,7 @@ Return this exact JSON structure:
 
 def generate_executive_summary(top_articles: list[dict], audience_profile: dict) -> dict:
     """
-    Generate a 3-5 bullet executive summary and an 'OCI Implication of the Day'
+    Generate a 3-5 bullet executive summary and a market outlook
     paragraph from the top articles for an audience using claude-sonnet-4-6.
     """
     cache_key = _cache_key(
@@ -226,7 +229,7 @@ def generate_executive_summary(top_articles: list[dict], audience_profile: dict)
         for i, a in enumerate(top_articles[:12])
     )
 
-    prompt = f"""You are the chief editorial AI for an executive intelligence briefing for OCI (Oracle Cloud Infrastructure) senior leadership.
+    prompt = f"""You are the chief editorial AI for an executive intelligence briefing for technology executives.
 
 Your audience: {audience_profile['name']}, {audience_profile['title']}
 Tone: {audience_profile['tone_guidance']}
@@ -245,13 +248,13 @@ Return this exact JSON structure:
     "Bullet 4: fourth development (if warranted)",
     "Bullet 5: fifth development (if warranted)"
   ],
-  "oci_implication_of_day": "2-3 sentences. The single most important strategic implication for OCI leadership today. Be direct and specific."
+  "market_outlook": "2-3 sentences. Based on today's top stories, where is the market heading? Identify the most significant trend, shift, or inflection point. Be forward-looking and specific."
 }}
 
 Rules:
 - 3-5 bullets only (remove 4th/5th if not warranted)
 - Each bullet must be a complete, standalone insight (not a title — a sentence with context)
-- The OCI implication must be concrete and actionable, not generic"""
+- The market outlook must be concrete and forward-looking, not generic"""
 
     try:
         raw = call_claude(prompt, model=SONNET_MODEL, timeout=120)
@@ -270,7 +273,7 @@ Rules:
                 "Multiple significant developments across cloud, AI, and infrastructure today.",
                 "Competitive landscape continues to shift — see individual stories for detail.",
             ],
-            "oci_implication_of_day": "Review top stories for strategic implications relevant to OCI.",
+            "market_outlook": "Market dynamics continue to evolve — review top stories for emerging trends and strategic implications.",
         }
 
     _cache_set(cache_key, result)

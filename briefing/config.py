@@ -38,7 +38,7 @@ AUDIENCE_PROFILES = {
         "tone": "ecosystem, partner-aware",
         "tone_guidance": (
             "Focus on multi-cloud dynamics, partner ecosystem shifts, and deal flow. "
-            "Highlight how OCI can expand into adjacent platform opportunities. "
+            "Highlight emerging platform opportunities and competitive positioning. "
             "Note ISV, GSI, and hyperscaler partnership angles."
         ),
         "section_weights": {
@@ -59,7 +59,7 @@ AUDIENCE_PROFILES = {
         "tone_guidance": (
             "Prioritize technical depth. Cover model benchmarks, infrastructure advances, "
             "open-source ecosystem moves, and competitive AI/data platform developments. "
-            "Be direct about implications for OCI's AI and data strategy."
+            "Be direct about strategic implications for AI and data infrastructure."
         ),
         "section_weights": {
             "compete":      0.35,
@@ -78,7 +78,7 @@ AUDIENCE_PROFILES = {
         "tone": "platform, resilience, scale",
         "tone_guidance": (
             "Focus on infrastructure scale, power/energy constraints, security posture, "
-            "and developer platform signals. Highlight OCI's resilience and sovereign-cloud angles. "
+            "and developer platform signals. Highlight resilience and sovereign-cloud angles. "
             "Note regulatory, compliance, and supply-chain risks."
         ),
         "section_weights": {
@@ -160,8 +160,8 @@ TIMELINESS_SCORES = [
 
 # OCI-relevant keywords for keyword scoring bonus (max +10 pts)
 OCI_KEYWORDS = {
-    # Oracle / OCI direct
-    "oracle": 3, "oci": 3, "oracle cloud": 3,
+    # Oracle / OCI (no special bonus)
+    "oracle": 1, "oci": 1, "oracle cloud": 1,
     # Hyperscaler competitors (important to track)
     "aws": 2, "amazon web services": 2, "azure": 2, "microsoft cloud": 2,
     "google cloud": 2, "gcp": 2,

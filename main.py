@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-main.py — OCI AI Daily Executive Briefing Pipeline
+main.py — AI Daily Executive Briefing Pipeline
 
 Usage:
   python3 main.py                     # full run (with LLM)
@@ -69,10 +69,6 @@ def _dry_run_summary(article: dict, audience_id: str) -> dict:
             "In production, Claude Sonnet generates a personalised 2-3 sentence summary "
             "tailored to this executive's role and priorities."
         ),
-        "oci_implication": (
-            "OCI implication placeholder: Claude Sonnet would generate a concrete, "
-            "strategic implication for OCI leadership here."
-        ),
     }
 
 def _dry_run_exec_summary(top_articles: list[dict], audience_id: str) -> dict:
@@ -81,11 +77,11 @@ def _dry_run_exec_summary(top_articles: list[dict], audience_id: str) -> dict:
     bullets = [f"{h}..." for h in headlines] or ["No articles available for this period."]
     return {
         "bullets": bullets,
-        "oci_implication_of_day": (
-            f"[DRY RUN] Executive summary for {profile['name']} ({profile['title']}). "
-            "Claude Sonnet would synthesise today's top signals into a concrete strategic "
-            "implication for OCI leadership — covering competitive moves, AI advancements, "
-            "and infrastructure developments most relevant to this executive's priorities."
+        "market_outlook": (
+            f"[DRY RUN] Market outlook for {profile['name']} ({profile['title']}). "
+            "Claude Sonnet would synthesise today's top signals into a forward-looking market "
+            "analysis — identifying key trends, competitive shifts, and inflection points "
+            "most relevant to this executive's priorities."
         ),
     }
 
@@ -287,6 +283,7 @@ def step_classify(articles: list[dict], dry_run: bool, no_cache: bool) -> list[d
                     article["sections"][0] if article["sections"] else "other"
                 )
                 article["confidence"] = result.get("confidence", "medium")
+                article["executive_relevance"] = result.get("executive_relevance", "medium")
                 classified_count += 1
                 print(f"      [{i}/{len(to_classify)}] {article['source']}: {article['title'][:60]}...")
             except Exception as exc:
@@ -296,6 +293,65 @@ def step_classify(articles: list[dict], dry_run: bool, no_cache: bool) -> list[d
 
     print(f"      → Classified {classified_count} articles ({cache_hits} cache hits)")
     return articles
+
+
+def step_relevance_filter(articles: list[dict]) -> list[dict]:
+    """Drop articles that are irrelevant or not executive-grade."""
+    all_relevant_sections: set[str] = set()
+    for profile in AUDIENCE_PROFILES.values():
+        all_relevant_sections.update(profile["section_weights"].keys())
+
+    # Keyword patterns that indicate non-executive content
+    LOW_VALUE_PATTERNS = [
+        "how to ", "how do ", "how i ", "best apps", "tips for", "ways to",
+        "review:", "hands-on", "deal:", "sale:", "deals:", "% off",
+        "unboxing", "vs.", "which is better", "beginners guide",
+        "podcast:", "recipe", "horoscope", "obituary",
+        "opinion |", "opinion:", "| opinion", "what your ", "what you ",
+        "why you should", "why you might", "should you ",
+        "here's how", "here's why", "here's what",
+        "readers share", "readers say",
+    ]
+
+    kept = []
+    dropped = 0
+    for article in articles:
+        classified = article.get("classified_section") not in (None, "", "None")
+        section = article.get("classified_section") or ""
+        confidence = article.get("confidence") or "medium"
+        exec_relevance = article.get("executive_relevance")  # None if not classified
+        title_lower = article.get("title", "").lower()
+
+        # Drop if title matches low-value patterns (runs first, catches everything)
+        if any(p in title_lower for p in LOW_VALUE_PATTERNS):
+            dropped += 1
+            logger.info("Relevance filter (pattern): dropped '%s'", article["title"][:60])
+            continue
+
+        # Drop if LLM flagged as low executive relevance
+        if exec_relevance == "low":
+            dropped += 1
+            logger.info("Relevance filter (exec=low): dropped '%s'", article["title"][:60])
+            continue
+
+        # Drop unclassified articles (never went through LLM) — they have no quality signal
+        if not classified:
+            dropped += 1
+            logger.info("Relevance filter (unclassified): dropped '%s'", article["title"][:60])
+            continue
+
+        # Drop if confidence is low AND section doesn't match any audience
+        if confidence == "low" and section not in all_relevant_sections:
+            if not any(s in all_relevant_sections for s in article.get("sections", [])):
+                dropped += 1
+                logger.info("Relevance filter (conf=low): dropped '%s'", article["title"][:60])
+                continue
+
+        kept.append(article)
+
+    if dropped:
+        print(f"      → Relevance filter: dropped {dropped} irrelevant articles")
+    return kept
 
 
 def step_full_score(articles: list[dict]) -> list[dict]:
@@ -414,7 +470,7 @@ def step_render(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="OCI AI Daily Executive Briefing Pipeline"
+        description="AI Daily Executive Briefing Pipeline"
     )
     parser.add_argument(
         "--dry-run", action="store_true",
@@ -440,7 +496,7 @@ def main() -> None:
     output_dir = OUTPUT_ROOT / date_str
 
     print("=" * 60)
-    print(f"  OCI AI Daily Executive Briefing — {date_str}")
+    print(f"  AI Daily Executive Briefing — {date_str}")
     print(f"  Audiences : {', '.join(audience_ids)}")
     print(f"  Dry run   : {'YES (no LLM calls)' if dry_run else 'NO'}")
     print(f"  Output    : {output_dir}")
@@ -473,6 +529,9 @@ def main() -> None:
 
     # ── 5. Classify ────────────────────────────────────────────────────────
     articles = step_classify(articles, dry_run=dry_run, no_cache=no_cache)
+
+    # ── 5b. Relevance filter ──────────────────────────────────────────────
+    articles = step_relevance_filter(articles)
 
     # ── 6. Full audience score ────────────────────────────────────────────
     articles = step_full_score(articles)

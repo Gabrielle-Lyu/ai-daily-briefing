@@ -80,24 +80,34 @@ _BROWSER_HEADERS = {
 }
 
 
-def _fetch_full_text(url: str) -> str:
-    """Download page with httpx (browser headers) and extract text with trafilatura.
+def _fetch_full_text(url: str) -> tuple[str, str]:
+    """Download page with httpx (browser headers) and extract text + og:image.
 
-    Returns extracted text (capped at 5000 chars) or empty string on failure.
+    Returns (text, image_url) tuple. Text capped at 5000 chars.
+    Both default to empty string on failure.
     """
     try:
         import trafilatura
         import httpx as _httpx
         resp = _httpx.get(url, headers=_BROWSER_HEADERS, follow_redirects=True, timeout=15)
         if resp.status_code >= 400:
-            return ""
-        text = trafilatura.extract(resp.text)
-        if text is None:
-            return ""
-        return text[:5000]
+            return ("", "")
+        html = resp.text
+        text = trafilatura.extract(html) or ""
+        # Extract og:image
+        image_url = ""
+        try:
+            from bs4 import BeautifulSoup as _BS
+            soup = _BS(html, "html.parser")
+            og = soup.find("meta", property="og:image")
+            if og and og.get("content"):
+                image_url = og["content"]
+        except Exception:
+            pass
+        return (text[:5000], image_url)
     except Exception as exc:
         logger.warning("Full text extraction failed for %s: %s", url[:60], exc)
-        return ""
+        return ("", "")
 
 
 def _fetch_feed(source: dict, cutoff: datetime) -> list[dict]:
@@ -138,12 +148,25 @@ def _fetch_feed(source: dict, cutoff: datetime) -> list[dict]:
             )
             summary = _strip_html(raw_summary)[:1500]  # cap length
 
+            # Extract image from RSS feed (media_content, media_thumbnail, or enclosure)
+            image_url = ""
+            if hasattr(entry, "media_content") and entry.media_content:
+                image_url = entry.media_content[0].get("url", "")
+            elif hasattr(entry, "media_thumbnail") and entry.media_thumbnail:
+                image_url = entry.media_thumbnail[0].get("url", "")
+            elif hasattr(entry, "enclosures") and entry.enclosures:
+                enc = entry.enclosures[0]
+                href = enc.get("href", "")
+                if href and enc.get("type", "").startswith("image"):
+                    image_url = href
+
             articles.append({
                 "id":           _make_article_id(url),
                 "title":        title,
                 "url":          url,
                 "summary":      summary,
                 "full_text":    "",
+                "image_url":    image_url,
                 "published_at": published_at,
                 "source":       source["name"],
                 "tier":         source["tier"],
@@ -197,7 +220,7 @@ def ingest_feeds(sources: list[dict] | None = None, window_hours: int = INGEST_W
 
     logger.info("Total ingested: %d unique articles", len(all_articles))
 
-    # Fetch full article text concurrently using trafilatura
+    # Fetch full article text + og:image concurrently using trafilatura
     if all_articles:
         logger.info("Fetching full text for %d articles...", len(all_articles))
         with ThreadPoolExecutor(max_workers=10) as text_pool:
@@ -208,10 +231,15 @@ def ingest_feeds(sources: list[dict] | None = None, window_hours: int = INGEST_W
             for future in as_completed(future_to_article):
                 article = future_to_article[future]
                 try:
-                    article["full_text"] = future.result(timeout=10)
+                    text, og_image = future.result(timeout=10)
+                    article["full_text"] = text
+                    # Use og:image if RSS didn't provide one
+                    if not article.get("image_url") and og_image:
+                        article["image_url"] = og_image
                 except Exception:
                     article["full_text"] = ""
         fetched = sum(1 for a in all_articles if a.get("full_text"))
-        logger.info("Full text fetched for %d/%d articles", fetched, len(all_articles))
+        images = sum(1 for a in all_articles if a.get("image_url"))
+        logger.info("Full text fetched for %d/%d articles, images for %d", fetched, len(all_articles), images)
 
     return all_articles

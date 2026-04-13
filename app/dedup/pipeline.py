@@ -273,10 +273,64 @@ def _persist_suppressions(suppressed: list[dict], clusters: list[list[dict]]) ->
 # Main pipeline entry point
 # ---------------------------------------------------------------------------
 
+def _embedding_dedup(articles: list[dict]) -> list[dict]:
+    """
+    Stage 6: Embedding-based same-day dedup.
+
+    Catches articles from different sources covering the same event with
+    different wording — cases that Jaccard misses.
+
+    For each pair with cosine >= 0.85, keeps the higher-scored article
+    and suppresses the other.
+    """
+    if len(articles) < 2:
+        return articles
+
+    import numpy as np
+    from app.dedup.embeddings import compute_embeddings, batch_cosine_similarity
+
+    # Compute embeddings for all articles
+    texts = [f"{a['title']} {a.get('full_text', '') or a.get('summary', '')}" for a in articles]
+    embeddings = compute_embeddings(texts)
+    emb_matrix = np.array(embeddings, dtype=np.float32)
+
+    # Find duplicates: for each article, check if a higher-scored article
+    # already covers the same story (cosine >= 0.85)
+    suppressed_indices: set[int] = set()
+    THRESHOLD = 0.80
+
+    for i in range(len(articles)):
+        if i in suppressed_indices:
+            continue
+        vec = emb_matrix[i]
+        sims = batch_cosine_similarity(vec, emb_matrix)
+
+        for j in range(i + 1, len(articles)):
+            if j in suppressed_indices:
+                continue
+            if sims[j] >= THRESHOLD:
+                # Same story — keep the one with higher score
+                score_i = max(articles[i].get("scores", {}).values(), default=0)
+                score_j = max(articles[j].get("scores", {}).values(), default=0)
+                loser = j if score_i >= score_j else i
+                suppressed_indices.add(loser)
+                logger.info(
+                    "Embedding dedup: suppressed '%s' (cosine=%.3f with '%s')",
+                    articles[loser]["title"][:50],
+                    sims[j],
+                    articles[i if loser == j else j]["title"][:50],
+                )
+
+    kept = [a for idx, a in enumerate(articles) if idx not in suppressed_indices]
+    logger.info("Embedding dedup: %d → %d (%d suppressed)", len(articles), len(kept), len(suppressed_indices))
+    return kept
+
+
 def run_dedup_pipeline(articles: list[dict], save_to_db: bool = True) -> list[dict]:
     """
-    Run the full 5-stage dedup pipeline:
+    Run the full 6-stage dedup pipeline:
     1. normalize → 2. cluster → 3. compare → 4. detect_followup → 5. suppress
+    → 6. embedding dedup (catches same-day cross-source duplicates)
     """
     logger.info("Starting dedup pipeline with %d articles", len(articles))
 
@@ -294,6 +348,9 @@ def run_dedup_pipeline(articles: list[dict], save_to_db: bool = True) -> list[di
 
     # Stage 5: Apply suppressions
     kept = apply_suppressions(clusters, save_to_db=save_to_db)
+
+    # Stage 6: Embedding-based dedup (catches paraphrased same-day duplicates)
+    kept = _embedding_dedup(kept)
 
     # Sort by max score
     kept.sort(key=lambda a: max(a.get("scores", {}).values(), default=0), reverse=True)
